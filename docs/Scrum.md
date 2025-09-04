@@ -41,82 +41,69 @@
 classDiagram
     direction TB
 
-    %% Clase abstracta Material
     class MaterialBiblioteca {
         <<abstract>>
-        -id : int
-        -titulo : String
-        -anio : int
-        +mostrarInformacion() void
+        -id: int
+        -titulo: String
+        -anio: int
+        -disponible: boolean
+        +autores: List<Autor>
+        +mostrarInformacion() String
+        +generarCitaAPA() String
     }
 
-    %% Clase Libro
     class Libro {
-        -isbn : String
-        -numPaginas : int
-        -editorial : String
-        +mostrarInformacion() void
-        +prestar() void
-        +devolver() void
+        -isbn: String
+        -editorial: String
     }
 
-    %% Clase Revista
     class Revista {
-        -numero : int
-        +mostrarInformacion() void
-        +prestar() void
-        +devolver() void
+        -numero: int
     }
 
-    %% Clase Video
     class Video {
-        -duracion : float
-        -formato : String
-        +mostrarInformacion() void
+        -duracion: float
     }
 
-    %% Interfaz Prestamo
-    class Prestamo {
-        <<interface>>
-        +prestar() void
-        +devolver() void
-    }
-
-    %% Clase Autor
     class Autor {
-        -id : int
-        -nombre : String
-        -nacionalidad : String
-        +mostrarAutor() void
+        -id: int
+        -nombre: String
     }
 
-    %% Clase Biblioteca
-    class Biblioteca {
-        -materiales : List~MaterialBiblioteca~
-        -usuarios : List~Usuario~
-        +agregarMaterial(m : MaterialBiblioteca) void
-        +listarMateriales() void
-        +buscarMaterial(titulo : String) MaterialBiblioteca
-    }
-
-    %% Clase Usuario
     class Usuario {
-        -id : int
-        -nombre : String
-        +pedirPrestamo(m : Prestamo) void
-        +devolverMaterial(m : Prestamo) void
+        -id: int
+        -nombre: String
+        -email: String
+        -prestamosActivos: List<Prestamo>
     }
 
-    %% Relaciones
-    Usuario "1" --> "*" Prestamo : gestiona
-    Biblioteca "1" o-- "*" MaterialBiblioteca : contiene
-    Biblioteca "1" o-- "*" Usuario : contiene
-    MaterialBiblioteca "1" --> "1..*" Autor : escrito por
+    class Prestamo {
+        -id: int
+        -fechaPrestamo: Date
+        -fechaDevolucion: Date
+        +material: MaterialBiblioteca
+        +usuario: Usuario
+    }
+
+    class Biblioteca {
+        -materiales: List<MaterialBiblioteca>
+        -usuarios: List<Usuario>
+        -prestamos: List<Prestamo>
+        +agregarMaterial(MaterialBiblioteca) void
+        +buscarPorTitulo(String) List<MaterialBiblioteca>
+        +realizarPrestamo(Usuario, MaterialBiblioteca) Prestamo
+        +registrarDevolucion(Prestamo) void
+    }
+
+    MaterialBiblioteca "1" --* "1..*" Autor
     MaterialBiblioteca <|-- Libro
     MaterialBiblioteca <|-- Revista
     MaterialBiblioteca <|-- Video
-    Prestamo <|.. Libro
-    Prestamo <|.. Revista
+    Biblioteca "1" o-- "*" MaterialBiblioteca
+    Biblioteca "1" o-- "*" Usuario
+    Biblioteca "1" o-- "*" Prestamo
+    Usuario "1" -- "*" Prestamo
+    Prestamo "1" -- "1" MaterialBiblioteca
 ```
 
 ---
