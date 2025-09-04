@@ -19,7 +19,7 @@
 
 **Product Backlog inicial (priorizado):**
 
-1. **HU1**: Como administrador, quiero registrar materiales (libros, revistas, videos) con sus datos básicos.
+1. **HU1**: Como administrador, quiero registrar materiales (libros, revistas, videos, etc) con sus datos básicos.
 2. **HU2**: Como usuario, quiero buscar materiales por título o autor.
 3. **HU3**: Como usuario, quiero pedir prestado un libro o revista digitalmente.
 4. **HU4**: Como usuario, quiero devolver un material prestado.
@@ -47,6 +47,7 @@ classDiagram
         -titulo: String
         -anio: int
         -disponible: boolean
+        -rutaArchivo: String
         +autores: List<Autor>
         +mostrarInformacion() String
         +generarCitaAPA() String
@@ -55,32 +56,47 @@ classDiagram
     class Libro {
         -isbn: String
         -editorial: String
+        -numPaginas: int
+        +generarCitaAPA() String
     }
 
     class Revista {
         -numero: int
+        -editorial: String
+        +generarCitaAPA() String
     }
 
     class Video {
         -duracion: float
+        -formato: String
+        +generarCitaAPA() String
+    }
+
+    class Audio {
+        -duracion: float
+        -formato: String
+        +generarCitaAPA() String
     }
 
     class Autor {
         -id: int
         -nombre: String
+        -nacionalidad: String
     }
 
     class Usuario {
         -id: int
         -nombre: String
         -email: String
-        -prestamosActivos: List<Prestamo>
+        -contraseña: String
+        -activo: boolean
     }
 
     class Prestamo {
         -id: int
         -fechaPrestamo: Date
         -fechaDevolucion: Date
+        -estado: String
         +material: MaterialBiblioteca
         +usuario: Usuario
     }
@@ -91,6 +107,7 @@ classDiagram
         -prestamos: List<Prestamo>
         +agregarMaterial(MaterialBiblioteca) void
         +buscarPorTitulo(String) List<MaterialBiblioteca>
+        +buscarPorAutor(String) List<MaterialBiblioteca>
         +realizarPrestamo(Usuario, MaterialBiblioteca) Prestamo
         +registrarDevolucion(Prestamo) void
     }
@@ -99,11 +116,12 @@ classDiagram
     MaterialBiblioteca <|-- Libro
     MaterialBiblioteca <|-- Revista
     MaterialBiblioteca <|-- Video
+    MaterialBiblioteca <|-- Audio
     Biblioteca "1" o-- "*" MaterialBiblioteca
     Biblioteca "1" o-- "*" Usuario
     Biblioteca "1" o-- "*" Prestamo
-    Usuario "1" -- "*" Prestamo
     Prestamo "1" -- "1" MaterialBiblioteca
+    Prestamo "1" -- "1" Usuario
 ```
 
 ---
