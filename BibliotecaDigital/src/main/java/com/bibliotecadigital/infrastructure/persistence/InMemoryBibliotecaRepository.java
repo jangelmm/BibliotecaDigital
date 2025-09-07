@@ -49,6 +49,7 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     
     @Override
     public List<MaterialBiblioteca> listarMateriales() {
+        // HU5
         return new ArrayList<>(materiales);
     }
     

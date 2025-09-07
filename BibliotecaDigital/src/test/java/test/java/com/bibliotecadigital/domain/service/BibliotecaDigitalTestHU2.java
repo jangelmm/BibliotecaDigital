@@ -21,7 +21,7 @@ public class BibliotecaDigitalTestHU2 {
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
 
-        while (opcion != 5) {
+        while (opcion != 3) {
             System.out.println("\n== BÚSQUEDA EN BIBLIOTECA ==");
             System.out.println("1. Buscar por Título");
             System.out.println("2. Buscar por Autor");
