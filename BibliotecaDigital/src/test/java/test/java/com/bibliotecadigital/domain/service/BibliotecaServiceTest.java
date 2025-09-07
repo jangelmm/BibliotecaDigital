@@ -94,6 +94,12 @@ public class BibliotecaServiceTest {
     }
     
     @Test
+    void testBuscarMaterialPorIdNoExistente() {
+        MaterialBiblioteca resultado = bibliotecaService.buscarMaterialPorId(9999);
+        assertNull(resultado);
+    }
+    
+    @Test
     void testBuscarMaterialPorTitulo() {
         Autor autor = new Autor(1, "Gabriel García Márquez");
         bibliotecaService.registrarAutor(autor);
@@ -111,6 +117,12 @@ public class BibliotecaServiceTest {
     }
     
     @Test
+    void testBuscarMaterialPorTituloNoExistente() {
+        List<MaterialBiblioteca> resultados = bibliotecaService.buscarMaterialesPorTitulo("Título desconocido");
+        assertTrue(resultados.isEmpty());
+    }
+    
+    @Test
     void testBuscarMaterialPorAutor() {
         Autor autor = new Autor(1, "Gabriel García Márquez");
         bibliotecaService.registrarAutor(autor);
@@ -125,6 +137,12 @@ public class BibliotecaServiceTest {
         
         assertFalse(resultados.isEmpty());
         assertEquals("Cien años de soledad", resultados.get(0).getTitulo());
+    }
+    
+    @Test
+    void testBuscarMaterialPorAutorNoExistente() {
+        List<MaterialBiblioteca> resultados = bibliotecaService.buscarMaterialesPorAutor("Autor Desconocido");
+        assertTrue(resultados.isEmpty());
     }
     
     @Test
@@ -146,6 +164,12 @@ public class BibliotecaServiceTest {
         List<MaterialBiblioteca> materiales = bibliotecaService.listarMateriales();
         
         assertEquals(2, materiales.size());
+    }
+    
+    @Test
+    void testListarMaterialesVacio() {
+        List<MaterialBiblioteca> materiales = bibliotecaService.listarMateriales();
+        assertTrue(materiales.isEmpty());
     }
     
     @Test
@@ -172,6 +196,12 @@ public class BibliotecaServiceTest {
     }
     
     @Test
+    void testBuscarAutorPorIdNoExistente() {
+        Autor resultado = bibliotecaService.buscarAutorPorId(9999);
+        assertNull(resultado);
+    }
+    
+    @Test
     void testListarAutores() {
         Autor autor1 = new Autor(0, "Gabriel García Márquez");
         Autor autor2 = new Autor(0, "Mario Vargas Llosa");
@@ -183,4 +213,10 @@ public class BibliotecaServiceTest {
         
         assertEquals(2, autores.size());
     }
+    
+    @Test
+    void testListarAutoresVacio() {
+        List<Autor> autores = bibliotecaService.listarAutores();
+        assertTrue(autores.isEmpty());
+    } 
 }

@@ -54,9 +54,15 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     
     @Override
     public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            return new ArrayList<>();
+        }
+        
         List<MaterialBiblioteca> resultados = new ArrayList<>();
+        String tituloBusqueda = titulo.toLowerCase().trim();
+        
         for (MaterialBiblioteca material : materiales) {
-            if (material.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
+            if (material.getTitulo().toLowerCase().contains(tituloBusqueda)) {
                 resultados.add(material);
             }
         }
@@ -65,10 +71,16 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     
     @Override
     public List<MaterialBiblioteca> buscarMaterialesPorAutor(String autor) {
+        if (autor == null || autor.trim().isEmpty()) {
+            return new ArrayList<>();
+        }
+        
         List<MaterialBiblioteca> resultados = new ArrayList<>();
+        String autorBusqueda = autor.toLowerCase().trim();
+        
         for (MaterialBiblioteca material : materiales) {
             for (Autor a : material.getAutores()) {
-                if (a.getNombre().toLowerCase().contains(autor.toLowerCase())) {
+                if (a.getNombre().toLowerCase().contains(autorBusqueda)) {
                     resultados.add(material);
                     break;
                 }
@@ -115,4 +127,5 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
         
         return true;
     }
+    
 }
