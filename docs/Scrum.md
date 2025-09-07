@@ -125,41 +125,6 @@ classDiagram
 
 ---
 
-## **Estructura del Proyecto**
-
-```
-src/
-├── main/
-│   ├── java/
-│   │   └── com/
-│   │       └── bibliotecadigital/
-│   │           ├── domain/
-│   │           │   ├── model/
-│   │           │   │   ├── MaterialBiblioteca.java
-│   │           │   │   ├── Libro.java
-│   │           │   │   ├── Revista.java
-│   │           │   │   ├── Video.java
-│   │           │   │   ├── Audio.java
-│   │           │   │   └── Autor.java
-│   │           │   └── service/
-│   │           │       └── BibliotecaService.java
-│   │           ├── infrastructure/
-│   │           │   └── persistence/
-│   │           │       └── InMemoryBibliotecaRepository.java
-│   │           └── presentation/
-│   │               └── desktop/
-│   │                   └── controllers/
-│   │                       └── MaterialController.java
-│   └── resources/
-└── test/
-    └── java/
-        └── com/
-            └── bibliotecadigital/
-                └── domain/
-                    └── service/
-                        └── BibliotecaServiceTest.java
-```
-
 ## **Plan de Sprints con Equipo de 4 Desarrolladores - Actualizado**
 
 ### Sprint 1 (2 semanas)
@@ -213,6 +178,7 @@ src/
 * **GitHub Issues**: cada HU registrada como issue con etiquetas actualizadas.
 * **GitHub Actions**: CI/CD configurado para ejecutar pruebas automáticamente.
 * **GitHub Releases**: publicar entregables de cada sprint con changelog.
+
 ---
 
 ### Notas importantes sobre la actualización:
@@ -222,8 +188,3 @@ src/
 3. El **Sprint 2** se centra en la clase `Prestamo` independiente y la gestión completa de préstamos.
 4. El **Sprint 3** incluye la implementación de `generarCitaAPA()` en todas las subclases de material.
 5. Se enfatiza la importancia de las pruebas unitarias para todas las funcionalidades implementadas.
-
-### Herramientas y Versiones
-- Editor: **Apache NetBeans IDE 19**
-- Java: **JDK 23 (Default)**
-- SO: **Windows 11**
