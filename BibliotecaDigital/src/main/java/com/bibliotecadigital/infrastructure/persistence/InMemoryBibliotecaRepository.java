@@ -6,6 +6,7 @@ package com.bibliotecadigital.infrastructure.persistence;
 
 import com.bibliotecadigital.domain.model.Autor;
 import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.Usuario;
 import com.bibliotecadigital.domain.service.BibliotecaService;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,14 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     private List<Autor> autores;
     private AtomicInteger materialIdCounter;
     private AtomicInteger autorIdCounter;
+    private List<Usuario> usuarios;
     
     public InMemoryBibliotecaRepository() {
         this.materiales = new ArrayList<>();
         this.autores = new ArrayList<>();
         this.materialIdCounter = new AtomicInteger(1);
         this.autorIdCounter = new AtomicInteger(1);
+        this.usuarios = new ArrayList<>();
     }
     
     @Override
@@ -124,8 +127,30 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
         if (material.getAnio() <= 0) return false;
         if (material.getRutaArchivo() == null || material.getRutaArchivo().trim().isEmpty()) return false;
         if (material.getAutores() == null || material.getAutores().isEmpty()) return false;
-        
         return true;
     }
+    
+    @Override
+    public boolean registrarUsuario(String nombre, String email, String password){
+        for (Usuario u : usuarios) { // Evitar emails duplicados
+            if (u.getEmail().equals(email)) {
+                return false; // ya existe
+            }
+        }
+        Usuario nuevo = new Usuario(nombre, email, password);
+        usuarios.add(nuevo);
+        return true;
+    }
+    
+    @Override
+    public Usuario buscarUsuarioPorEmail(String email) {
+        for (Usuario u : usuarios) {
+            if (u.getEmail().equals(email)) {
+                return u;
+            }
+        }
+        return null;
+    }
+    
     
 }
