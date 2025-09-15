@@ -11,12 +11,31 @@ import org.mindrot.jbcrypt.BCrypt;
  * @version 2.0
  * @author Jesus
  */
+
+import jakarta.persistence.*;
+import org.mindrot.jbcrypt.BCrypt;
+
+@Entity
 public class Usuario {
-    private String nombre;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String nombre;
+
     private String passwordHash;
+
+    @Enumerated(EnumType.STRING)
     private RolUsuario rol;
 
+    public Usuario() {} // Constructor vacío requerido por JPA
+
+    // Tu constructor original
     public Usuario(String nombre, String email, String passwordPlano, RolUsuario rol) {
         this.nombre = nombre;
         this.email = email;
@@ -24,22 +43,12 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public RolUsuario getRol() {
-        return rol;
-    }
-
-    public void setRol(RolUsuario rol) {
-        this.rol = rol;
-    }
-
+    // --- Getters y Setters ---
+    public Long getId() { return id; }
+    public String getNombre() { return nombre; }
+    public String getEmail() { return email; }
+    public RolUsuario getRol() { return rol; }
+    public void setRol(RolUsuario rol) { this.rol = rol; }
     public boolean verificarPassword(String passwordIngresada) {
         return BCrypt.checkpw(passwordIngresada, this.passwordHash);
     }
