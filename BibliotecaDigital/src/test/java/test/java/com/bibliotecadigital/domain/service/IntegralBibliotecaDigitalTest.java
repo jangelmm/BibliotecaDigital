@@ -41,11 +41,12 @@ public class IntegralBibliotecaDigitalTest {
     
     private static void iniciarMenu() {
         int opcion = 0;
-        while (opcion != 3) {
+        while (opcion != 4) {
             System.out.println("\n== LISTAR MATERIALES DE LA BIBLIOTECA ==");
             System.out.println("1. Listar todos los materiales");
             System.out.println("2. Filtrar por tipo de material");
-            System.out.println("3. Salir");
+            System.out.println("3. Ver Detalle de un Material (por ID)");
+            System.out.println("4. Salir");
             System.out.print("Opción: ");
             try {
                 opcion = Integer.parseInt(sc.nextLine());
@@ -57,7 +58,10 @@ public class IntegralBibliotecaDigitalTest {
                         listarMaterialesPorTipo();
                         break;
                     case 3:
-                        System.out.println("Programa terminado\n");
+                        verDetalleMaterial();
+                        break;
+                    case 4:
+                        System.out.println("Volviendo al menú principal...\n"); 
                         break;
                     default:
                         System.out.println("Opción no válida");
@@ -65,6 +69,25 @@ public class IntegralBibliotecaDigitalTest {
             } catch (NumberFormatException e) {
                 System.out.println("Ingrese un número válido");
             }
+        }
+    }
+    
+    private static void verDetalleMaterial() {
+        System.out.print("Ingrese el ID del material para ver sus detalles: ");
+        try {
+            int id = Integer.parseInt(sc.nextLine());
+            MaterialBiblioteca material = servicio.buscarMaterialPorId(id);
+
+            if (material != null) {
+                System.out.println("\n--- DETALLES DEL MATERIAL ID: " + id + " ---");
+                // Aquí se utiliza el método que ya estaba implementado
+                System.out.println(material.mostrarInformacion());
+                System.out.println("------------------------------------");
+            } else {
+                System.out.println("Error: No se encontró ningún material con el ID " + id + ".");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Por favor, ingrese un ID numérico válido.");
         }
     }
     
