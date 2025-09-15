@@ -156,20 +156,107 @@ public class JpaBibliotecaRepository implements BibliotecaService {
         });
         return true;
     }
+    
+    @Override
+    public Autor registrarAutor(Autor autor) {
+        executeInsideTransaction(em -> em.persist(autor));
+        return autor;
+    }
 
-    // ... resto de implementaciones ...
     @Override
-    public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) { /* ... */ return null; }
+    public Autor actualizarAutor(Autor autor) {
+        final Autor[] autorActualizado = new Autor[1];
+        executeInsideTransaction(em -> {
+            autorActualizado[0] = em.merge(autor);
+        });
+        return autorActualizado[0];
+    }
+
     @Override
-    public List<MaterialBiblioteca> buscarMaterialesPorAutor(String autor) { /* ... */ return null; }
+    public void eliminarAutor(int id) {
+        executeInsideTransaction(em -> {
+            Autor autor = em.find(Autor.class, id);
+            if (autor != null) {
+                em.remove(autor);
+            }
+        });
+    }
+
     @Override
-    public Autor registrarAutor(Autor autor) { /* ... */ return null; }
+    public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<MaterialBiblioteca> query = em.createQuery(
+                "SELECT m FROM MaterialBiblioteca m WHERE lower(m.titulo) LIKE lower(:titulo)", 
+                MaterialBiblioteca.class
+            );
+            query.setParameter("titulo", "%" + titulo + "%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     @Override
-    public Autor buscarAutorPorId(int id) { /* ... */ return null; }
+    public List<MaterialBiblioteca> buscarMaterialesPorAutor(String nombreAutor) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<MaterialBiblioteca> query = em.createQuery(
+                "SELECT m FROM MaterialBiblioteca m JOIN m.autores a WHERE lower(a.nombre) LIKE lower(:nombreAutor)", 
+                MaterialBiblioteca.class
+            );
+            query.setParameter("nombreAutor", "%" + nombreAutor + "%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     @Override
-    public List<Autor> listarAutores() { /* ... */ return null; }
+    public Autor buscarAutorPorId(int id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.find(Autor.class, id);
+        } finally {
+            em.close();
+        }
+    }
+
     @Override
-    public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) { /* ... */ return false; }
+    public List<Autor> listarAutores() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            // Esta es la implementación que corrige tu error
+            TypedQuery<Autor> query = em.createQuery("SELECT a FROM Autor a", Autor.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     @Override
-    public boolean validarMaterial(MaterialBiblioteca material) { /* ... */ return false; }
+    public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) {
+        final boolean[] exito = {false};
+        executeInsideTransaction(em -> {
+            Usuario usuario = buscarUsuarioPorEmail(email);
+            if (usuario != null) {
+                usuario.setRol(nuevoRol);
+                em.merge(usuario);
+                exito[0] = true;
+            }
+        });
+        return exito[0];
+    }
+    
+    // El método validarMaterial no interactúa con JPA, su lógica puede quedar como está
+    // o ser movida a una capa de validación más adelante.
+    @Override
+    public boolean validarMaterial(MaterialBiblioteca material) {
+        if (material == null) return false;
+        if (material.getTitulo() == null || material.getTitulo().trim().isEmpty()) return false;
+        if (material.getAnio() <= 0) return false;
+        if (material.getRutaArchivo() == null || material.getRutaArchivo().trim().isEmpty()) return false;
+        if (material.getAutores() == null || material.getAutores().isEmpty()) return false;
+        return true;
+    }
 }
