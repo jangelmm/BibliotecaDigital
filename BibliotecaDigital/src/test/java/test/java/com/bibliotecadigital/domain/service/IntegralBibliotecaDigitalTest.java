@@ -41,12 +41,13 @@ public class IntegralBibliotecaDigitalTest {
     
     private static void iniciarMenu() {
         int opcion = 0;
-        while (opcion != 4) {
+        while (opcion != 5) {
             System.out.println("\n== LISTAR MATERIALES DE LA BIBLIOTECA ==");
             System.out.println("1. Listar todos los materiales");
             System.out.println("2. Filtrar por tipo de material");
             System.out.println("3. Ver Detalle de un Material (por ID)");
-            System.out.println("4. Salir");
+            System.out.println("4. Generar Cita APA (por ID)"); 
+            System.out.println("5. Salir");
             System.out.print("Opción: ");
             try {
                 opcion = Integer.parseInt(sc.nextLine());
@@ -61,6 +62,9 @@ public class IntegralBibliotecaDigitalTest {
                         verDetalleMaterial();
                         break;
                     case 4:
+                        generarCita(); 
+                        break;
+                    case 5: 
                         System.out.println("Volviendo al menú principal...\n"); 
                         break;
                     default:
@@ -69,6 +73,25 @@ public class IntegralBibliotecaDigitalTest {
             } catch (NumberFormatException e) {
                 System.out.println("Ingrese un número válido");
             }
+        }
+    }
+    
+    private static void generarCita() {
+        System.out.print("Ingrese el ID del material para generar su cita APA: ");
+        try {
+            int id = Integer.parseInt(sc.nextLine());
+            MaterialBiblioteca material = servicio.buscarMaterialPorId(id);
+
+            if (material != null) {
+                System.out.println("\n--- CITA APA GENERADA ---");
+                // Aquí se invoca el método de la HU
+                System.out.println(material.generarCitaAPA());
+                System.out.println("---------------------------");
+            } else {
+                System.out.println("Error: No se encontró ningún material con el ID " + id + ".");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Por favor, ingrese un ID numérico válido.");
         }
     }
     

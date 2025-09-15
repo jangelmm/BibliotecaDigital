@@ -40,19 +40,17 @@ public class Video extends MaterialBiblioteca {
     @Override
     public String generarCitaAPA() {
         if (autores.isEmpty()) {
-            return titulo + " [" + formato + "]. (" + anio + ").";
+            return String.format("%s (%d) [Video].", titulo, anio);
         }
-        
-        StringBuilder cita = new StringBuilder();
-        cita.append(autores.get(0).getNombre());
-        
+
+        // 1. Usar el método heredado para formatear el nombre
+        String autorAPA = formatearNombreAutorAPA(autores.get(0).getNombre());
+
         if (autores.size() > 1) {
-            cita.append(" et al.");
+            autorAPA += " et al.";
         }
-        
-        cita.append(" (").append(anio).append("). ");
-        cita.append(titulo).append(" [").append(formato).append("].");
-        
-        return cita.toString();
+
+        // 2. Usar la palabra "Video" en lugar del formato específico
+        return String.format("%s (%d). %s [Video].", autorAPA, anio, titulo);
     }
 }

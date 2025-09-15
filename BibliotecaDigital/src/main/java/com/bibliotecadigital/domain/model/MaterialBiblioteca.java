@@ -53,6 +53,32 @@ public abstract class MaterialBiblioteca {
         autores.remove(autor);
     }
     
+    /**
+     * Formatea el nombre de un autor al estilo APA (Apellido, I.).
+     * Este método es 'protected' para que solo las subclases puedan usarlo.
+     * @param nombreCompleto El nombre completo del autor, ej. "Gabriel García Márquez".
+     * @return El nombre formateado, ej. "García Márquez, G.".
+     */
+    protected String formatearNombreAutorAPA(String nombreCompleto) {
+        if (nombreCompleto == null || nombreCompleto.trim().isEmpty()) {
+            return "";
+        }
+        String[] partes = nombreCompleto.trim().split("\\s+");
+        if (partes.length == 1) {
+            return partes[0]; // Maneja nombres únicos como "Platón"
+        }
+        
+        String nombre = partes[0];
+        String inicial = nombre.substring(0, 1) + ".";
+        
+        StringBuilder apellidos = new StringBuilder();
+        for (int i = 1; i < partes.length; i++) {
+            apellidos.append(partes[i]).append(" ");
+        }
+        
+        return apellidos.toString().trim() + ", " + inicial;
+    }
+    
     // Métodos abstractos
     public abstract String mostrarInformacion();
     public abstract String generarCitaAPA();
