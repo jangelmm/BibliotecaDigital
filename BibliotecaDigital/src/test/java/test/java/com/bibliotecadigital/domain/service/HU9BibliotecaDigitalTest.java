@@ -15,7 +15,7 @@ import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaReposi
  * @author Angel-Mtz
  * Nota: Modifique la creación de Usuarios para que no marqué error
  */
-public class BibliotecaDigitalTestHU9 {
+public class HU9BibliotecaDigitalTest {
     public static void main(String[] args) {
         InMemoryBibliotecaRepository biblioteca = new InMemoryBibliotecaRepository();
         AuthenticationService auth = new AuthenticationService(biblioteca);

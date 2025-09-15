@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BibliotecaDigitalTestHU4 {
+public class HU4BibliotecaDigitalTest {
 
     private InMemoryBibliotecaRepository biblioteca;
     private Usuario usuario;
