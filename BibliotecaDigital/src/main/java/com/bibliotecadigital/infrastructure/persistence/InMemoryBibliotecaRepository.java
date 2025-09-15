@@ -6,8 +6,10 @@ package com.bibliotecadigital.infrastructure.persistence;
 
 import com.bibliotecadigital.domain.model.Autor;
 import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.Prestamo;
 import com.bibliotecadigital.domain.model.Usuario;
 import com.bibliotecadigital.domain.service.BibliotecaService;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,6 +20,8 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     private AtomicInteger materialIdCounter;
     private AtomicInteger autorIdCounter;
     private List<Usuario> usuarios;
+    private List<Prestamo> prestamos = new ArrayList<>();
+    private AtomicInteger prestamoIdCounter = new AtomicInteger(1);
     
     public InMemoryBibliotecaRepository() {
         this.materiales = new ArrayList<>();
@@ -150,6 +154,23 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
             }
         }
         return null;
+    }
+
+    @Override
+    public Prestamo crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales) {
+        
+        // Cambiar la disponibilidad del material
+        for (MaterialBiblioteca material : materiales){material.setDisponible(false);}
+        
+        LocalDate fechaPrestamo = LocalDate.now();
+        LocalDate fechaDevolucion = fechaPrestamo.plusDays(15);
+        
+        // Generar ID único para el prestamo
+        int nuevoId = prestamoIdCounter.getAndIncrement();
+        Prestamo prestamo = new Prestamo(nuevoId, usuario, materiales, fechaPrestamo, fechaDevolucion);
+        prestamos.add(prestamo);
+        
+        return prestamo;
     }
     
     
