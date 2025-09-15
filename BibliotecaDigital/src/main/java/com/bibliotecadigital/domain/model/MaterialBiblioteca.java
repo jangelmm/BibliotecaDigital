@@ -3,25 +3,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.bibliotecadigital.domain.model;
-
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Toda la jerarquía en una tabla
+@DiscriminatorColumn(name = "TIPO_MATERIAL", discriminatorType = DiscriminatorType.STRING)
 public abstract class MaterialBiblioteca {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
+    
     protected String titulo;
     protected int anio;
     protected String rutaArchivo;
-    protected List<Autor> autores;
     protected boolean disponible;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "material_autor",
+        joinColumns = @JoinColumn(name = "material_id"),
+        inverseJoinColumns = @JoinColumn(name = "autor_id")
+    )
+    protected List<Autor> autores;
+
+    public MaterialBiblioteca() { // Constructor vacío requerido por JPA
+        this.autores = new ArrayList<>();
+        this.disponible = true;
+    }
     
     public MaterialBiblioteca(int id, String titulo, int anio, String rutaArchivo) {
+        this(); // Llama al constructor vacío para inicializar la lista
         this.id = id;
         this.titulo = titulo;
         this.anio = anio;
         this.rutaArchivo = rutaArchivo;
-        this.autores = new ArrayList<>();
-        this.disponible = true;
     }
     
     // Getters y setters

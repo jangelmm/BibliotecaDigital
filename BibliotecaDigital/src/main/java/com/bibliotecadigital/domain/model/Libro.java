@@ -3,10 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.bibliotecadigital.domain.model;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("LIBRO") // Identificador para esta subclase en la tabla
 public class Libro extends MaterialBiblioteca {
+    
     private String editorial;
     private int numPaginas;
+
+    public Libro() { super(); }
     
     public Libro(int id, String titulo, int anio, String rutaArchivo, 
                  String editorial, int numPaginas) {
