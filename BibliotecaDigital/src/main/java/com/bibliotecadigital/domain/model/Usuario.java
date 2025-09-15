@@ -8,17 +8,20 @@ import org.mindrot.jbcrypt.BCrypt;
 /**
  *
  * @author Manu-Hdz
+ * @version 2.0
+ * @author Jesus
  */
 public class Usuario {
     private String nombre;
     private String email;
     private String passwordHash;
+    private RolUsuario rol;
 
-    public Usuario(String nombre, String email, String passwordPlano) {
+    public Usuario(String nombre, String email, String passwordPlano, RolUsuario rol) {
         this.nombre = nombre;
         this.email = email;
-        // Al crear un usuario, se guarda el hash y no la contraseña en texto plano
         this.passwordHash = BCrypt.hashpw(passwordPlano, BCrypt.gensalt());
+        this.rol = rol;
     }
 
     public String getNombre() {
@@ -29,10 +32,15 @@ public class Usuario {
         return email;
     }
 
-    // Verificar contraseña ingresada contra el hash almacenado
+    public RolUsuario getRol() {
+        return rol;
+    }
+
+    public void setRol(RolUsuario rol) {
+        this.rol = rol;
+    }
+
     public boolean verificarPassword(String passwordIngresada) {
         return BCrypt.checkpw(passwordIngresada, this.passwordHash);
     }
-    
-    
 }

@@ -6,6 +6,7 @@ package com.bibliotecadigital.infrastructure.persistence;
 
 import com.bibliotecadigital.domain.model.Autor;
 import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.RolUsuario;
 import com.bibliotecadigital.domain.model.Usuario;
 import com.bibliotecadigital.domain.service.BibliotecaService;
 import java.util.ArrayList;
@@ -131,17 +132,29 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     }
     
     @Override
-    public boolean registrarUsuario(String nombre, String email, String password){
-        for (Usuario u : usuarios) { // Evitar emails duplicados
+    public boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol) {
+        for (Usuario u : usuarios) {
             if (u.getEmail().equals(email)) {
                 return false; // ya existe
             }
         }
-        Usuario nuevo = new Usuario(nombre, email, password);
+        Usuario nuevo = new Usuario(nombre, email, password, rol);
         usuarios.add(nuevo);
         return true;
     }
+
     
+    @Override
+    public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) {
+        for (Usuario u : usuarios) {
+            if (u.getEmail().equals(email)) {
+                u.setRol(nuevoRol);
+                return true;
+            }
+        }
+        return false; // usuario no encontrado
+    }
+
     @Override
     public Usuario buscarUsuarioPorEmail(String email) {
         for (Usuario u : usuarios) {
@@ -151,6 +164,4 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
         }
         return null;
     }
-    
-    
 }

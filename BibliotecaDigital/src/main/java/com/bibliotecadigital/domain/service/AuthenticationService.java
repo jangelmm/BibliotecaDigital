@@ -10,6 +10,7 @@ import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaReposi
 /**
  *
  * @author Manu-hdz
+ * @author Jesus-Mtz
  */
 public class AuthenticationService {
     private InMemoryBibliotecaRepository biblioteca;
@@ -18,12 +19,28 @@ public class AuthenticationService {
         this.biblioteca = biblioteca;
     }
 
-    // Login de usuario
     public Usuario login(String email, String password) {
         Usuario usuario = biblioteca.buscarUsuarioPorEmail(email);
         if (usuario != null && usuario.verificarPassword(password)) {
             return usuario; // login correcto
         }
         return null; // login fallido
+    }
+    
+    public boolean tienePermiso(Usuario usuario, String funcionalidad) {
+        if (usuario == null) return false;
+        
+        switch(usuario.getRol()) {
+            case ADMINISTRADOR:
+                return true; // Los administradores tienen acceso a todo
+            case ENCARGADO:
+                return !funcionalidad.equals("configuracion_sistema");
+            case CLIENTE:
+                return funcionalidad.equals("buscar_materiales") || 
+                       funcionalidad.equals("prestar_material") ||
+                       funcionalidad.equals("devolver_material");
+            default:
+                return false;
+        }
     }
 }

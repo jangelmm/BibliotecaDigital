@@ -9,6 +9,7 @@ import com.bibliotecadigital.domain.model.Autor;
 import com.bibliotecadigital.domain.model.Libro;
 import com.bibliotecadigital.domain.model.MaterialBiblioteca;
 import com.bibliotecadigital.domain.model.Revista;
+import com.bibliotecadigital.domain.model.RolUsuario;
 import com.bibliotecadigital.domain.model.Usuario;
 import com.bibliotecadigital.domain.model.Video;
 import com.bibliotecadigital.domain.service.AuthenticationService;
@@ -217,13 +218,13 @@ public class BibliotecaDigitalTestIntegral {
     }
     
     private static void inicioSesion(){
-        biblioteca.registrarUsuario("Carlos", "carlos@mail.com", "12345");
-        biblioteca.registrarUsuario("Ana", "ana@mail.com", "abc123");
-        
+        biblioteca.registrarUsuario("Carlos Admin", "carlos@mail.com", "12345", RolUsuario.ADMINISTRADOR);
+        biblioteca.registrarUsuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
+    
         boolean loginExitoso = false;
         
         while(!loginExitoso){
-            System.out.print("Nombre de Usuario: ");
+            System.out.print("Correo del Usuario: ");
             String email = sc.nextLine();
             System.out.print("Password: ");
             String password = sc.nextLine();
@@ -243,20 +244,45 @@ public class BibliotecaDigitalTestIntegral {
     
     private static void registrarUsuario(){
         String nombre, correo, password;
-        
+        RolUsuario rol = null;
+
         System.out.println("\n REGISTRO DE UN NUEVO USUARIO");
         System.out.println("");
         System.out.print("Nombre: ");
         nombre = sc.nextLine();
-        System.out.println("Correo Gmail: ");
+        System.out.println("Correo: ");
         correo = sc.nextLine();
         System.out.println("Password: ");     
         password = sc.nextLine();
-        
-        biblioteca.registrarUsuario(nombre, correo, password);
-        
-        System.out.println("Usuario Registrado");
-        
+
+        // Selección de rol
+        System.out.println("Seleccione el rol:");
+        System.out.println("1. Administrador");
+        System.out.println("2. Encargado");
+        System.out.println("3. Cliente");
+        System.out.print("Opción: ");
+
+        try {
+            int opcionRol = Integer.parseInt(sc.nextLine());
+            switch(opcionRol) {
+                case 1: rol = RolUsuario.ADMINISTRADOR; break;
+                case 2: rol = RolUsuario.ENCARGADO; break;
+                case 3: rol = RolUsuario.CLIENTE; break;
+                default: 
+                    System.out.println("Opción inválida, se asignará rol de Cliente");
+                    rol = RolUsuario.CLIENTE;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Opción inválida, se asignará rol de Cliente");
+            rol = RolUsuario.CLIENTE;
+        }
+
+        boolean exito = biblioteca.registrarUsuario(nombre, correo, password, rol);
+        if (exito) {
+            System.out.println("Usuario registrado con rol: " + rol);
+        } else {
+            System.out.println("Error: el usuario ya existe");
+        }
     }
     
     private static void prueba(){
