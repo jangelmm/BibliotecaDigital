@@ -4,6 +4,7 @@
  */
 package test.java.com.bibliotecadigital.domain.service;
 
+import com.bibliotecadigital.domain.model.RolUsuario;
 import com.bibliotecadigital.domain.model.Usuario;
 import com.bibliotecadigital.domain.service.AuthenticationService;
 import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
@@ -11,6 +12,8 @@ import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaReposi
 /**
  *
  * @author Manu-Hdz
+ * @author Angel-Mtz
+ * Nota: Modifique la creación de Usuarios para que no marqué error
  */
 public class BibliotecaDigitalTestHU9 {
     public static void main(String[] args) {
@@ -18,8 +21,8 @@ public class BibliotecaDigitalTestHU9 {
         AuthenticationService auth = new AuthenticationService(biblioteca);
 
         // Registro de usuarios
-        biblioteca.registrarUsuario("Carlos", "carlos@mail.com", "12345");
-        biblioteca.registrarUsuario("Ana", "ana@mail.com", "abc123");
+        biblioteca.registrarUsuario("Carlos", "carlos@mail.com", "12345", RolUsuario.ADMINISTRADOR);
+        biblioteca.registrarUsuario("Ana", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
         
         System.out.println("Usuarios Registrado"
                 + "\n Carlos, carlos@gmail.com, 12345"
