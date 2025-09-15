@@ -27,4 +27,7 @@ public interface BibliotecaService {
     // Métodos para préstamos
     Prestamo crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales);
     List<Prestamo> listarPrestamos();
+    
+    // Método para devoluciones
+    boolean registrarDevolucion(Prestamo prestamo, MaterialBiblioteca material);
 }

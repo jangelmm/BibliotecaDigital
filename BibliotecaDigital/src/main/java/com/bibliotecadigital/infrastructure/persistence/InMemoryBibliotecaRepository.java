@@ -6,6 +6,7 @@ package com.bibliotecadigital.infrastructure.persistence;
 
 import com.bibliotecadigital.domain.model.*; // Importa todos los modelos
 import com.bibliotecadigital.domain.service.BibliotecaService;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -195,5 +196,40 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     @Override
     public List<Prestamo> listarPrestamos() {
         return new ArrayList<>(prestamos);
+    }
+    
+    @Override
+    public boolean registrarDevolucion(Prestamo prestamo, MaterialBiblioteca material) {
+        if (prestamo == null || material == null) {
+            throw new IllegalArgumentException("El préstamo y el material no pueden ser nulos.");
+        }
+
+        // 1. Validar que el material pertenece al préstamo
+        if (!prestamo.getMateriales().contains(material)) {
+            throw new IllegalArgumentException("El material no pertenece al préstamo especificado.");
+        }
+
+        // 2. Validar que el material no haya sido devuelto ya
+        if (material.isDisponible()) {
+            throw new IllegalStateException("El material '" + material.getTitulo() + "' ya figura como disponible.");
+        }
+
+        // 3. Actualizar el estado del material
+        material.setDisponible(true);
+
+        // 4. Verificar si el préstamo se ha completado
+        boolean todosDevueltos = true;
+        for (MaterialBiblioteca m : prestamo.getMateriales()) {
+            if (!m.isDisponible()) {
+                todosDevueltos = false;
+                break;
+            }
+        }
+
+        if (todosDevueltos) {
+            prestamo.setFechaDevolucion(LocalDate.now());
+        }
+
+        return true;
     }
 }
