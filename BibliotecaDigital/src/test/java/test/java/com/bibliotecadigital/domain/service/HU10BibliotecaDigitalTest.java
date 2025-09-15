@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author jesus
  */
-public class BibliotecaDigitalTestHU10 {
+public class HU10BibliotecaDigitalTest {
 
     private InMemoryBibliotecaRepository biblioteca;
     private AuthenticationService auth;
@@ -85,7 +85,7 @@ public class BibliotecaDigitalTestHU10 {
         // --- Test 1 ---
         try {
             System.out.print("Ejecutando: testRegistrarUsuarioConRol... ");
-            BibliotecaDigitalTestHU10 test1 = new BibliotecaDigitalTestHU10();
+            HU10BibliotecaDigitalTest test1 = new HU10BibliotecaDigitalTest();
             test1.setUp();
             test1.testRegistrarUsuarioConRol();
             System.out.println(" PASSED");
@@ -97,7 +97,7 @@ public class BibliotecaDigitalTestHU10 {
         // --- Test 2 ---
         try {
             System.out.print("Ejecutando: testActualizarRolUsuario... ");
-            BibliotecaDigitalTestHU10 test2 = new BibliotecaDigitalTestHU10();
+            HU10BibliotecaDigitalTest test2 = new HU10BibliotecaDigitalTest();
             test2.setUp();
             test2.testActualizarRolUsuario();
             System.out.println(" PASSED");
@@ -109,7 +109,7 @@ public class BibliotecaDigitalTestHU10 {
         // --- Test 3 ---
         try {
             System.out.print("Ejecutando: testVerificacionPermisosAdministrador... ");
-            BibliotecaDigitalTestHU10 test3 = new BibliotecaDigitalTestHU10();
+            HU10BibliotecaDigitalTest test3 = new HU10BibliotecaDigitalTest();
             test3.setUp();
             test3.testVerificacionPermisosAdministrador();
             System.out.println(" PASSED");
@@ -121,7 +121,7 @@ public class BibliotecaDigitalTestHU10 {
         // --- Test 4 ---
         try {
             System.out.print("Ejecutando: testVerificacionPermisosCliente... ");
-            BibliotecaDigitalTestHU10 test4 = new BibliotecaDigitalTestHU10();
+            HU10BibliotecaDigitalTest test4 = new HU10BibliotecaDigitalTest();
             test4.setUp();
             test4.testVerificacionPermisosCliente();
             System.out.println(" PASSED");
@@ -133,7 +133,7 @@ public class BibliotecaDigitalTestHU10 {
         // --- Test 5 ---
         try {
             System.out.print("Ejecutando: testVerificacionPermisosEncargado... ");
-            BibliotecaDigitalTestHU10 test5 = new BibliotecaDigitalTestHU10();
+            HU10BibliotecaDigitalTest test5 = new HU10BibliotecaDigitalTest();
             test5.setUp();
             test5.testVerificacionPermisosEncargado();
             System.out.println(" PASSED");

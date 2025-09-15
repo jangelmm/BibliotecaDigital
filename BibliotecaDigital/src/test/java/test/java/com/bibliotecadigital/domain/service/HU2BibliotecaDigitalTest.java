@@ -1,57 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package test.java.com.bibliotecadigital.domain.service;
 
 import com.bibliotecadigital.domain.model.*;
 import com.bibliotecadigital.domain.service.BibliotecaService;
 import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
 import com.bibliotecadigital.presentation.desktop.controllers.MaterialController;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author Diego Garcia
- */
-public class BibliotecaDigitalTestHU5 {
+public class HU2BibliotecaDigitalTest {
     private static MaterialController controlador;
-    private static BibliotecaService servicio;
-    
+
     public static void main(String[] args) {
-        servicio = new InMemoryBibliotecaRepository();
+        BibliotecaService servicio = new InMemoryBibliotecaRepository();
         controlador = new MaterialController(servicio);
-        cargarDatosDePrueba(); // Carga lo mismo que HU2
+        cargarDatosDePrueba();
         iniciarMenu();
     }
-    
+
     private static void iniciarMenu() {
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
 
         while (opcion != 3) {
-            System.out.println("\n== LISTAR MATERIALES DE LA BIBLIOTECA ==");
-            System.out.println("1. Listar todos los materiales");
-            System.out.println("2. Filtrar por tipo de material");
+            System.out.println("\n== BÚSQUEDA EN BIBLIOTECA ==");
+            System.out.println("1. Buscar por Título");
+            System.out.println("2. Buscar por Autor");
             System.out.println("3. Salir");
             System.out.print("Opción: ");
 
             try {
                 opcion = Integer.parseInt(scanner.nextLine().trim());
                 switch (opcion) {
-                    case 1:
-                        listarMateriales();
-                        break;
-                    case 2:
-                        listarMaterialesPorTipo();
-                        break;
-                    case 3:
-                        System.out.println("Programa terminado");
-                        break;
-                    default:
-                        System.out.println("Opción no válida");
+                    case 1 -> buscarPorTitulo(scanner);
+                    case 2 -> buscarPorAutor(scanner);
+                    case 3 -> System.out.println("Programa terminado");
+                    default -> System.out.println("Opción no válida");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Ingrese un número válido");
@@ -59,32 +42,31 @@ public class BibliotecaDigitalTestHU5 {
         }
         scanner.close();
     }
-    
-    private static void listarMateriales() {
-        List<MaterialBiblioteca> lista = servicio.listarMateriales();
-        System.out.println("\n\t\t\t=== Lista de todos los materiales ===");
-        imprimirTablaMateriales(lista);
+
+    private static void buscarPorTitulo(Scanner scanner) {
+        System.out.print("Ingrese título: ");
+        String titulo = scanner.nextLine().trim();
+        List<MaterialBiblioteca> resultados = controlador.buscarMaterialesPorTitulo(titulo);
+        mostrarResultados(resultados);
     }
-    
-    private static void listarMaterialesPorTipo() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el tipo de material a filtrar (Libro, Revista, Video, Audio): ");
-        String tipo = scanner.nextLine().trim();
 
-        List<MaterialBiblioteca> todos = servicio.listarMateriales(); // lista todo
-        List<MaterialBiblioteca> filtrados = new ArrayList<>();
+    private static void buscarPorAutor(Scanner scanner) {
+        System.out.print("Ingrese autor: ");
+        String autor = scanner.nextLine().trim();
+        List<MaterialBiblioteca> resultados = controlador.buscarMaterialesPorAutor(autor);
+        mostrarResultados(resultados);
+    }
 
-        for (MaterialBiblioteca m : todos) {
-            if (m.getClass().getSimpleName().equalsIgnoreCase(tipo)) {
-                filtrados.add(m);
-            }
+    private static void mostrarResultados(List<MaterialBiblioteca> resultados) {
+        if (resultados.isEmpty()) {
+            System.out.println("No se encontraron resultados");
+            return;
         }
 
-        if (filtrados.isEmpty()) {
-            System.out.println("No hay materiales de tipo '" + tipo + "'.");
-        } else {
-            System.out.println("\n\t\t\t=== Lista de materiales de tipo " + tipo + " ===");
-            imprimirTablaMateriales(filtrados);
+        System.out.println("\nResultados encontrados: " + resultados.size());
+        for (MaterialBiblioteca material : resultados) {
+            System.out.println("------------------");
+            System.out.println(material.mostrarInformacion());
         }
     }
 
@@ -159,30 +141,4 @@ public class BibliotecaDigitalTestHU5 {
         System.out.println("   - 'Ludwig van Beethoven' (2 audios)");
         System.out.println("   - 'Steven Spielberg' (2 videos)");
     }
-    
-    // Método para imprimir tabla, reutilizable
-    private static void imprimirTablaMateriales(List<MaterialBiblioteca> materiales) {
-        if (materiales.isEmpty()) {
-            System.out.println("No hay materiales para mostrar.");
-            return;
-        }
-
-        // Encabezados
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-4s | %-30s | %-25s | %-4s | %-10s | %-10s | %-30s%n",
-                          "ID", "Título", "Autor(es)", "Año", "Tipo", "Estado", "Ruta de archivo");
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-
-        // Filas con datos
-        for (MaterialBiblioteca m : materiales) {
-            String autoresStr = m.getAutores().isEmpty() ? "-" :
-                                String.join(", ", m.getAutores().stream().map(a -> a.getNombre()).toArray(String[]::new));
-            String tipo = m.getClass().getSimpleName();
-            String estado = m.isDisponible() ? "Disponible" : "Prestado";
-
-            System.out.printf("%-4d | %-30s | %-25s | %-4d | %-10s | %-10s | %-30s%n",
-                              m.getId(), m.getTitulo(), autoresStr, m.getAnio(), tipo, estado, m.getRutaArchivo());
-        }
-    }
-
 }

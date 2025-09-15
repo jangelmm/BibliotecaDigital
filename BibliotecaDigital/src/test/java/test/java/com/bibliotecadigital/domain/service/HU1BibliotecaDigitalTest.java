@@ -6,7 +6,7 @@ import com.bibliotecadigital.domain.service.BibliotecaService;
 import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
 import com.bibliotecadigital.presentation.desktop.controllers.MaterialController;
 
-public class BibliotecaDigitalTestHU1 {
+public class HU1BibliotecaDigitalTest {
     public static void main(String[] args) {
         // Tu código de demostración aquí
         BibliotecaService servicio = new InMemoryBibliotecaRepository();

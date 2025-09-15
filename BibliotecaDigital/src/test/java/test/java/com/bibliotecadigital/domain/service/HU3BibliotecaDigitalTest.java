@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author jesus
  */
 
-public class BibliotecaDigitalTestHU3 {
+public class HU3BibliotecaDigitalTest {
 
     private InMemoryBibliotecaRepository biblioteca;
     private Usuario usuario;
