@@ -9,16 +9,31 @@ package com.bibliotecadigital.domain.model;
  * @author jesus
  */
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
 public class Prestamo {
-    private final int id;
-    private final Usuario usuario;
-    private final List<MaterialBiblioteca> materiales;
-    private final LocalDate fechaPrestamo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id") 
+    private Usuario usuario;
+    @ManyToMany(fetch = FetchType.EAGER) // Un préstamo tiene MUCHOS materiales
+    @JoinTable(
+        name = "prestamo_material",
+        joinColumns = @JoinColumn(name = "prestamo_id"),
+        inverseJoinColumns = @JoinColumn(name = "material_id")
+    )
+    private List<MaterialBiblioteca> materiales;
+    private LocalDate fechaPrestamo;
     private LocalDate fechaDevolucion; // Puede ser nula hasta que se devuelva todo
 
+    public Prestamo() {
+        
+    }
     public Prestamo(int id, Usuario usuario, List<MaterialBiblioteca> materiales) {
         this.id = id;
         this.usuario = usuario;
