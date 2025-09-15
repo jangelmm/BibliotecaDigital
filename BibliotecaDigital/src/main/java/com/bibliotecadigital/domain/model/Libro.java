@@ -22,6 +22,23 @@ public class Libro extends MaterialBiblioteca {
     public int getNumPaginas() { return numPaginas; }
     public void setNumPaginas(int numPaginas) { this.numPaginas = numPaginas; }
     
+    @Override 
+    public String generarCitaAPA() {
+        if (autores.isEmpty()) {
+            // Manejo de caso sin autor
+            return String.format("%s (%d). %s.", titulo, anio, editorial);
+        }
+        
+        // Usamos el nuevo método formateador
+        String autorAPA = formatearNombreAutorAPA(autores.get(0).getNombre());
+        
+        if (autores.size() > 1) {
+            autorAPA += " et al.";
+        }
+        
+        return String.format("%s (%d). %s. %s.", autorAPA, anio, titulo, editorial);
+    }
+    
     @Override
     public String mostrarInformacion() {
         StringBuilder info = new StringBuilder();
@@ -35,25 +52,5 @@ public class Libro extends MaterialBiblioteca {
         info.append("Ruta de archivo: ").append(rutaArchivo).append("\n");
         info.append("Disponible: ").append(disponible ? "Sí" : "No").append("\n");
         return info.toString();
-    }
-    
-    @Override
-    public String generarCitaAPA() {
-        if (autores.isEmpty()) {
-            return titulo + " (" + anio + "). " + editorial + ".";
-        }
-        
-        StringBuilder cita = new StringBuilder();
-        cita.append(autores.get(0).getNombre());
-        
-        if (autores.size() > 1) {
-            cita.append(" et al.");
-        }
-        
-        cita.append(" (").append(anio).append("). ");
-        cita.append(titulo).append(". ");
-        cita.append(editorial).append(".");
-        
-        return cita.toString();
     }
 }
