@@ -1,9 +1,6 @@
 package com.bibliotecadigital.domain.service;
 
-import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.model.MaterialBiblioteca;
-import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.domain.model.RolUsuario;
+import com.bibliotecadigital.domain.model.*;
 import java.util.List;
 
 public interface BibliotecaService {
@@ -26,4 +23,8 @@ public interface BibliotecaService {
     
     // Métodos de validación
     boolean validarMaterial(MaterialBiblioteca material);
+    
+    // Métodos para préstamos
+    Prestamo crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales);
+    List<Prestamo> listarPrestamos();
 }
