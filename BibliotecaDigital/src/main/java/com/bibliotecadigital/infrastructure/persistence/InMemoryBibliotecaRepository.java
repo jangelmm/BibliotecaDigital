@@ -4,10 +4,7 @@
  */
 package com.bibliotecadigital.infrastructure.persistence;
 
-import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.model.MaterialBiblioteca;
-import com.bibliotecadigital.domain.model.RolUsuario;
-import com.bibliotecadigital.domain.model.Usuario;
+import com.bibliotecadigital.domain.model.*; // Importa todos los modelos
 import com.bibliotecadigital.domain.service.BibliotecaService;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,8 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     private AtomicInteger materialIdCounter;
     private AtomicInteger autorIdCounter;
     private List<Usuario> usuarios;
+    private List<Prestamo> prestamos; 
+    private AtomicInteger prestamoIdCounter; 
     
     public InMemoryBibliotecaRepository() {
         this.materiales = new ArrayList<>();
@@ -26,6 +25,8 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
         this.materialIdCounter = new AtomicInteger(1);
         this.autorIdCounter = new AtomicInteger(1);
         this.usuarios = new ArrayList<>();
+        this.prestamos = new ArrayList<>();
+        this.prestamoIdCounter = new AtomicInteger(1);
     }
     
     @Override
@@ -163,5 +164,36 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
             }
         }
         return null;
+    }
+    
+    @Override
+    public Prestamo crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales) {
+        if (usuario == null || materiales == null || materiales.isEmpty()) {
+            throw new IllegalArgumentException("Usuario y lista de materiales no pueden ser nulos o vacíos.");
+        }
+
+        // 1. Validar que todos los materiales estén disponibles
+        for (MaterialBiblioteca material : materiales) {
+            if (!material.isDisponible()) {
+                throw new IllegalStateException("El material '" + material.getTitulo() + "' (ID: " + material.getId() + ") no está disponible.");
+            }
+        }
+
+        // 2. Crear el préstamo
+        Prestamo nuevoPrestamo = new Prestamo(prestamoIdCounter.getAndIncrement(), usuario, materiales);
+        
+        // 3. Actualizar el estado de los materiales
+        for (MaterialBiblioteca material : materiales) {
+            material.setDisponible(false);
+        }
+
+        // 4. Guardar y retornar el préstamo
+        this.prestamos.add(nuevoPrestamo);
+        return nuevoPrestamo;
+    }
+
+    @Override
+    public List<Prestamo> listarPrestamos() {
+        return new ArrayList<>(prestamos);
     }
 }
