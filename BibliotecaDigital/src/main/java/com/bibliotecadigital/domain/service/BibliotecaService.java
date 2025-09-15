@@ -15,6 +15,8 @@ public interface BibliotecaService {
     Autor registrarAutor(Autor autor);
     Autor buscarAutorPorId(int id);
     List<Autor> listarAutores();
+    Autor actualizarAutor(Autor autor);
+    void eliminarAutor(int id);
     
     // Métodos para usuarios
     boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol);

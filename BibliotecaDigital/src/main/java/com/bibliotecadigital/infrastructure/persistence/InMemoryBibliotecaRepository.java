@@ -232,4 +232,14 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
 
         return true;
     }
+    
+    @Override
+    public Autor actualizarAutor(Autor autor) {
+        return null;
+    }
+
+    @Override
+    public void eliminarAutor(int id) {
+        
+    }
 }
