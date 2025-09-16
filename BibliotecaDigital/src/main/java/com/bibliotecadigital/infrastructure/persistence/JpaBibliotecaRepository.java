@@ -78,6 +78,29 @@ public class JpaBibliotecaRepository implements BibliotecaService {
         }
     }
     
+    
+    
+    // Metodos nuevos para el CRUD de Materiales -------------------------------
+    @Override
+    public MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material) {
+        final MaterialBiblioteca[] materialAct = new MaterialBiblioteca[1];
+        executeInsideTransaction(em -> {
+            materialAct[0] = em.merge(material);
+        });
+        return materialAct[0];
+    }
+    
+    @Override
+    public void eliminarMaterial(int id) {
+        executeInsideTransaction(em -> {
+            MaterialBiblioteca material = em.find(MaterialBiblioteca.class, id);
+            if (material != null) {
+                em.remove(material);
+            }
+        });
+    }
+    // -------------------------------------------------------------------------
+    
     @Override
     public boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol) {
         // La lógica de validación de email duplicado es mejor en la capa de servicio,
