@@ -66,6 +66,16 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             em.close();
         }
     }
+    
+    public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
+        for (Integer id : autorIds) {
+            Autor autor = buscarAutorPorId(id);
+            if (autor != null) {
+                material.getAutores().add(autor);
+            }
+        }
+        registrarMaterial(material); // Usa persist() o merge() según corresponda
+    }
 
     @Override
     public List<MaterialBiblioteca> listarMateriales() {
@@ -77,9 +87,7 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             em.close();
         }
     }
-    
-    
-    
+       
     // Metodos nuevos para el CRUD de Materiales -------------------------------
     @Override
     public MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material) {

@@ -253,4 +253,8 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
         
     }
     
+    public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
+        
+    }
+    
 }

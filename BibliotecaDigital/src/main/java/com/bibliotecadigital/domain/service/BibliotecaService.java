@@ -11,6 +11,7 @@ public interface BibliotecaService {
     List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo);
     List<MaterialBiblioteca> buscarMaterialesPorAutor(String autor);
     MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material);
+    void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds);
     void eliminarMaterial(int id);
     
     // Métodos para autores

@@ -4,17 +4,46 @@
  */
 package com.bibliotecadigital.presentation.desktop.views;
 
+import com.bibliotecadigital.domain.model.Audio;
+import com.bibliotecadigital.domain.model.Autor;
+import com.bibliotecadigital.domain.model.Libro;
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.Revista;
+import com.bibliotecadigital.domain.model.Video;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Diego Garcia
  */
-public class GestionMaterialesView extends javax.swing.JFrame {
-
+public class GestionMaterialesView extends javax.swing.JFrame implements GestionMaterialesViewInterface {
+    
+    private DefaultTableModel tableModel; // El modelo de datos para nuestra tabla
     /**
      * Creates new form GestionMaterialesView
      */
     public GestionMaterialesView() {
         initComponents();
+        configuracionAdicional();
+    }
+    
+    private void configuracionAdicional() {
+        // 1. Crear nuestro modelo de tabla personalizado
+        tableModel = new DefaultTableModel(new Object[]{"ID", "Año", "Titulo", "Ruta de archivo", "Estado", "Autor(es)", "Tipo", "Editorial", "Num paginas", "Numero", "Duracion" ,"Formato"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Hacer que las celdas no sean editables
+            }
+        };
+        
+        // 2. Conectar nuestra JTable (materialesTable) con el modelo de datos
+        materialesTable.setModel(tableModel);
+        
+        // 3. Centrar la ventana
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -26,21 +55,73 @@ public class GestionMaterialesView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrollPanelTabla = new javax.swing.JScrollPane();
+        materialesTable = new javax.swing.JTable();
+        nuevoButton = new javax.swing.JButton();
+        editarButton = new javax.swing.JButton();
+        eliminarButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        materialesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scrollPanelTabla.setViewportView(materialesTable);
+
+        nuevoButton.setText("Nuevo");
+        nuevoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoButtonActionPerformed(evt);
+            }
+        });
+
+        editarButton.setText("Editar");
+
+        eliminarButton.setText("Eliminar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPanelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nuevoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nuevoButton)
+                    .addComponent(editarButton)
+                    .addComponent(eliminarButton))
+                .addGap(37, 37, 37))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +159,207 @@ public class GestionMaterialesView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editarButton;
+    private javax.swing.JButton eliminarButton;
+    private javax.swing.JTable materialesTable;
+    private javax.swing.JButton nuevoButton;
+    private javax.swing.JScrollPane scrollPanelTabla;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void addNuevoListener(ActionListener listener) {
+        nuevoButton.addActionListener(listener);
+    }
+
+    @Override
+    public void addEditarListener(ActionListener listener) {
+        editarButton.addActionListener(listener);    }
+
+    @Override
+    public void addEliminarListener(ActionListener listener) {
+        eliminarButton.addActionListener(listener);
+    }
+
+    @Override
+    public void mostrarMateriales(List<MaterialBiblioteca> materiales) {
+        tableModel.setRowCount(0); // Limpiar la tabla
+
+        for (MaterialBiblioteca material : materiales) {
+            String tipo = material.getClass().getSimpleName();
+
+            String autoresStr = material.getAutores().isEmpty()
+                ? "-"
+                : String.join(", ", material.getAutores().stream()
+                                            .map(a -> a.getNombre())
+                                            .toArray(String[]::new));
+
+            Object[] fila = new Object[12];
+
+            // Comunes
+            fila[0] = material.getId();
+            fila[1] = material.getAnio();
+            fila[2] = material.getTitulo();
+            fila[3] = material.getRutaArchivo();
+            fila[4] = material.isDisponible() ? "Disponible" : "Prestado";
+            fila[5] = autoresStr;
+            fila[6] = tipo;
+
+            // Inicializar campos específicos con "-"
+            fila[7] = "-"; // Editorial
+            fila[8] = "-"; // Num páginas
+            fila[9] = "-"; // Número (revista)
+            fila[10] = "-"; // Duración
+            fila[11] = "-"; // Formato
+
+            // Asignar según el tipo
+            if (material instanceof Libro libro) {
+                fila[7] = libro.getEditorial() != null ? libro.getEditorial() : "-";
+                fila[8] = libro.getNumPaginas();
+            } else if (material instanceof Revista revista) {
+                fila[7] = revista.getEditorial() != null ? revista.getEditorial() : "-";
+                fila[9] = revista.getNumero();
+            } else if (material instanceof Audio audio) {
+                fila[10] = audio.getDuracion();
+                fila[11] = audio.getFormato() != null ? audio.getFormato() : "-";
+            } else if (material instanceof Video video) {
+                fila[10] = video.getDuracion();
+                fila[11] = video.getFormato() != null ? video.getFormato() : "-";
+            }
+
+            tableModel.addRow(fila);
+        }
+    }
+
+
+    @Override
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    @Override
+    public MaterialBiblioteca getMaterialSeleccionado() {
+        /*
+        int selectedRow = materialesTable.getSelectedRow();
+        if (selectedRow < 0) {
+            return null; // No hay fila seleccionada
+        }
+
+        try {
+            int id = (int) tableModel.getValueAt(selectedRow, 0);
+            int anio = (int) tableModel.getValueAt(selectedRow, 1);
+            String titulo = (String) tableModel.getValueAt(selectedRow, 2);
+            String rutaArchivo = (String) tableModel.getValueAt(selectedRow, 3);
+            String estado = (String) tableModel.getValueAt(selectedRow, 4);
+            String tipo = (String) tableModel.getValueAt(selectedRow, 6);
+
+            boolean disponible = estado.equalsIgnoreCase("Disponible");
+
+            // Autores: aquí solo recuperas los nombres como String separados por coma
+            // Si necesitas reconstruir objetos Autor, necesitarás buscar en tu base de datos o lista
+            String autoresStr = (String) tableModel.getValueAt(selectedRow, 5);
+            List<Autor> autores = new ArrayList<>();
+            if (!autoresStr.equals("-")) {
+                for (String nombre : autoresStr.split(",")) {
+                    autores.add(new Autor(nombre.trim())); // Suponiendo un constructor simple
+                }
+            }
+
+            // Leer campos específicos
+            String editorial = (String) tableModel.getValueAt(selectedRow, 7);
+            String numPaginasStr = tableModel.getValueAt(selectedRow, 8).toString();
+            String numeroRevistaStr = tableModel.getValueAt(selectedRow, 9).toString();
+            String duracion = (String) tableModel.getValueAt(selectedRow, 10);
+            String formato = (String) tableModel.getValueAt(selectedRow, 11);
+
+            // Crear instancia según tipo
+            switch (tipo) {
+                case "Libro":
+                    int numPaginas = Integer.parseInt(numPaginasStr);
+                    Libro libro = new Libro(id, titulo, anio, rutaArchivo, autores, editorial, numPaginas);
+                    return libro;
+
+                case "Revista":
+                    int numero = Integer.parseInt(numeroRevistaStr);
+                    Revista revista = new Revista(id, titulo, anio, rutaArchivo, disponible, autores, editorial, numero);
+                    return revista;
+
+                case "Audio":
+                    Audio audio = new Audio(id, titulo, anio, rutaArchivo, disponible, autores, duracion, formato);
+                    return audio;
+
+                case "Video":
+                    Video video = new Video(id, titulo, anio, rutaArchivo, disponible, autores, duracion, formato);
+                    return video;
+
+                default:
+                    System.err.println("Tipo de material desconocido: " + tipo);
+                    return null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }*/
+        return null;
+    }
+
+    @Override
+    public String pedirTipoMaterial() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String pedirNuevoTituloMaterial(String tituloActual) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int pedirAnioMaterial() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String pedirRutaArchivo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Integer> pedirIdsAutores() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String pedirEditorial() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int pedirNumPaginas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int pedirNumero() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public float pedirDuracion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String pedirFormato() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean confirmarEliminacion(String tituloMaterial) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public JFrame getFrame() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
