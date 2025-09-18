@@ -13,8 +13,11 @@ package com.mycompany.bibliotecadigital;
 import com.bibliotecadigital.domain.service.BibliotecaService;
 import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
 import com.bibliotecadigital.presentation.desktop.controllers.GestionAutoresController;
+import com.bibliotecadigital.presentation.desktop.controllers.GestionMaterialesController;
 import com.bibliotecadigital.presentation.desktop.views.GestionAutoresView; // <-- Asegúrate de importar la clase concreta
 import com.bibliotecadigital.presentation.desktop.views.GestionAutoresViewInterface;
+import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesView;
+import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesViewInterface;
 
 public class BibliotecaDigital {
 
@@ -28,13 +31,16 @@ public class BibliotecaDigital {
             // ...y se asigna a una variable del tipo de la INTERFAZ.
             // Esta es la mejor práctica.
             GestionAutoresViewInterface vistaAutores = new GestionAutoresView();
-
+            GestionMaterialesViewInterface vistaMateriales= new GestionMaterialesView();
+            
             // 3. Instanciar el Controlador, inyectando Modelo y Vista
             new GestionAutoresController(servicio, vistaAutores);
-
+            new GestionMaterialesController(servicio, vistaMateriales);
+            
             // 4. Hacer visible la GUI
             // El método setVisible debe ser parte de tu interfaz
-            vistaAutores.setVisible(true); 
+            vistaAutores.setVisible(true);
+            vistaMateriales.setVisible(true); 
         });
     }
 }

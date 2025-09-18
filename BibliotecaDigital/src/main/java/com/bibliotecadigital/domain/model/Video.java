@@ -4,9 +4,16 @@
  */
 package com.bibliotecadigital.domain.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("VIDEO")
 public class Video extends MaterialBiblioteca {
     private float duracion;
     private String formato;
+
+    public Video() { super(); }
     
     public Video(int id, String titulo, int anio, String rutaArchivo, 
                  float duracion, String formato) {

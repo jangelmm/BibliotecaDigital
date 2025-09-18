@@ -4,9 +4,16 @@
  */
 package com.bibliotecadigital.domain.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("AUDIO")
 public class Audio extends MaterialBiblioteca {
     private float duracion;
     private String formato;
+    
+    public Audio() { super(); }
     
     public Audio(int id, String titulo, int anio, String rutaArchivo, 
                  float duracion, String formato) {

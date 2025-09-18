@@ -242,4 +242,19 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     public void eliminarAutor(int id) {
         
     }
+    
+    @Override
+    public MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material) {
+        return null;
+    }
+
+    @Override
+    public void eliminarMaterial(int id) {
+        
+    }
+    
+    public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
+        
+    }
+    
 }
