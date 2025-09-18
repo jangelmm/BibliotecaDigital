@@ -4,9 +4,16 @@
  */
 package com.bibliotecadigital.domain.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("REVISTA") // Identificador para esta subclase en la tabla
 public class Revista extends MaterialBiblioteca {
     private String editorial;
     private int numero;
+    
+    public Revista() { super(); }
     
     public Revista(int id, String titulo, int anio, String rutaArchivo, 
                    String editorial, int numero) {

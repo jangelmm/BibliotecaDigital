@@ -17,6 +17,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -66,6 +67,26 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             em.close();
         }
     }
+    
+    public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
+        executeInsideTransaction(em -> {
+            // Lista para guardar autores gestionados por Hibernate
+            List<Autor> autoresGestionados = new ArrayList<>();
+
+            for (Integer idAutor : autorIds) {
+                Autor autor = em.find(Autor.class, idAutor); // Traemos el autor existente
+                if (autor != null) {
+                    autoresGestionados.add(autor);
+                }
+            }
+
+            // Asociamos los autores al material
+            material.setAutores(autoresGestionados);
+
+            // Persistimos solo el material, Hibernate manejará la relación
+            em.persist(material);
+        });
+    }
 
     @Override
     public List<MaterialBiblioteca> listarMateriales() {
@@ -77,6 +98,27 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             em.close();
         }
     }
+       
+    // Metodos nuevos para el CRUD de Materiales -------------------------------
+    @Override
+    public MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material) {
+        final MaterialBiblioteca[] materialAct = new MaterialBiblioteca[1];
+        executeInsideTransaction(em -> {
+            materialAct[0] = em.merge(material);
+        });
+        return materialAct[0];
+    }
+    
+    @Override
+    public void eliminarMaterial(int id) {
+        executeInsideTransaction(em -> {
+            MaterialBiblioteca material = em.find(MaterialBiblioteca.class, id);
+            if (material != null) {
+                em.remove(material);
+            }
+        });
+    }
+    // -------------------------------------------------------------------------
     
     @Override
     public boolean registrarUsuario(Usuario usuario) {

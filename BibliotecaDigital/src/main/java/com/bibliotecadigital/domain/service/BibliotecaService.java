@@ -10,6 +10,9 @@ public interface BibliotecaService {
     List<MaterialBiblioteca> listarMateriales();
     List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo);
     List<MaterialBiblioteca> buscarMaterialesPorAutor(String autor);
+    MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material);
+    void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds);
+    void eliminarMaterial(int id);
     
     // Métodos para autores
     Autor registrarAutor(Autor autor);
