@@ -17,6 +17,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -68,13 +69,23 @@ public class JpaBibliotecaRepository implements BibliotecaService {
     }
     
     public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
-        for (Integer id : autorIds) {
-            Autor autor = buscarAutorPorId(id);
-            if (autor != null) {
-                material.getAutores().add(autor);
+        executeInsideTransaction(em -> {
+            // Lista para guardar autores gestionados por Hibernate
+            List<Autor> autoresGestionados = new ArrayList<>();
+
+            for (Integer idAutor : autorIds) {
+                Autor autor = em.find(Autor.class, idAutor); // Traemos el autor existente
+                if (autor != null) {
+                    autoresGestionados.add(autor);
+                }
             }
-        }
-        registrarMaterial(material); // Usa persist() o merge() según corresponda
+
+            // Asociamos los autores al material
+            material.setAutores(autoresGestionados);
+
+            // Persistimos solo el material, Hibernate manejará la relación
+            em.persist(material);
+        });
     }
 
     @Override

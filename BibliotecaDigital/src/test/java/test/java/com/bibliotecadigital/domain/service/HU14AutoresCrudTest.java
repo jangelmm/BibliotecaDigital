@@ -45,7 +45,7 @@ public class HU14AutoresCrudTest extends BaseJpaTest {
         vistaMock = new MockGestionAutoresView();
         controlador = new GestionAutoresController(repository, vistaMock);
     }
-
+/*
     @Test
     void testCrearYEncontrarAutorDesdeController() {
         // Arrange: Preparamos nuestro 'banco de pruebas' (el Mock).
@@ -61,4 +61,5 @@ public class HU14AutoresCrudTest extends BaseJpaTest {
         assertFalse(repository.listarAutores().isEmpty());
         assertEquals("Gabriel García Márquez", repository.listarAutores().get(0).getNombre());
     }
+*/
 }

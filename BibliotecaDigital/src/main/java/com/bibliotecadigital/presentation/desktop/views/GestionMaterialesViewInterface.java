@@ -26,22 +26,23 @@ public interface GestionMaterialesViewInterface {
     // Métodos para que el Controlador obtenga datos de la Vista ---------------
     // Para todos los materiales
     MaterialBiblioteca getMaterialSeleccionado();
-    String pedirTipoMaterial();
+    String pedirTipoMaterial(String tipoActual);
     String pedirNuevoTituloMaterial(String tituloActual);
-    int pedirAnioMaterial();
-    String pedirRutaArchivo();
+    int pedirAnioMaterial(int anioActual);
+    String pedirRutaArchivo(String rutaActual);
     List<Integer> pedirIdsAutores();
-    
+    boolean pedirEstadoMaterial(boolean estadoActual);
+
     // Para Libro
-    String pedirEditorial();
-    int pedirNumPaginas();
-    
+    String pedirEditorial(String editorialActual);
+    Integer pedirNumPaginas(Integer numPaginasActual);
+
     // Para Revista
-    int pedirNumero();
-    
+    int pedirNumero(int numeroActual);
+
     // Para Video y Audio
-    float pedirDuracion();
-    String pedirFormato();
+    float pedirDuracion(float duracionActual);
+    String pedirFormato(String formatoActual);
     // -------------------------------------------------------------------------
     
     boolean confirmarEliminacion(String tituloMaterial);

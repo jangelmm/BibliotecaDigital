@@ -11,7 +11,9 @@ import com.bibliotecadigital.domain.model.MaterialBiblioteca;
 import com.bibliotecadigital.domain.model.Revista;
 import com.bibliotecadigital.domain.model.Video;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -182,54 +184,55 @@ public class GestionMaterialesView extends javax.swing.JFrame implements Gestion
 
     @Override
     public void mostrarMateriales(List<MaterialBiblioteca> materiales) {
-        tableModel.setRowCount(0); // Limpiar la tabla
+        tableModel.setRowCount(0); // limpiar tabla
 
         for (MaterialBiblioteca material : materiales) {
-            String tipo = material.getClass().getSimpleName();
+            // Convertir lista de autores a string con IDs separados por coma
+            String autoresId = material.getAutores().stream()
+                                       .map(a -> String.valueOf(a.getId()))
+                                       .collect(Collectors.joining(","));
 
-            String autoresStr = material.getAutores().isEmpty()
-                ? "-"
-                : String.join(", ", material.getAutores().stream()
-                                            .map(a -> a.getNombre())
-                                            .toArray(String[]::new));
+            String tipo = "";
+            String editorial = "";
+            int numPaginas = 0;
+            int numero = 0;
+            float duracion = 0;
+            String formato = "";
 
-            Object[] fila = new Object[12];
-
-            // Comunes
-            fila[0] = material.getId();
-            fila[1] = material.getAnio();
-            fila[2] = material.getTitulo();
-            fila[3] = material.getRutaArchivo();
-            fila[4] = material.isDisponible() ? "Disponible" : "Prestado";
-            fila[5] = autoresStr;
-            fila[6] = tipo;
-
-            // Inicializar campos específicos con "-"
-            fila[7] = "-"; // Editorial
-            fila[8] = "-"; // Num páginas
-            fila[9] = "-"; // Número (revista)
-            fila[10] = "-"; // Duración
-            fila[11] = "-"; // Formato
-
-            // Asignar según el tipo
-            if (material instanceof Libro libro) {
-                fila[7] = libro.getEditorial() != null ? libro.getEditorial() : "-";
-                fila[8] = libro.getNumPaginas();
-            } else if (material instanceof Revista revista) {
-                fila[7] = revista.getEditorial() != null ? revista.getEditorial() : "-";
-                fila[9] = revista.getNumero();
-            } else if (material instanceof Audio audio) {
-                fila[10] = audio.getDuracion();
-                fila[11] = audio.getFormato() != null ? audio.getFormato() : "-";
-            } else if (material instanceof Video video) {
-                fila[10] = video.getDuracion();
-                fila[11] = video.getFormato() != null ? video.getFormato() : "-";
+            if (material instanceof Libro l) {
+                tipo = "libro";
+                editorial = l.getEditorial();
+                numPaginas = l.getNumPaginas();
+            } else if (material instanceof Revista r) {
+                tipo = "revista";
+                editorial = r.getEditorial();
+                numero = r.getNumero();
+            } else if (material instanceof Audio a) {
+                tipo = "audio";
+                duracion = a.getDuracion();
+                formato = a.getFormato();
+            } else if (material instanceof Video v) {
+                tipo = "video";
+                duracion = v.getDuracion();
+                formato = v.getFormato();
             }
 
-            tableModel.addRow(fila);
+            tableModel.addRow(new Object[]{
+                material.getId(),
+                material.getAnio(),
+                material.getTitulo(),
+                material.getRutaArchivo(),
+                material.isDisponible() ? "Disponible" : "No disponible",
+                autoresId, // solo IDs
+                tipo,
+                editorial,
+                numPaginas,
+                numero, //.getNumero() == 0 ? "" : material.getNumero(),
+                duracion, //.getDuracion() == 0f ? "" : material.getDuracion(),
+                formato
+            });
         }
     }
-
 
     @Override
     public void mostrarMensaje(String mensaje) {
@@ -238,128 +241,192 @@ public class GestionMaterialesView extends javax.swing.JFrame implements Gestion
 
     @Override
     public MaterialBiblioteca getMaterialSeleccionado() {
-        /*
         int selectedRow = materialesTable.getSelectedRow();
-        if (selectedRow < 0) {
-            return null; // No hay fila seleccionada
+        if (selectedRow < 0) return null;
+
+        int id = (int) tableModel.getValueAt(selectedRow, 0);
+        int anio = (int) tableModel.getValueAt(selectedRow, 1);
+        String titulo = (String) tableModel.getValueAt(selectedRow, 2);
+        String rutaArchivo = (String) tableModel.getValueAt(selectedRow, 3);
+        boolean disponible = "Disponible".equals(tableModel.getValueAt(selectedRow, 4));
+
+        String autoresIdStr = (String) tableModel.getValueAt(selectedRow, 5);
+        List<Autor> autores = new ArrayList<>();
+        if (autoresIdStr != null && !autoresIdStr.isEmpty()) {
+            for (String sId : autoresIdStr.split(",")) {
+                int aId = Integer.parseInt(sId.trim());
+                autores.add(new Autor(aId, "")); // solo con ID, nombre puede obtenerse de DB si quieres
+            }
         }
 
-        try {
-            int id = (int) tableModel.getValueAt(selectedRow, 0);
-            int anio = (int) tableModel.getValueAt(selectedRow, 1);
-            String titulo = (String) tableModel.getValueAt(selectedRow, 2);
-            String rutaArchivo = (String) tableModel.getValueAt(selectedRow, 3);
-            String estado = (String) tableModel.getValueAt(selectedRow, 4);
-            String tipo = (String) tableModel.getValueAt(selectedRow, 6);
+        String tipo = (String) tableModel.getValueAt(selectedRow, 6);
 
-            boolean disponible = estado.equalsIgnoreCase("Disponible");
+        MaterialBiblioteca material = switch (tipo) {
+            case "libro" -> new Libro(id, titulo, anio, rutaArchivo,
+                                      (String) tableModel.getValueAt(selectedRow, 7),
+                                      (int) tableModel.getValueAt(selectedRow, 8));
+            case "revista" -> new Revista(id, titulo, anio, rutaArchivo,
+                                          (String) tableModel.getValueAt(selectedRow, 7),
+                                          (int) tableModel.getValueAt(selectedRow, 9));
+            case "audio" -> new Audio(id, titulo, anio, rutaArchivo,
+                                      ((Number) tableModel.getValueAt(selectedRow, 10)).floatValue(),
+                                      (String) tableModel.getValueAt(selectedRow, 11));
+            case "video" -> new Video(id, titulo, anio, rutaArchivo,
+                                      ((Number) tableModel.getValueAt(selectedRow, 10)).floatValue(),
+                                      (String) tableModel.getValueAt(selectedRow, 11));
+            default -> null;
+        };
 
-            // Autores: aquí solo recuperas los nombres como String separados por coma
-            // Si necesitas reconstruir objetos Autor, necesitarás buscar en tu base de datos o lista
-            String autoresStr = (String) tableModel.getValueAt(selectedRow, 5);
-            List<Autor> autores = new ArrayList<>();
-            if (!autoresStr.equals("-")) {
-                for (String nombre : autoresStr.split(",")) {
-                    autores.add(new Autor(nombre.trim())); // Suponiendo un constructor simple
-                }
-            }
+        if (material != null) {
+            material.setDisponible(disponible);
+            autores.forEach(material::agregarAutor);
+        }
 
-            // Leer campos específicos
-            String editorial = (String) tableModel.getValueAt(selectedRow, 7);
-            String numPaginasStr = tableModel.getValueAt(selectedRow, 8).toString();
-            String numeroRevistaStr = tableModel.getValueAt(selectedRow, 9).toString();
-            String duracion = (String) tableModel.getValueAt(selectedRow, 10);
-            String formato = (String) tableModel.getValueAt(selectedRow, 11);
-
-            // Crear instancia según tipo
-            switch (tipo) {
-                case "Libro":
-                    int numPaginas = Integer.parseInt(numPaginasStr);
-                    Libro libro = new Libro(id, titulo, anio, rutaArchivo, autores, editorial, numPaginas);
-                    return libro;
-
-                case "Revista":
-                    int numero = Integer.parseInt(numeroRevistaStr);
-                    Revista revista = new Revista(id, titulo, anio, rutaArchivo, disponible, autores, editorial, numero);
-                    return revista;
-
-                case "Audio":
-                    Audio audio = new Audio(id, titulo, anio, rutaArchivo, disponible, autores, duracion, formato);
-                    return audio;
-
-                case "Video":
-                    Video video = new Video(id, titulo, anio, rutaArchivo, disponible, autores, duracion, formato);
-                    return video;
-
-                default:
-                    System.err.println("Tipo de material desconocido: " + tipo);
-                    return null;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }*/
-        return null;
+        return material;
     }
 
     @Override
-    public String pedirTipoMaterial() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String pedirTipoMaterial(String tipoActual) {
+         String[] opciones = {"Libro", "Revista", "Audio", "Video"};
+
+        // Determinar la opción inicial según el tipo actual
+        int seleccionInicial = 0;
+        for (int i = 0; i < opciones.length; i++) {
+            if (opciones[i].equalsIgnoreCase(tipoActual)) {
+                seleccionInicial = i;
+                break;
+            }
+        }
+
+        int seleccion = JOptionPane.showOptionDialog(
+            this,
+            "Seleccione el tipo de material:",
+            "Tipo de material",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opciones,
+            opciones[seleccionInicial]
+        );
+
+        // Retorna la opción seleccionada, o el tipoActual si cierra el diálogo
+        return seleccion >= 0 ? opciones[seleccion] : tipoActual;
     }
 
     @Override
     public String pedirNuevoTituloMaterial(String tituloActual) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Muestra un diálogo para que el usuario ingrese un titulo
+        return JOptionPane.showInputDialog(this, "Ingrese el titulo del material:", tituloActual);
     }
 
     @Override
-    public int pedirAnioMaterial() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int pedirAnioMaterial(int anioActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese el año del material:", anioActual);
+        try {
+            return (input == null || input.trim().isEmpty()) ? anioActual : Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            return anioActual;
+        }
     }
 
     @Override
-    public String pedirRutaArchivo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String pedirRutaArchivo(String rutaActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese la ruta del archivo:", rutaActual);
+        return (input == null || input.trim().isEmpty()) ? rutaActual : input.trim();
     }
 
     @Override
     public List<Integer> pedirIdsAutores() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String input = JOptionPane.showInputDialog(this, "Ingrese los IDs de los autores separados por comas:"); 
+        if (input == null || input.trim().isEmpty()) { 
+            return java.util.Collections.emptyList(); 
+        }
+        String[] partes = input.split(","); 
+        List<Integer> ids = new java.util.ArrayList<>(); 
+        for (String p : partes) { 
+            ids.add(Integer.parseInt(p.trim())); 
+        } 
+        return ids;
     }
 
     @Override
-    public String pedirEditorial() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String pedirEditorial(String editorialActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese la editorial:", editorialActual);
+        return (input == null || input.trim().isEmpty()) ? editorialActual : input.trim();
     }
 
     @Override
-    public int pedirNumPaginas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Integer pedirNumPaginas(Integer numPaginasActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese el número de páginas:", numPaginasActual);
+        try {
+            return (input == null || input.trim().isEmpty()) ? numPaginasActual : Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            return numPaginasActual;
+        }
     }
 
     @Override
-    public int pedirNumero() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int pedirNumero(int numeroActual) {
+        String valorPorDefecto = (numeroActual == -1) ? "" : String.valueOf(numeroActual);
+        String input = JOptionPane.showInputDialog(this, "Ingrese el número de la revista:", numeroActual);
+        try {
+            return (input == null || input.trim().isEmpty()) ? numeroActual : Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            return numeroActual;
+        }
     }
 
     @Override
-    public float pedirDuracion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public float pedirDuracion(float duracionActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese la duración (en minutos):", duracionActual);
+        try {
+            return (input == null || input.trim().isEmpty()) ? duracionActual : Float.parseFloat(input.trim());
+        } catch (NumberFormatException e) {
+            return duracionActual;
+        }
     }
 
     @Override
-    public String pedirFormato() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String pedirFormato(String formatoActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese el formato:", formatoActual);
+        return (input == null || input.trim().isEmpty()) ? formatoActual : input.trim();
     }
 
+    public boolean pedirEstadoMaterial(boolean estadoActual) {
+        // Opciones a mostrar
+        String[] opciones = {"Sí", "No"};
+
+        // Determinar opción inicial según el estado actual
+        int seleccionInicial = estadoActual ? 0 : 1;
+
+        // Mostrar el cuadro de diálogo con opciones
+        int seleccion = JOptionPane.showOptionDialog(
+            this,
+            "Seleccione el estado del material,  ¿esta disponible?:",
+            "Estado del material",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opciones,
+            opciones[seleccionInicial]
+        );
+
+        // Retorna true si selecciona "Sí", false si selecciona "No" o cierra el diálogo
+        return seleccion == 0;
+    }
+    
     @Override
     public boolean confirmarEliminacion(String tituloMaterial) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Muestra un diálogo de confirmación
+        int respuesta = JOptionPane.showConfirmDialog(this, 
+                "¿Está seguro de que desea eliminar el material '" + tituloMaterial + "'?", 
+                "Confirmar Eliminación", 
+                JOptionPane.YES_NO_OPTION);
+        return respuesta == JOptionPane.YES_OPTION;
     }
 
     @Override
     public JFrame getFrame() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this;
     }
 }

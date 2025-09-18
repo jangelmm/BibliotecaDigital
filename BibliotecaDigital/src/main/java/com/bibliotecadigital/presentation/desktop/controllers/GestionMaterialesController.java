@@ -41,42 +41,51 @@ public class GestionMaterialesController {
     }
 
     public void crearNuevoMaterial() {
-        String tipo = vista.pedirTipoMaterial(); // (libro/Revista/Video/Audio)
+        // Pasamos valores "vacíos" o neutros porque es creación
+        String tipo = vista.pedirTipoMaterial("").trim().toLowerCase(); // libro/revista/video/audio
         String titulo = vista.pedirNuevoTituloMaterial("");
-        int anio = vista.pedirAnioMaterial();
-        String rutaArchivo = vista.pedirRutaArchivo();
+        int anio = vista.pedirAnioMaterial(0);
+        String rutaArchivo = vista.pedirRutaArchivo("");
         boolean disponible = true; // disponible por default
-        List<Integer> autorIds = vista.pedirIdsAutores(); // por ejemplo: [1, 2, 5]
+        List<Integer> autorIds = vista.pedirIdsAutores( ); // por ejemplo: [1, 2, 5]
 
         MaterialBiblioteca material = null;
 
+        System.out.println("tipo: " + tipo);
+
         switch (tipo) {
-            case "Libro":
-                String editorial = vista.pedirEditorial();
-                int numPaginas = vista.pedirNumPaginas();
-                material = new Libro(0, titulo,  anio, rutaArchivo, editorial, numPaginas);
+            case "libro":
+                String editorial = vista.pedirEditorial("");  // ahora recibe parámetro
+                Integer numPaginas = vista.pedirNumPaginas(null);   // ahora recibe parámetro
+                material = new Libro(0, titulo, anio, rutaArchivo, editorial, numPaginas);
                 break;
 
-            case "Revista":
-                String edit = vista.pedirEditorial();
-                int numero = vista.pedirNumero();
+            case "revista":
+                String edit = vista.pedirEditorial("");     // parámetro
+                int numero = vista.pedirNumero(0);          // parámetro
                 material = new Revista(0, titulo, anio, rutaArchivo, edit, numero);
                 break;
 
-            case "Video":
-                float duracion = vista.pedirDuracion();
-                String formato = vista.pedirFormato();
+            case "video":
+                float duracion = vista.pedirDuracion(0f);   // parámetro
+                String formato = vista.pedirFormato("");    // parámetro
                 material = new Video(0, titulo, anio, rutaArchivo, duracion, formato);
                 break;
-                
-            case "Audio":
-                float dur = vista.pedirDuracion();
-                String form = vista.pedirFormato();
+
+            case "audio":
+                float dur = vista.pedirDuracion(0f);       // parámetro
+                String form = vista.pedirFormato("");      // parámetro
                 material = new Audio(0, titulo, anio, rutaArchivo, dur, form);
                 break;
+
+            default:
+                vista.mostrarMensaje("Tipo de material no válido.");
         }
 
+        System.out.println("Creando material tipo: " + tipo);
+
         if (material != null) {
+            material.setDisponible(disponible); // establecemos estado
             servicio.registrarMaterialConAutores(material, autorIds);
             cargarMateriales();
             vista.mostrarMensaje("Material creado exitosamente.");
@@ -89,14 +98,61 @@ public class GestionMaterialesController {
             vista.mostrarMensaje("Por favor, seleccione un material para editar.");
             return;
         }
-       
+
+        // Editar título
         String nuevoTitulo = vista.pedirNuevoTituloMaterial(materialSeleccionado.getTitulo());
         if (nuevoTitulo != null && !nuevoTitulo.trim().isEmpty()) {
             materialSeleccionado.setTitulo(nuevoTitulo);
-            servicio.actualizarMaterial(materialSeleccionado);
-            cargarMateriales(); // Refrescar la tabla
-            vista.mostrarMensaje("Material actualizado exitosamente.");
         }
+
+        // Editar estado
+        boolean nuevoDisponible = vista.pedirEstadoMaterial(materialSeleccionado.isDisponible());
+        materialSeleccionado.setDisponible(nuevoDisponible);
+
+        // Editar año
+        int nuevoAnio = vista.pedirAnioMaterial(materialSeleccionado.getAnio());
+        if (nuevoAnio > 0) { // Puedes agregar más validaciones si quieres
+            materialSeleccionado.setAnio(nuevoAnio);
+        }
+
+        // Editar ruta de archivo
+        String nuevaRuta = vista.pedirRutaArchivo(materialSeleccionado.getRutaArchivo());
+        if (nuevaRuta != null && !nuevaRuta.trim().isEmpty()) {
+            materialSeleccionado.setRutaArchivo(nuevaRuta);
+        }
+        
+        // Editar autores (opcional)
+        //List<Integer> nuevosIdsAutores = vista.pedirIdsAutores(materialSeleccionado.getAutores());
+        //servicio.actualizarAutores(materialSeleccionado, nuevosIdsAutores);
+
+        // Editar atributos según el tipo
+        if (materialSeleccionado instanceof Libro libro) {
+            String nuevaEditorial = vista.pedirEditorial(libro.getEditorial());
+            libro.setEditorial(nuevaEditorial);
+            int nuevasPaginas = vista.pedirNumPaginas(libro.getNumPaginas());
+            libro.setNumPaginas(nuevasPaginas);
+        } else if (materialSeleccionado instanceof Revista revista) {
+            String nuevaEditorial = vista.pedirEditorial(revista.getEditorial());
+            revista.setEditorial(nuevaEditorial);
+            int nuevoNumero = vista.pedirNumero(revista.getNumero());
+            revista.setNumero(nuevoNumero);
+        } else if (materialSeleccionado instanceof Audio audio) {
+            float nuevaDuracion = vista.pedirDuracion(audio.getDuracion());
+            audio.setDuracion(nuevaDuracion);
+            String nuevoFormato = vista.pedirFormato(audio.getFormato());
+            audio.setFormato(nuevoFormato);
+        } else if (materialSeleccionado instanceof Video video) {
+            float nuevaDuracion = vista.pedirDuracion(video.getDuracion());
+            video.setDuracion(nuevaDuracion);
+            String nuevoFormato = vista.pedirFormato(video.getFormato());
+            video.setFormato(nuevoFormato);
+        }
+
+        // Guardar cambios
+        servicio.actualizarMaterial(materialSeleccionado);
+        cargarMateriales(); // Refrescar la tabla
+        vista.mostrarMensaje("Material actualizado exitosamente.");
+
     }
     
     public void eliminarMaterialSeleccionado() {
@@ -118,21 +174,4 @@ public class GestionMaterialesController {
         }
     }
     
-    /*
-    public List<Integer> pedirIdsAutores() {
-        String input = JOptionPane.showInputDialog("Ingrese los IDs de los autores separados por coma:");
-        if (input == null || input.trim().isEmpty()) {
-            return new ArrayList<>();
-        }
-
-        return Arrays.stream(input.split(","))
-                     .map(String::trim)
-                     .map(Integer::parseInt)
-                     .collect(Collectors.toList());
-    }
-    */
-    
-    /*
-    
-    */
 }
