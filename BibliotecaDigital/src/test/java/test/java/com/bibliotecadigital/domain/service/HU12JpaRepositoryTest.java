@@ -15,7 +15,7 @@ public class HU12JpaRepositoryTest extends BaseJpaTest {
     @DisplayName("Debería registrar un usuario y encontrarlo por email")
     void testRegistrarYBuscarUsuario() {
         // Act
-        repository.registrarUsuario("Ana JPA", "ana.jpa@mail.com", "pass123", RolUsuario.CLIENTE);
+        repository.registrarUsuario(new Usuario("Ana JPA", "ana.jpa@mail.com", "pass123", RolUsuario.CLIENTE));
         Usuario encontrado = repository.buscarUsuarioPorEmail("ana.jpa@mail.com");
 
         // Assert
@@ -27,7 +27,7 @@ public class HU12JpaRepositoryTest extends BaseJpaTest {
     @DisplayName("Debería crear un préstamo y marcar los materiales como no disponibles")
     void testCrearPrestamoYVerificarDisponibilidad() {
         // Arrange
-        repository.registrarUsuario("Beto JPA", "beto.jpa@mail.com", "pass123", RolUsuario.CLIENTE);
+        repository.registrarUsuario(new Usuario("Beto JPA", "beto.jpa@mail.com", "pass123", RolUsuario.CLIENTE));
         Usuario usuario = repository.buscarUsuarioPorEmail("beto.jpa@mail.com");
 
         Libro libro = new Libro(0, "Libro para Prestar", 2025, "/ruta/jpa.pdf", "Ed. JPA", 100);

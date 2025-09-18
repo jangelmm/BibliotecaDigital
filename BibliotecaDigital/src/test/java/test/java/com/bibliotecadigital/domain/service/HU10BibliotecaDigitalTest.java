@@ -25,7 +25,8 @@ public class HU10BibliotecaDigitalTest {
 
     @Test
     void testRegistrarUsuarioConRol() {
-        boolean resultado = biblioteca.registrarUsuario("Admin", "admin@mail.com", "admin123", RolUsuario.ADMINISTRADOR);
+        
+        boolean resultado = biblioteca.registrarUsuario( new Usuario("Admin", "admin@mail.com", "admin123", RolUsuario.ADMINISTRADOR));
         assertTrue(resultado);
         
         Usuario usuario = biblioteca.buscarUsuarioPorEmail("admin@mail.com");
@@ -35,7 +36,7 @@ public class HU10BibliotecaDigitalTest {
     
     @Test
     void testActualizarRolUsuario() {
-        biblioteca.registrarUsuario("Usuario", "user@mail.com", "user123", RolUsuario.CLIENTE);
+        biblioteca.registrarUsuario(new Usuario("Usuario", "user@mail.com", "user123", RolUsuario.CLIENTE));
         
         boolean resultado = biblioteca.actualizarRolUsuario("user@mail.com", RolUsuario.ENCARGADO);
         assertTrue(resultado);
@@ -46,7 +47,7 @@ public class HU10BibliotecaDigitalTest {
     
     @Test
     void testVerificacionPermisosAdministrador() {
-        biblioteca.registrarUsuario("Admin", "admin@mail.com", "admin123", RolUsuario.ADMINISTRADOR);
+        biblioteca.registrarUsuario(new Usuario("Admin", "admin@mail.com", "admin123", RolUsuario.ADMINISTRADOR));
         Usuario admin = auth.login("admin@mail.com", "admin123");
         
         // Simulación de la lógica de permisos mejorada con Enum
@@ -57,7 +58,7 @@ public class HU10BibliotecaDigitalTest {
     
     @Test
     void testVerificacionPermisosCliente() {
-        biblioteca.registrarUsuario("Cliente", "cliente@mail.com", "cliente123", RolUsuario.CLIENTE);
+        biblioteca.registrarUsuario( new Usuario("Cliente", "cliente@mail.com", "cliente123", RolUsuario.CLIENTE));
         Usuario cliente = auth.login("cliente@mail.com", "cliente123");
         
         assertTrue(auth.tienePermiso(cliente, "buscar_materiales"));
@@ -67,7 +68,7 @@ public class HU10BibliotecaDigitalTest {
     
     @Test
     void testVerificacionPermisosEncargado() {
-        biblioteca.registrarUsuario("Encargado", "encargado@mail.com", "encargado123", RolUsuario.ENCARGADO);
+        biblioteca.registrarUsuario(new Usuario("Encargado", "encargado@mail.com", "encargado123", RolUsuario.ENCARGADO));
         Usuario encargado = auth.login("encargado@mail.com", "encargado123");
         
         assertTrue(auth.tienePermiso(encargado, "gestion_usuarios"));

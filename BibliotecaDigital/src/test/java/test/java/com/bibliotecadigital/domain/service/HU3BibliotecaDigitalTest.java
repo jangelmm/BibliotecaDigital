@@ -29,7 +29,7 @@ public class HU3BibliotecaDigitalTest {
         biblioteca = new InMemoryBibliotecaRepository();
 
         // Crear un usuario de prueba
-        biblioteca.registrarUsuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
+        biblioteca.registrarUsuario(new Usuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE));
         usuario = biblioteca.buscarUsuarioPorEmail("ana@mail.com");
 
         // Crear materiales de prueba

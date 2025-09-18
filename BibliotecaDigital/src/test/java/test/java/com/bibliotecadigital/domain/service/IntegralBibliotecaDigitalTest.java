@@ -264,8 +264,8 @@ public class IntegralBibliotecaDigitalTest {
     }
     
     private static void inicioSesion(){
-        biblioteca.registrarUsuario("Carlos Admin", "carlos@mail.com", "12345", RolUsuario.ADMINISTRADOR);
-        biblioteca.registrarUsuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
+        biblioteca.registrarUsuario(new Usuario("Carlos Admin", "carlos@mail.com", "12345", RolUsuario.ADMINISTRADOR));
+        biblioteca.registrarUsuario(new Usuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE));
     
         boolean loginExitoso = false;
         
@@ -323,7 +323,7 @@ public class IntegralBibliotecaDigitalTest {
             rol = RolUsuario.CLIENTE;
         }
 
-        boolean exito = biblioteca.registrarUsuario(nombre, correo, password, rol);
+        boolean exito = biblioteca.registrarUsuario(new Usuario(nombre, correo, password, rol));
         if (exito) {
             System.out.println("Usuario registrado con rol: " + rol);
         } else {

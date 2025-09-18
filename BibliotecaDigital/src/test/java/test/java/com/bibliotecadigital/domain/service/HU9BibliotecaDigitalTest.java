@@ -21,8 +21,8 @@ public class HU9BibliotecaDigitalTest {
         AuthenticationService auth = new AuthenticationService(biblioteca);
 
         // Registro de usuarios
-        biblioteca.registrarUsuario("Carlos", "carlos@mail.com", "12345", RolUsuario.ADMINISTRADOR);
-        biblioteca.registrarUsuario("Ana", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
+        biblioteca.registrarUsuario(new Usuario("Carlos", "carlos@mail.com", "12345", RolUsuario.ADMINISTRADOR));
+        biblioteca.registrarUsuario(new Usuario("Ana", "ana@mail.com", "abc123", RolUsuario.CLIENTE));
         
         System.out.println("Usuarios Registrado"
                 + "\n Carlos, carlos@gmail.com, 12345"

@@ -48,8 +48,14 @@ public class Usuario {
     public String getNombre() { return nombre; }
     public String getEmail() { return email; }
     public RolUsuario getRol() { return rol; }
-    public void setRol(RolUsuario rol) { this.rol = rol; }
     public boolean verificarPassword(String passwordIngresada) {
         return BCrypt.checkpw(passwordIngresada, this.passwordHash);
     }
+    
+    public void setRol(RolUsuario rol) { this.rol = rol; }
+    public void setId(Long id) { this.id = id;}
+    public void setEmail(String email) { this.email = email; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    
+    
 }

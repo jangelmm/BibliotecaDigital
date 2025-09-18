@@ -19,9 +19,11 @@ public interface BibliotecaService {
     void eliminarAutor(int id);
     
     // Métodos para usuarios
-    boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol);
+    boolean registrarUsuario(Usuario usuario);
     Usuario buscarUsuarioPorEmail(String email);
+    List<Usuario> listarUsuarios();
     boolean actualizarRolUsuario(String email, RolUsuario nuevoRol);
+    void eliminarUsuario(Usuario usuario);
     
     // Métodos de validación
     boolean validarMaterial(MaterialBiblioteca material);

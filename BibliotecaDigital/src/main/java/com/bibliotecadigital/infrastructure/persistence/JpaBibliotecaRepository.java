@@ -79,15 +79,18 @@ public class JpaBibliotecaRepository implements BibliotecaService {
     }
     
     @Override
-    public boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol) {
-        // La lógica de validación de email duplicado es mejor en la capa de servicio,
-        // pero por ahora la implementamos aquí para seguir el contrato.
-        if (buscarUsuarioPorEmail(email) != null) {
-            return false; // Usuario ya existe
+    public boolean registrarUsuario(Usuario usuario) {
+        if (buscarUsuarioPorEmail(usuario.getEmail()) != null) {
+            return false; // email duplicado
         }
-        Usuario nuevoUsuario = new Usuario(nombre, email, password, rol);
-        executeInsideTransaction(em -> em.persist(nuevoUsuario));
-        return true;
+
+        try {
+            executeInsideTransaction(em -> em.persist(usuario)); // 🔹 persiste el usuario
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace(); // 🔹 opcional: para ver error en consola
+            return false;
+        }
     }
 
     @Override
@@ -181,7 +184,19 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             }
         });
     }
+    
+    @Override
+    public void eliminarUsuario(Usuario u) {
+        executeInsideTransaction(em -> {
+            // Primero buscamos la entidad en el EntityManager
+            Usuario usuarioEnBD = em.find(Usuario.class, u.getId());
+            if (usuarioEnBD != null) {
+                em.remove(usuarioEnBD);
+            }
+        });
+    }
 
+    
     @Override
     public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
         EntityManager em = emf.createEntityManager();
@@ -233,6 +248,17 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             em.close();
         }
     }
+    @Override
+    public List<Usuario> listarUsuarios() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
 
     @Override
     public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) {
@@ -259,4 +285,24 @@ public class JpaBibliotecaRepository implements BibliotecaService {
         if (material.getAutores() == null || material.getAutores().isEmpty()) return false;
         return true;
     }
+    
+    public boolean actualizarUsuario(Usuario usuario) {
+    EntityManager em = emf.createEntityManager();
+    try {
+        // Verificamos si ya existe un email igual en otro usuario
+        TypedQuery<Usuario> query = em.createQuery(
+            "SELECT u FROM Usuario u WHERE u.email = :email AND u.id <> :id", Usuario.class);
+        query.setParameter("email", usuario.getEmail());
+        query.setParameter("id", usuario.getId());
+
+        if (!query.getResultList().isEmpty()) {
+            return false; // correo duplicado
+        }
+
+        executeInsideTransaction(em2 -> em2.merge(usuario)); // actualiza el usuario
+        return true;
+    } finally {
+        em.close();
+    }
+}
 }

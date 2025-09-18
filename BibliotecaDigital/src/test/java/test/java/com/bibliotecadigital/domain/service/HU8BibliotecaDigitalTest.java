@@ -35,8 +35,8 @@ public class HU8BibliotecaDigitalTest {
 
         // === PASO 1: REGISTRO DE USUARIOS Y MATERIALES ===
         System.out.println("PASO 1: Registrando usuarios y materiales...");
-        biblioteca.registrarUsuario("Admin Carlos", "admin@mail.com", "passAdmin", RolUsuario.ADMINISTRADOR);
-        biblioteca.registrarUsuario("Cliente Ana", "cliente@mail.com", "passCliente", RolUsuario.CLIENTE);
+        biblioteca.registrarUsuario(new Usuario("Admin Carlos", "admin@mail.com", "passAdmin", RolUsuario.ADMINISTRADOR));
+        biblioteca.registrarUsuario(new Usuario("Cliente Ana", "cliente@mail.com", "passCliente", RolUsuario.CLIENTE));
 
         Autor autor = biblioteca.registrarAutor(new Autor(0, "Autor Integral"));
         Libro libro = new Libro(0, "Libro Integral", 2025, "/ruta/libro.pdf", "Ed. Test", 150);

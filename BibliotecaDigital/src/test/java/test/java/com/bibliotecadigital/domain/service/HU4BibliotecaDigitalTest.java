@@ -29,7 +29,7 @@ public class HU4BibliotecaDigitalTest {
         biblioteca = new InMemoryBibliotecaRepository();
         
         // Crear usuario y materiales
-        biblioteca.registrarUsuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
+        biblioteca.registrarUsuario(new Usuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE));
         usuario = biblioteca.buscarUsuarioPorEmail("ana@mail.com");
 
         Autor autor = new Autor(1, "Autor de Prueba");

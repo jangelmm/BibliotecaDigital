@@ -134,17 +134,21 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     }
     
     @Override
-    public boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol) {
+    public boolean registrarUsuario(Usuario usuario) {
         for (Usuario u : usuarios) {
-            if (u.getEmail().equals(email)) {
+            if (u.getEmail().equals(usuario.getEmail())) {
                 return false; // ya existe
             }
         }
-        Usuario nuevo = new Usuario(nombre, email, password, rol);
+        Usuario nuevo = usuario;
         usuarios.add(nuevo);
         return true;
     }
 
+    @Override
+    public List<Usuario> listarUsuarios() {
+        return new ArrayList<>(usuarios);
+    }
     
     @Override
     public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) {
@@ -240,6 +244,10 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
 
     @Override
     public void eliminarAutor(int id) {
+        
+    }
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
         
     }
 }
