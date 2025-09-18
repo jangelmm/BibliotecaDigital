@@ -92,20 +92,17 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
     /**
      * Carga la lista de usuarios en el combobox
      */
-    @SuppressWarnings("unchecked") // Suprimimos la advertencia de compilación
+    @SuppressWarnings("unchecked") 
     private void cargarUsuarios() {
-        // Creamos un modelo genérico
+        // modelo genérico
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-
-        // Obtenemos los usuarios
+        
         List<Usuario> usuarios = controller.obtenerUsuarios();
-
-        // Añadimos cada usuario al modelo
+        
         for (Usuario usuario : usuarios) {
             model.addElement(usuario);
         }
-
-        // Asignamos el modelo al combobox
+        
         usuarioComboBox.setModel(model);
     }
     
@@ -186,11 +183,9 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
         }
         
         if (materialSeleccionado != null) {
-            // Agregar a seleccionados
             materialesSeleccionados.add(materialSeleccionado);
             materialesSeleccionadosModel.addRow(new Object[]{id, titulo, autor, tipo});
             
-            // Eliminar de disponibles
             materialesDisponiblesModel.removeRow(filaSeleccionada);
         }
     }
@@ -265,8 +260,6 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
         
         // Crear el préstamo a través del controlador
         controller.crearPrestamo(usuarioSeleccionado, materialesSeleccionados);
-        
-        // Cerrar el diálogo
         dispose();
     }
     
