@@ -2,7 +2,7 @@ import os
 import argparse
 
 # Directorios a ignorar (incluye caches de Python)
-IGNORE_DIRS = {'.web', 'venv', '__pycache__'}
+IGNORE_DIRS = {'.web', 'venv', '__pycache__', 'test'}
 
 # Extensiones de archivo permitidas
 ALLOWED_EXTS = {'.py', '.java', '.cpp', '.c'}

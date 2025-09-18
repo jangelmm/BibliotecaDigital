@@ -4,66 +4,57 @@
 BibliotecaDigital
 ├── BibliotecaDigital
 │   ├── src
-│   │   ├── main
-│   │   │   ├── java
-│   │   │   │   └── com
-│   │   │   │       ├── bibliotecadigital
-│   │   │   │       │   ├── domain
-│   │   │   │       │   │   ├── model
-│   │   │   │       │   │   │   ├── Audio.java
-│   │   │   │       │   │   │   ├── Autor.java
-│   │   │   │       │   │   │   ├── Libro.java
-│   │   │   │       │   │   │   ├── MaterialBiblioteca.java
-│   │   │   │       │   │   │   ├── Prestamo.java
-│   │   │   │       │   │   │   ├── Revista.java
-│   │   │   │       │   │   │   ├── RolUsuario.java
-│   │   │   │       │   │   │   ├── Usuario.java
-│   │   │   │       │   │   │   └── Video.java
-│   │   │   │       │   │   └── service
-│   │   │   │       │   │       ├── AuthenticationService.java
-│   │   │   │       │   │       └── BibliotecaService.java
-│   │   │   │       │   ├── infrastructure
-│   │   │   │       │   │   └── persistence
-│   │   │   │       │   │       ├── InMemoryBibliotecaRepository.java
-│   │   │   │       │   │       └── JpaBibliotecaRepository.java
-│   │   │   │       │   └── presentation
-│   │   │   │       │       └── desktop
-│   │   │   │       │           ├── controllers
-│   │   │   │       │           │   ├── GestionAutoresController.java
-│   │   │   │       │           │   └── MaterialController.java
-│   │   │   │       │           └── views
-│   │   │   │       │               ├── GestionAutoresView.form
-│   │   │   │       │               ├── GestionAutoresView.java
-│   │   │   │       │               └── GestionAutoresViewInterface.java
-│   │   │   │       └── mycompany
-│   │   │   │           └── bibliotecadigital
-│   │   │   │               └── BibliotecaDigital.java
-│   │   │   └── resources
-│   │   │       └── META-INF
-│   │   │           └── persistence.xml
-│   │   └── test
-│   │       └── java
-│   │           └── test
-│   │               └── java
-│   │                   └── com
-│   │                       └── bibliotecadigital
-│   │                           └── domain
-│   │                               └── service
-│   │                                   ├── BibliotecaServiceTest.java
-│   │                                   ├── HU10BibliotecaDigitalTest.java
-│   │                                   ├── HU11PersistenciaTest.java
-│   │                                   ├── HU12JpaRepositoryTest.java
-│   │                                   ├── HU14AutoresCrudTest.java
-│   │                                   ├── HU1BibliotecaDigitalTest.java
-│   │                                   ├── HU2BibliotecaDigitalTest.java
-│   │                                   ├── HU3BibliotecaDigitalTest.java
-│   │                                   ├── HU4BibliotecaDigitalTest.java
-│   │                                   ├── HU5BibliotecaDigitalTest.java
-│   │                                   ├── HU6CitasApaTest.java
-│   │                                   ├── HU7BibliotecaDigitalTest.java
-│   │                                   ├── HU8BibliotecaDigitalTest.java
-│   │                                   ├── HU9BibliotecaDigitalTest.java
-│   │                                   └── IntegralBibliotecaDigitalTest.java
+│   │   └── main
+│   │       ├── java
+│   │       │   └── com
+│   │       │       ├── bibliotecadigital
+│   │       │       │   ├── domain
+│   │       │       │   │   ├── model
+│   │       │       │   │   │   ├── Audio.java
+│   │       │       │   │   │   ├── Autor.java
+│   │       │       │   │   │   ├── Libro.java
+│   │       │       │   │   │   ├── MaterialBiblioteca.java
+│   │       │       │   │   │   ├── Prestamo.java
+│   │       │       │   │   │   ├── Revista.java
+│   │       │       │   │   │   ├── RolUsuario.java
+│   │       │       │   │   │   ├── Usuario.java
+│   │       │       │   │   │   └── Video.java
+│   │       │       │   │   └── service
+│   │       │       │   │       ├── AuthenticationService.java
+│   │       │       │   │       └── BibliotecaService.java
+│   │       │       │   ├── infrastructure
+│   │       │       │   │   └── persistence
+│   │       │       │   │       ├── InMemoryBibliotecaRepository.java
+│   │       │       │   │       └── JpaBibliotecaRepository.java
+│   │       │       │   └── presentation
+│   │       │       │       └── desktop
+│   │       │       │           ├── controllers
+│   │       │       │           │   ├── GestionAutoresController.java
+│   │       │       │           │   ├── GestionMaterialesController.java
+│   │       │       │           │   ├── GestionPrestamosController.java
+│   │       │       │           │   ├── GestionUsuariosController.java
+│   │       │       │           │   └── MaterialController.java
+│   │       │       │           └── views
+│   │       │       │               ├── GestionAutoresView.form
+│   │       │       │               ├── GestionAutoresView.java
+│   │       │       │               ├── GestionAutoresViewInterface.java
+│   │       │       │               ├── GestionMaterialesView.form
+│   │       │       │               ├── GestionMaterialesView.java
+│   │       │       │               ├── GestionMaterialesViewInterface.java
+│   │       │       │               ├── GestionPrestamosView.form
+│   │       │       │               ├── GestionPrestamosView.java
+│   │       │       │               ├── GestionPrestamosViewInterface.java
+│   │       │       │               ├── GestionUsuariosView.form
+│   │       │       │               ├── GestionUsuariosView.java
+│   │       │       │               ├── GestionUsuariosViewInterface.java
+│   │       │       │               ├── NuevoPrestamoDialog.form
+│   │       │       │               └── NuevoPrestamoDialog.java
+│   │       │       └── mycompany
+│   │       │           └── bibliotecadigital
+│   │       │               └── BibliotecaDigital.java
+│   │       └── resources
+│   │           └── META-INF
+│   │               └── persistence.xml
 │   ├── target
 │   │   ├── classes
 │   │   │   ├── META-INF
@@ -82,7 +73,6 @@ BibliotecaDigital
 │   │   │       │   │   │   ├── Usuario.class
 │   │   │       │   │   │   └── Video.class
 │   │   │       │   │   └── service
-│   │   │       │   │       ├── AuthenticationService$1.class
 │   │   │       │   │       ├── AuthenticationService.class
 │   │   │       │   │       └── BibliotecaService.class
 │   │   │       │   ├── infrastructure
@@ -93,76 +83,52 @@ BibliotecaDigital
 │   │   │       │       └── desktop
 │   │   │       │           ├── controllers
 │   │   │       │           │   ├── GestionAutoresController.class
+│   │   │       │           │   ├── GestionMaterialesController.class
+│   │   │       │           │   ├── GestionPrestamosController.class
+│   │   │       │           │   ├── GestionUsuariosController.class
 │   │   │       │           │   └── MaterialController.class
 │   │   │       │           └── views
 │   │   │       │               ├── GestionAutoresView$1.class
 │   │   │       │               ├── GestionAutoresView$2.class
 │   │   │       │               ├── GestionAutoresView.class
-│   │   │       │               └── GestionAutoresViewInterface.class
+│   │   │       │               ├── GestionAutoresView.form
+│   │   │       │               ├── GestionAutoresViewInterface.class
+│   │   │       │               ├── GestionMaterialesView$1.class
+│   │   │       │               ├── GestionMaterialesView$2.class
+│   │   │       │               ├── GestionMaterialesView$3.class
+│   │   │       │               ├── GestionMaterialesView.class
+│   │   │       │               ├── GestionMaterialesView.form
+│   │   │       │               ├── GestionMaterialesViewInterface.class
+│   │   │       │               ├── GestionPrestamosView$1.class
+│   │   │       │               ├── GestionPrestamosView$2.class
+│   │   │       │               ├── GestionPrestamosView.class
+│   │   │       │               ├── GestionPrestamosView.form
+│   │   │       │               ├── GestionPrestamosViewInterface.class
+│   │   │       │               ├── GestionUsuariosView$1.class
+│   │   │       │               ├── GestionUsuariosView$DetalleUsuarioDialog.class
+│   │   │       │               ├── GestionUsuariosView$EditarUsuarioDialog.class
+│   │   │       │               ├── GestionUsuariosView$NuevoUsuarioDialog.class
+│   │   │       │               ├── GestionUsuariosView.class
+│   │   │       │               ├── GestionUsuariosView.form
+│   │   │       │               ├── GestionUsuariosViewInterface.class
+│   │   │       │               ├── NuevoPrestamoDialog$1.class
+│   │   │       │               ├── NuevoPrestamoDialog$2.class
+│   │   │       │               ├── NuevoPrestamoDialog.class
+│   │   │       │               └── NuevoPrestamoDialog.form
 │   │   │       └── mycompany
 │   │   │           └── bibliotecadigital
 │   │   │               └── BibliotecaDigital.class
 │   │   ├── generated-sources
 │   │   │   └── annotations
-│   │   ├── generated-test-sources
-│   │   │   └── test-annotations
 │   │   ├── maven-status
 │   │   │   └── maven-compiler-plugin
-│   │   │       ├── compile
-│   │   │       │   └── default-compile
-│   │   │       │       ├── createdFiles.lst
-│   │   │       │       └── inputFiles.lst
-│   │   │       └── testCompile
-│   │   │           └── default-testCompile
+│   │   │       └── compile
+│   │   │           └── default-compile
 │   │   │               ├── createdFiles.lst
 │   │   │               └── inputFiles.lst
-│   │   ├── surefire-reports
-│   │   │   ├── 2025-09-15T14-57-57_727.dumpstream
-│   │   │   ├── 2025-09-15T14-58-19_090.dumpstream
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.BibliotecaServiceTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU10BibliotecaDigitalTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU11PersistenciaTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU12JpaRepositoryTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU14AutoresCrudTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU3BibliotecaDigitalTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU4BibliotecaDigitalTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU6CitasApaTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU7BibliotecaDigitalTest.xml
-│   │   │   ├── TEST-test.java.com.bibliotecadigital.domain.service.HU8BibliotecaDigitalTest.xml
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.BibliotecaServiceTest.txt
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.HU10BibliotecaDigitalTest.txt
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.HU11PersistenciaTest.txt
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.HU12JpaRepositoryTest.txt
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.HU14AutoresCrudTest.txt
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.HU3BibliotecaDigitalTest.txt
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.HU4BibliotecaDigitalTest.txt
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.HU6CitasApaTest.txt
-│   │   │   ├── test.java.com.bibliotecadigital.domain.service.HU7BibliotecaDigitalTest.txt
-│   │   │   └── test.java.com.bibliotecadigital.domain.service.HU8BibliotecaDigitalTest.txt
 │   │   └── test-classes
-│   │       └── test
-│   │           └── java
-│   │               └── com
-│   │                   └── bibliotecadigital
-│   │                       └── domain
-│   │                           └── service
-│   │                               ├── BibliotecaServiceTest.class
-│   │                               ├── HU10BibliotecaDigitalTest.class
-│   │                               ├── HU11PersistenciaTest.class
-│   │                               ├── HU12JpaRepositoryTest.class
-│   │                               ├── HU14AutoresCrudTest.class
-│   │                               ├── HU1BibliotecaDigitalTest.class
-│   │                               ├── HU2BibliotecaDigitalTest.class
-│   │                               ├── HU3BibliotecaDigitalTest.class
-│   │                               ├── HU4BibliotecaDigitalTest.class
-│   │                               ├── HU5BibliotecaDigitalTest.class
-│   │                               ├── HU6CitasApaTest.class
-│   │                               ├── HU7BibliotecaDigitalTest.class
-│   │                               ├── HU8BibliotecaDigitalTest.class
-│   │                               ├── HU9BibliotecaDigitalTest.class
-│   │                               ├── IntegralBibliotecaDigitalTest.class
-│   │                               └── MockGestionAutoresView.class
 │   ├── biblioteca.db
+│   ├── nb-configuration.xml
 │   ├── nbactions.xml
 │   └── pom.xml
 ├── docs
@@ -195,6 +161,138 @@ BibliotecaDigital
 /BibliotecaDigital/target/
 ```
 
+## `script.py`
+
+```python
+import os
+import argparse
+
+# Directorios a ignorar (incluye caches de Python)
+IGNORE_DIRS = {'.web', 'venv', '__pycache__', 'test'}
+
+# Extensiones de archivo permitidas
+ALLOWED_EXTS = {'.py', '.java', '.cpp', '.c'}
+
+# Archivos específicos a incluir siempre (aunque empiecen con '.'
+# o tengan extensión fuera de ALLOWED_EXTS)
+INCLUDED_FILES = {'requirements.txt', 'rxconfig.py', '.gitignore'}
+
+# Prefijos para el tree
+TREE_PREFIXES = {
+    'branch': '├── ',
+    'last':   '└── ',
+    'indent': '    ',
+    'pipe':   '│   '
+}
+
+
+def build_tree(root_path):
+    """
+    Genera una lista de líneas representando la estructura de directorios,
+    ignorando IGNORE_DIRS, pero incluyendo archivos en INCLUDED_FILES.
+    """
+    tree_lines = []
+
+    def _tree(dir_path, prefix=''):
+        entries = sorted(os.listdir(dir_path))
+        # Filtrar: ignora los directorios deseados; oculta dot-files salvo INCLUDED_FILES
+        entries = [
+            e for e in entries
+            if e not in IGNORE_DIRS
+               and (not e.startswith('.') or e in INCLUDED_FILES)
+        ]
+
+        dirs = [e for e in entries if os.path.isdir(os.path.join(dir_path, e))]
+        files = [e for e in entries if os.path.isfile(os.path.join(dir_path, e))]
+        total = len(dirs) + len(files)
+
+        for idx, name in enumerate(dirs + files):
+            path = os.path.join(dir_path, name)
+            connector = TREE_PREFIXES['last'] if idx == total - 1 else TREE_PREFIXES['branch']
+            tree_lines.append(f"{prefix}{connector}{name}")
+            if os.path.isdir(path):
+                extension = TREE_PREFIXES['indent'] if idx == total - 1 else TREE_PREFIXES['pipe']
+                _tree(path, prefix + extension)
+
+    tree_lines.append(os.path.basename(root_path) or root_path)
+    _tree(root_path)
+    return tree_lines
+
+
+def collect_files(root_path):
+    """
+    Recorre el árbol e incluye:
+    - Archivos con extensiones en ALLOWED_EXTS
+    - Archivos listados en INCLUDED_FILES (en cualquier carpeta)
+    """
+    paths = []
+    for dirpath, dirnames, filenames in os.walk(root_path):
+        # Excluir carpetas no deseadas
+        dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
+
+        for fname in sorted(filenames):
+            rel = os.path.relpath(os.path.join(dirpath, fname), root_path)
+            ext = os.path.splitext(fname)[1]
+            if ext in ALLOWED_EXTS or fname in INCLUDED_FILES:
+                paths.append(os.path.join(dirpath, fname))
+
+    return paths
+
+
+def ext_to_lang(ext):
+    """Mapea extensión de archivo a lenguaje para Markdown."""
+    return {
+        '.py': 'python',
+        '.java': 'java',
+        '.cpp': 'cpp',
+        '.c': 'c',
+        '.txt': 'text',
+        '': 'text'   # Para archivos como .gitignore
+    }.get(ext, 'text')
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Genera un Markdown con la estructura tipo tree y el código fuente.")
+    parser.add_argument(
+        'output', nargs='?', default='project_overview.md',
+        help='Nombre del archivo Markdown de salida. (default: project_overview.md)')
+    args = parser.parse_args()
+
+    root = os.getcwd()
+    tree_lines = build_tree(root)
+    code_files = collect_files(root)
+
+    with open(args.output, 'w', encoding='utf-8') as md:
+        # Título
+        md.write("# Estructura del proyecto\n\n")
+
+        # Árbol de directorios
+        md.write("```\n")
+        md.write("\n".join(tree_lines))
+        md.write("\n```\n\n")
+
+        # Contenido de cada archivo
+        for path in code_files:
+            rel_path = os.path.relpath(path, root)
+            ext = os.path.splitext(path)[1]
+            lang = ext_to_lang(ext)
+            md.write(f"## `{rel_path}`\n\n")
+            md.write(f"```{lang}\n")
+            try:
+                with open(path, 'r', encoding='utf-8') as f:
+                    md.write(f.read())
+            except Exception as e:
+                md.write(f"# Error al leer el archivo: {e}\n")
+            md.write("```\n\n")
+
+    print(f"Archivo Markdown generado: {args.output}")
+
+
+if __name__ == '__main__':
+    main()
+```
+
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\model\Audio.java`
 
 ```java
@@ -204,9 +302,16 @@ BibliotecaDigital
  */
 package com.bibliotecadigital.domain.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("AUDIO")
 public class Audio extends MaterialBiblioteca {
     private float duracion;
     private String formato;
+    
+    public Audio() { super(); }
     
     public Audio(int id, String titulo, int anio, String rutaArchivo, 
                  float duracion, String formato) {
@@ -495,6 +600,26 @@ public abstract class MaterialBiblioteca {
         return "ID: " + id + ", Título: " + titulo + ", Año: " + anio + 
                ", Autores: " + autores + ", Disponible: " + disponible;
     }
+
+    public Object getTipo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getEditorial() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int getNumPaginas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int getNumero() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public float getDuracion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }```
 
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\model\Prestamo.java`
@@ -578,9 +703,16 @@ public class Prestamo {
  */
 package com.bibliotecadigital.domain.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("REVISTA") // Identificador para esta subclase en la tabla
 public class Revista extends MaterialBiblioteca {
     private String editorial;
     private int numero;
+    
+    public Revista() { super(); }
     
     public Revista(int id, String titulo, int anio, String rutaArchivo, 
                    String editorial, int numero) {
@@ -704,10 +836,16 @@ public class Usuario {
     public String getNombre() { return nombre; }
     public String getEmail() { return email; }
     public RolUsuario getRol() { return rol; }
-    public void setRol(RolUsuario rol) { this.rol = rol; }
     public boolean verificarPassword(String passwordIngresada) {
         return BCrypt.checkpw(passwordIngresada, this.passwordHash);
     }
+    
+    public void setRol(RolUsuario rol) { this.rol = rol; }
+    public void setId(Long id) { this.id = id;}
+    public void setEmail(String email) { this.email = email; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    
+    
 }```
 
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\model\Video.java`
@@ -719,9 +857,16 @@ public class Usuario {
  */
 package com.bibliotecadigital.domain.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("VIDEO")
 public class Video extends MaterialBiblioteca {
     private float duracion;
     private String formato;
+
+    public Video() { super(); }
     
     public Video(int id, String titulo, int anio, String rutaArchivo, 
                  float duracion, String formato) {
@@ -835,6 +980,9 @@ public interface BibliotecaService {
     List<MaterialBiblioteca> listarMateriales();
     List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo);
     List<MaterialBiblioteca> buscarMaterialesPorAutor(String autor);
+    MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material);
+    void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds);
+    void eliminarMaterial(int id);
     
     // Métodos para autores
     Autor registrarAutor(Autor autor);
@@ -844,9 +992,11 @@ public interface BibliotecaService {
     void eliminarAutor(int id);
     
     // Métodos para usuarios
-    boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol);
+    boolean registrarUsuario(Usuario usuario);
     Usuario buscarUsuarioPorEmail(String email);
+    List<Usuario> listarUsuarios();
     boolean actualizarRolUsuario(String email, RolUsuario nuevoRol);
+    void eliminarUsuario(Usuario usuario);
     
     // Métodos de validación
     boolean validarMaterial(MaterialBiblioteca material);
@@ -998,17 +1148,21 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     }
     
     @Override
-    public boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol) {
+    public boolean registrarUsuario(Usuario usuario) {
         for (Usuario u : usuarios) {
-            if (u.getEmail().equals(email)) {
+            if (u.getEmail().equals(usuario.getEmail())) {
                 return false; // ya existe
             }
         }
-        Usuario nuevo = new Usuario(nombre, email, password, rol);
+        Usuario nuevo = usuario;
         usuarios.add(nuevo);
         return true;
     }
 
+    @Override
+    public List<Usuario> listarUsuarios() {
+        return new ArrayList<>(usuarios);
+    }
     
     @Override
     public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) {
@@ -1106,6 +1260,26 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     public void eliminarAutor(int id) {
         
     }
+    
+    @Override
+    public MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material) {
+        return null;
+    }
+
+    @Override
+    public void eliminarMaterial(int id) {
+        
+    }
+    
+    public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
+        
+    }
+
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 }```
 
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\infrastructure\persistence\JpaBibliotecaRepository.java`
@@ -1130,6 +1304,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -1179,6 +1354,26 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             em.close();
         }
     }
+    
+    public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
+        executeInsideTransaction(em -> {
+            // Lista para guardar autores gestionados por Hibernate
+            List<Autor> autoresGestionados = new ArrayList<>();
+
+            for (Integer idAutor : autorIds) {
+                Autor autor = em.find(Autor.class, idAutor); // Traemos el autor existente
+                if (autor != null) {
+                    autoresGestionados.add(autor);
+                }
+            }
+
+            // Asociamos los autores al material
+            material.setAutores(autoresGestionados);
+
+            // Persistimos solo el material, Hibernate manejará la relación
+            em.persist(material);
+        });
+    }
 
     @Override
     public List<MaterialBiblioteca> listarMateriales() {
@@ -1190,17 +1385,41 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             em.close();
         }
     }
+       
+    // Metodos nuevos para el CRUD de Materiales -------------------------------
+    @Override
+    public MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material) {
+        final MaterialBiblioteca[] materialAct = new MaterialBiblioteca[1];
+        executeInsideTransaction(em -> {
+            materialAct[0] = em.merge(material);
+        });
+        return materialAct[0];
+    }
     
     @Override
-    public boolean registrarUsuario(String nombre, String email, String password, RolUsuario rol) {
-        // La lógica de validación de email duplicado es mejor en la capa de servicio,
-        // pero por ahora la implementamos aquí para seguir el contrato.
-        if (buscarUsuarioPorEmail(email) != null) {
-            return false; // Usuario ya existe
+    public void eliminarMaterial(int id) {
+        executeInsideTransaction(em -> {
+            MaterialBiblioteca material = em.find(MaterialBiblioteca.class, id);
+            if (material != null) {
+                em.remove(material);
+            }
+        });
+    }
+    // -------------------------------------------------------------------------
+    
+    @Override
+    public boolean registrarUsuario(Usuario usuario) {
+        if (buscarUsuarioPorEmail(usuario.getEmail()) != null) {
+            return false; // email duplicado
         }
-        Usuario nuevoUsuario = new Usuario(nombre, email, password, rol);
-        executeInsideTransaction(em -> em.persist(nuevoUsuario));
-        return true;
+
+        try {
+            executeInsideTransaction(em -> em.persist(usuario)); // 🔹 persiste el usuario
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace(); // 🔹 opcional: para ver error en consola
+            return false;
+        }
     }
 
     @Override
@@ -1294,7 +1513,19 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             }
         });
     }
+    
+    @Override
+    public void eliminarUsuario(Usuario u) {
+        executeInsideTransaction(em -> {
+            // Primero buscamos la entidad en el EntityManager
+            Usuario usuarioEnBD = em.find(Usuario.class, u.getId());
+            if (usuarioEnBD != null) {
+                em.remove(usuarioEnBD);
+            }
+        });
+    }
 
+    
     @Override
     public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
         EntityManager em = emf.createEntityManager();
@@ -1346,6 +1577,17 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             em.close();
         }
     }
+    @Override
+    public List<Usuario> listarUsuarios() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
 
     @Override
     public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) {
@@ -1372,6 +1614,26 @@ public class JpaBibliotecaRepository implements BibliotecaService {
         if (material.getAutores() == null || material.getAutores().isEmpty()) return false;
         return true;
     }
+    
+    public boolean actualizarUsuario(Usuario usuario) {
+    EntityManager em = emf.createEntityManager();
+    try {
+        // Verificamos si ya existe un email igual en otro usuario
+        TypedQuery<Usuario> query = em.createQuery(
+            "SELECT u FROM Usuario u WHERE u.email = :email AND u.id <> :id", Usuario.class);
+        query.setParameter("email", usuario.getEmail());
+        query.setParameter("id", usuario.getId());
+
+        if (!query.getResultList().isEmpty()) {
+            return false; // correo duplicado
+        }
+
+        executeInsideTransaction(em2 -> em2.merge(usuario)); // actualiza el usuario
+        return true;
+    } finally {
+        em.close();
+    }
+}
 }```
 
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\GestionAutoresController.java`
@@ -1458,6 +1720,496 @@ public class GestionAutoresController {
         }
     }
 }```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\GestionMaterialesController.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.controllers;
+
+import com.bibliotecadigital.domain.model.Audio;
+import com.bibliotecadigital.domain.model.Autor;
+import com.bibliotecadigital.domain.model.Libro;
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.Revista;
+import com.bibliotecadigital.domain.model.Video;
+import com.bibliotecadigital.domain.service.BibliotecaService;
+import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesViewInterface;
+import java.util.List;
+
+/**
+ *
+ * @author Diego Garcia
+ */
+public class GestionMaterialesController {
+    
+    private final BibliotecaService servicio;
+    private final GestionMaterialesViewInterface vista;
+
+    public GestionMaterialesController(BibliotecaService servicio, GestionMaterialesViewInterface vista) {
+        this.servicio = servicio;
+        this.vista = vista;
+        
+        // Conectar los listeners de la vista con los métodos de este controlador
+        this.vista.addNuevoListener(e -> crearNuevoMaterial());
+        this.vista.addEditarListener(e -> editarMaterialSeleccionado());
+        this.vista.addEliminarListener(e -> eliminarMaterialSeleccionado());
+        
+        // Cargar los datos iniciales
+        cargarMateriales();
+    }
+
+    public void cargarMateriales() {
+        vista.mostrarMateriales(servicio.listarMateriales());
+    }
+
+    public void crearNuevoMaterial() {
+        // Pasamos valores "vacíos" o neutros porque es creación
+        String tipo = vista.pedirTipoMaterial("").trim().toLowerCase(); // libro/revista/video/audio
+        String titulo = vista.pedirNuevoTituloMaterial("");
+        int anio = vista.pedirAnioMaterial(0);
+        String rutaArchivo = vista.pedirRutaArchivo("");
+        boolean disponible = true; // disponible por default
+        List<Integer> autorIds = vista.pedirIdsAutores( ); // por ejemplo: [1, 2, 5]
+
+        MaterialBiblioteca material = null;
+
+        System.out.println("tipo: " + tipo);
+
+        switch (tipo) {
+            case "libro":
+                String editorial = vista.pedirEditorial("");  // ahora recibe parámetro
+                Integer numPaginas = vista.pedirNumPaginas(null);   // ahora recibe parámetro
+                material = new Libro(0, titulo, anio, rutaArchivo, editorial, numPaginas);
+                break;
+
+            case "revista":
+                String edit = vista.pedirEditorial("");     // parámetro
+                int numero = vista.pedirNumero(0);          // parámetro
+                material = new Revista(0, titulo, anio, rutaArchivo, edit, numero);
+                break;
+
+            case "video":
+                float duracion = vista.pedirDuracion(0f);   // parámetro
+                String formato = vista.pedirFormato("");    // parámetro
+                material = new Video(0, titulo, anio, rutaArchivo, duracion, formato);
+                break;
+
+            case "audio":
+                float dur = vista.pedirDuracion(0f);       // parámetro
+                String form = vista.pedirFormato("");      // parámetro
+                material = new Audio(0, titulo, anio, rutaArchivo, dur, form);
+                break;
+
+            default:
+                vista.mostrarMensaje("Tipo de material no válido.");
+        }
+
+        System.out.println("Creando material tipo: " + tipo);
+
+        if (material != null) {
+            material.setDisponible(disponible); // establecemos estado
+            servicio.registrarMaterialConAutores(material, autorIds);
+            cargarMateriales();
+            vista.mostrarMensaje("Material creado exitosamente.");
+        }
+    }
+    
+    public void editarMaterialSeleccionado() {
+        MaterialBiblioteca materialSeleccionado = vista.getMaterialSeleccionado();
+        if (materialSeleccionado == null) {
+            vista.mostrarMensaje("Por favor, seleccione un material para editar.");
+            return;
+        }
+
+        // Editar título
+        String nuevoTitulo = vista.pedirNuevoTituloMaterial(materialSeleccionado.getTitulo());
+        if (nuevoTitulo != null && !nuevoTitulo.trim().isEmpty()) {
+            materialSeleccionado.setTitulo(nuevoTitulo);
+        }
+
+        // Editar estado
+        boolean nuevoDisponible = vista.pedirEstadoMaterial(materialSeleccionado.isDisponible());
+        materialSeleccionado.setDisponible(nuevoDisponible);
+
+        // Editar año
+        int nuevoAnio = vista.pedirAnioMaterial(materialSeleccionado.getAnio());
+        if (nuevoAnio > 0) { // Puedes agregar más validaciones si quieres
+            materialSeleccionado.setAnio(nuevoAnio);
+        }
+
+        // Editar ruta de archivo
+        String nuevaRuta = vista.pedirRutaArchivo(materialSeleccionado.getRutaArchivo());
+        if (nuevaRuta != null && !nuevaRuta.trim().isEmpty()) {
+            materialSeleccionado.setRutaArchivo(nuevaRuta);
+        }
+        
+        // Editar autores (opcional)
+        //List<Integer> nuevosIdsAutores = vista.pedirIdsAutores(materialSeleccionado.getAutores());
+        //servicio.actualizarAutores(materialSeleccionado, nuevosIdsAutores);
+
+        // Editar atributos según el tipo
+        if (materialSeleccionado instanceof Libro libro) {
+            String nuevaEditorial = vista.pedirEditorial(libro.getEditorial());
+            libro.setEditorial(nuevaEditorial);
+            int nuevasPaginas = vista.pedirNumPaginas(libro.getNumPaginas());
+            libro.setNumPaginas(nuevasPaginas);
+        } else if (materialSeleccionado instanceof Revista revista) {
+            String nuevaEditorial = vista.pedirEditorial(revista.getEditorial());
+            revista.setEditorial(nuevaEditorial);
+            int nuevoNumero = vista.pedirNumero(revista.getNumero());
+            revista.setNumero(nuevoNumero);
+        } else if (materialSeleccionado instanceof Audio audio) {
+            float nuevaDuracion = vista.pedirDuracion(audio.getDuracion());
+            audio.setDuracion(nuevaDuracion);
+            String nuevoFormato = vista.pedirFormato(audio.getFormato());
+            audio.setFormato(nuevoFormato);
+        } else if (materialSeleccionado instanceof Video video) {
+            float nuevaDuracion = vista.pedirDuracion(video.getDuracion());
+            video.setDuracion(nuevaDuracion);
+            String nuevoFormato = vista.pedirFormato(video.getFormato());
+            video.setFormato(nuevoFormato);
+        }
+
+        // Guardar cambios
+        servicio.actualizarMaterial(materialSeleccionado);
+        cargarMateriales(); // Refrescar la tabla
+        vista.mostrarMensaje("Material actualizado exitosamente.");
+
+    }
+    
+    public void eliminarMaterialSeleccionado() {
+        MaterialBiblioteca materialSeleccionado = vista.getMaterialSeleccionado();
+        if (materialSeleccionado == null) {
+            vista.mostrarMensaje("Por favor, seleccione un material para eliminar.");
+            return;
+        }
+
+        if (vista.confirmarEliminacion(materialSeleccionado.getTitulo())) {
+            try {
+                servicio.eliminarMaterial(materialSeleccionado.getId());
+                cargarMateriales(); // Refrescar la tabla
+                vista.mostrarMensaje("Material eliminado exitosamente.");
+            } catch (Exception e) {
+                // Manejar el caso de que un material no se pueda borrar por tener prestamos asociados
+                vista.mostrarMensaje("Error: No se puede eliminar el material, probablemente tiene un prestamo asociados.");
+            }
+        }
+    }
+    
+}
+```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\GestionPrestamosController.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.controllers;
+
+import com.bibliotecadigital.domain.model.Prestamo;
+import com.bibliotecadigital.domain.model.Usuario;
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.RolUsuario;
+import com.bibliotecadigital.domain.service.BibliotecaService;
+import com.bibliotecadigital.presentation.desktop.views.GestionPrestamosViewInterface;
+
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+ * Controlador para la gestión de préstamos.
+ * Conecta la vista con los servicios de la aplicación.
+ */
+public class GestionPrestamosController {
+    
+    public final BibliotecaService servicio;
+    private final GestionPrestamosViewInterface vista;
+    
+    /**
+     * Constructor del controlador
+     * @param servicio Servicio de biblioteca para operaciones CRUD
+     * @param vista Vista para la interacción con el usuario
+     */
+    public GestionPrestamosController(BibliotecaService servicio, GestionPrestamosViewInterface vista) {
+        this.servicio = servicio;
+        this.vista = vista;
+        
+        // Registrar los listeners en la vista
+        this.vista.addNuevoPrestamoListener(e -> abrirDialogoNuevoPrestamo());
+        this.vista.addFinalizarPrestamoListener(e -> finalizarPrestamoSeleccionado());
+        this.vista.addRefrescarListener(e -> cargarPrestamos());
+        
+        // Cargar los préstamos iniciales
+        cargarPrestamos();
+    }
+    
+    /**
+     * Carga todos los préstamos y los muestra en la vista
+     */
+    public void cargarPrestamos() {
+        vista.mostrarPrestamos(servicio.listarPrestamos());
+    }
+    
+    /**
+     * Abre el diálogo para crear un nuevo préstamo
+     */
+    private void abrirDialogoNuevoPrestamo() {
+        vista.abrirDialogoNuevoPrestamo();
+    }
+    
+    /**
+     * Crea un nuevo préstamo con los datos proporcionados
+     * @param usuario Usuario que realiza el préstamo
+     * @param materiales Lista de materiales a prestar
+     */
+    public void crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales) {
+        if (usuario == null) {
+            vista.mostrarError("Debe seleccionar un usuario");
+            return;
+        }
+        
+        if (materiales == null || materiales.isEmpty()) {
+            vista.mostrarError("Debe seleccionar al menos un material");
+            return;
+        }
+        
+        // La validación de disponibilidad se realiza en el servicio,
+        // pero verificamos previamente para dar un mensaje más específico
+        for (MaterialBiblioteca material : materiales) {
+            if (!material.isDisponible()) {
+                vista.mostrarError("El material '" + material.getTitulo() + "' no está disponible");
+                return;
+            }
+        }
+        
+        // Crear el préstamo utilizando el servicio
+        Prestamo nuevoPrestamo = servicio.crearPrestamo(usuario, materiales);
+        
+        if (nuevoPrestamo != null) {
+            vista.mostrarMensaje("Préstamo creado correctamente");
+            cargarPrestamos(); // Refrescar la tabla
+        } else {
+            vista.mostrarError("No se pudo crear el préstamo");
+        }
+    }
+    
+    /**
+     * Finaliza el préstamo seleccionado
+     */
+    private void finalizarPrestamoSeleccionado() {
+        Prestamo prestamo = vista.getPrestamoSeleccionado();
+        
+        if (prestamo == null) {
+            vista.mostrarError("Por favor, seleccione un préstamo para finalizar.");
+            return;
+        }
+        
+        if (prestamo.getFechaDevolucion() != null) {
+            vista.mostrarError("El préstamo seleccionado ya está finalizado");
+            return;
+        }
+        
+        if (vista.confirmarFinalizacionPrestamo(prestamo)) {
+            boolean todosDevueltos = true;
+            
+            for (MaterialBiblioteca material : prestamo.getMateriales()) {
+                boolean devuelto = servicio.registrarDevolucion(prestamo, material);
+                if (!devuelto) {
+                    todosDevueltos = false;
+                    vista.mostrarError("Error al registrar la devolución del material: " + material.getTitulo());
+                    break;
+                }
+            }
+            
+            if (todosDevueltos) {
+                vista.mostrarMensaje("Préstamo finalizado correctamente");
+                cargarPrestamos(); // Refrescar la tabla
+            }
+        }
+    }
+    
+    /**
+     * Obtiene usuarios para mostrar en la interfaz, filtrados por rol.
+     * Nota: Este método es provisional hasta tener un método adecuado en el servicio.
+     * @return Lista de usuarios disponibles
+     */
+    public List<Usuario> obtenerUsuarios() {
+        List<Usuario> todosLosUsuarios = new ArrayList<>();
+        List<Usuario> usuariosFiltrados = new ArrayList<>();
+
+        // 1. Crear usuarios de prueba si no existen (para garantizar que haya datos)
+        // Esto solo se ejecuta la primera vez que se llame al método
+        if (servicio.buscarUsuarioPorEmail("admin@biblioteca.com") == null) {
+            servicio.registrarUsuario(new Usuario ("Administrador", "admin@biblioteca.com", "admin123", RolUsuario.ADMINISTRADOR));
+        }
+
+        if (servicio.buscarUsuarioPorEmail("cliente@biblioteca.com") == null) {
+            servicio.registrarUsuario(new Usuario ("Cliente", "cliente@biblioteca.com", "cliente123", RolUsuario.CLIENTE));
+        }
+
+        if (servicio.buscarUsuarioPorEmail("encargado@biblioteca.com") == null) {
+            servicio.registrarUsuario(new Usuario ("Encargado", "encargado@biblioteca.com", "encargado123", RolUsuario.ENCARGADO));
+        }
+
+        // 2. Buscar usuarios conocidos por correo y añadirlos a la lista
+        Usuario admin = servicio.buscarUsuarioPorEmail("admin@biblioteca.com");
+        if (admin != null) todosLosUsuarios.add(admin);
+
+        Usuario cliente = servicio.buscarUsuarioPorEmail("cliente@biblioteca.com");
+        if (cliente != null) todosLosUsuarios.add(cliente);
+
+        Usuario encargado = servicio.buscarUsuarioPorEmail("encargado@biblioteca.com");
+        if (encargado != null) todosLosUsuarios.add(encargado);
+
+        // 3. Filtrar usuarios según su rol
+        for (Usuario u : todosLosUsuarios) {
+            // Solo mostrar clientes y administradores para préstamos
+            if (u.getRol() == RolUsuario.CLIENTE || u.getRol() == RolUsuario.ADMINISTRADOR) {
+                usuariosFiltrados.add(u);
+            }
+        }
+
+        // 4. Imprimir información
+        System.out.println("Usuarios filtrados encontrados: " + usuariosFiltrados.size());
+        for (Usuario u : usuariosFiltrados) {
+            System.out.println("  - " + u.getNombre() + " (" + u.getRol() + ")");
+        }
+
+        return usuariosFiltrados;
+    }
+    
+    public Prestamo buscarPrestamoPorId(int id) {
+        List<Prestamo> prestamos = servicio.listarPrestamos();
+        for (Prestamo p : prestamos) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Busca materiales por título
+     * @param titulo Título o parte del título a buscar
+     * @return Lista de materiales que coinciden con la búsqueda
+     */
+    public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
+        return servicio.buscarMaterialesPorTitulo(titulo);
+    }
+}```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\GestionUsuariosController.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.controllers;
+
+import com.bibliotecadigital.domain.model.Usuario;
+import com.bibliotecadigital.domain.service.BibliotecaService;
+import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
+import com.bibliotecadigital.presentation.desktop.views.GestionUsuariosView;
+import com.bibliotecadigital.presentation.desktop.views.GestionUsuariosViewInterface;
+import java.util.List;
+
+/**
+ *
+ * @author Manu Hdz
+ */
+public class GestionUsuariosController {
+    private final BibliotecaService servicio;
+    private final JpaBibliotecaRepository baseDatos;
+    private final GestionUsuariosViewInterface vista;
+
+    public GestionUsuariosController(BibliotecaService servicio, GestionUsuariosViewInterface vista, JpaBibliotecaRepository baseDatos) {
+        this.servicio = servicio;
+        this.vista = vista;
+        this.baseDatos = baseDatos;
+        // Conectar los listeners de la vista con los métodos de este controlador
+        this.vista.addCrearListener(e -> crearUsuario());
+        this.vista.addModificarListener(e -> modificarUsuario());
+        this.vista.addEliminarListener(e -> eliminarUsuario());
+        
+        // Cargar los datos iniciales
+        cargarUsuarios();
+    }
+
+    private void cargarUsuarios() {
+        List<Usuario> usuarios = baseDatos.listarUsuarios();  // 🔹 Obtiene desde la BD
+        vista.mostrarUsuarios(usuarios);                     // 🔹 Muestra en la tabla
+    }
+    
+    private void eliminarUsuario() {
+        Usuario seleccionado = vista.getUsuarioSeleccionado();
+
+    if (seleccionado != null && vista.confirmarEliminacion(seleccionado.getNombre())) {
+        // Llamamos al servicio para eliminar de la BD
+        baseDatos.eliminarUsuario(seleccionado);
+
+        // Refrescamos la tabla
+        cargarUsuarios();
+
+        vista.mostrarMensaje("Usuario eliminado correctamente.");
+    } else {
+        vista.mostrarMensaje("Seleccione un usuario para eliminar.");
+    }
+    }
+    
+    private void crearUsuario() {
+        GestionUsuariosView.NuevoUsuarioDialog dialog = ((GestionUsuariosView) vista).new NuevoUsuarioDialog(vista.getFrame());
+        
+        dialog.setVisible(true); // bloquea hasta cerrar
+
+        Usuario nuevo = dialog.getUsuarioCreado();
+        if(nuevo != null) {
+            boolean agregado = false;
+            try {
+                agregado = baseDatos.registrarUsuario(nuevo);
+            } catch(Exception ex) {
+                vista.mostrarMensaje("Error al agregar usuario: " + ex.getMessage());
+            }
+
+            if(agregado) {
+                vista.mostrarMensaje("Usuario agregado correctamente");
+                cargarUsuarios(); // refresca tabla desde BD
+            } else {
+                vista.mostrarMensaje("No se pudo agregar usuario. ¿Email duplicado?");
+            }
+        }
+    }
+    private void modificarUsuario() {
+        Usuario seleccionado = vista.getUsuarioSeleccionado();
+        if (seleccionado != null) {
+            // Abrimos el diálogo de edición
+            GestionUsuariosView.EditarUsuarioDialog dialog = ((GestionUsuariosView) vista).new EditarUsuarioDialog(vista.getFrame(), seleccionado);
+            dialog.setVisible(true);
+
+            // Si el usuario guardó los cambios
+            Usuario editado = dialog.getUsuarioEditado();
+            if (editado != null) {
+                // Actualizamos en la BD
+                baseDatos.actualizarUsuario(editado);
+
+                // Refrescamos la tabla
+                cargarUsuarios();
+
+                vista.mostrarMensaje("Usuario actualizado correctamente.");
+            }
+        } else {
+            vista.mostrarMensaje("Seleccione un usuario para modificar.");
+        }
+    }
+    
+}
+```
 
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\MaterialController.java`
 
@@ -1772,6 +2524,1625 @@ public interface GestionAutoresViewInterface {
     void setVisible(boolean visible);
 }```
 
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\GestionMaterialesView.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.views;
+
+import com.bibliotecadigital.domain.model.Audio;
+import com.bibliotecadigital.domain.model.Autor;
+import com.bibliotecadigital.domain.model.Libro;
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.Revista;
+import com.bibliotecadigital.domain.model.Video;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+/**
+ *
+ * @author Diego Garcia
+ */
+public class GestionMaterialesView extends javax.swing.JFrame implements GestionMaterialesViewInterface {
+    
+    private DefaultTableModel tableModel; // El modelo de datos para nuestra tabla
+    /**
+     * Creates new form GestionMaterialesView
+     */
+    public GestionMaterialesView() {
+        initComponents();
+        configuracionAdicional();
+    }
+    
+    private void configuracionAdicional() {
+        // 1. Crear nuestro modelo de tabla personalizado
+        tableModel = new DefaultTableModel(new Object[]{"ID", "Año", "Titulo", "Ruta de archivo", "Estado", "Autor(es)", "Tipo", "Editorial", "Num paginas", "Numero", "Duracion" ,"Formato"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Hacer que las celdas no sean editables
+            }
+        };
+        
+        // 2. Conectar nuestra JTable (materialesTable) con el modelo de datos
+        materialesTable.setModel(tableModel);
+        
+        // 3. Centrar la ventana
+        setLocationRelativeTo(null);
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        scrollPanelTabla = new javax.swing.JScrollPane();
+        materialesTable = new javax.swing.JTable();
+        nuevoButton = new javax.swing.JButton();
+        editarButton = new javax.swing.JButton();
+        eliminarButton = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        materialesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scrollPanelTabla.setViewportView(materialesTable);
+
+        nuevoButton.setText("Nuevo");
+        nuevoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoButtonActionPerformed(evt);
+            }
+        });
+
+        editarButton.setText("Editar");
+
+        eliminarButton.setText("Eliminar");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPanelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nuevoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nuevoButton)
+                    .addComponent(editarButton)
+                    .addComponent(eliminarButton))
+                .addGap(37, 37, 37))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevoButtonActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GestionMaterialesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GestionMaterialesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GestionMaterialesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GestionMaterialesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GestionMaterialesView().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editarButton;
+    private javax.swing.JButton eliminarButton;
+    private javax.swing.JTable materialesTable;
+    private javax.swing.JButton nuevoButton;
+    private javax.swing.JScrollPane scrollPanelTabla;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void addNuevoListener(ActionListener listener) {
+        nuevoButton.addActionListener(listener);
+    }
+
+    @Override
+    public void addEditarListener(ActionListener listener) {
+        editarButton.addActionListener(listener);    }
+
+    @Override
+    public void addEliminarListener(ActionListener listener) {
+        eliminarButton.addActionListener(listener);
+    }
+
+    @Override
+    public void mostrarMateriales(List<MaterialBiblioteca> materiales) {
+        tableModel.setRowCount(0); // limpiar tabla
+
+        for (MaterialBiblioteca material : materiales) {
+            // Convertir lista de autores a string con IDs separados por coma
+            String autoresId = material.getAutores().stream()
+                                       .map(a -> String.valueOf(a.getId()))
+                                       .collect(Collectors.joining(","));
+
+            String tipo = "";
+            String editorial = "";
+            int numPaginas = 0;
+            int numero = 0;
+            float duracion = 0;
+            String formato = "";
+
+            if (material instanceof Libro l) {
+                tipo = "libro";
+                editorial = l.getEditorial();
+                numPaginas = l.getNumPaginas();
+            } else if (material instanceof Revista r) {
+                tipo = "revista";
+                editorial = r.getEditorial();
+                numero = r.getNumero();
+            } else if (material instanceof Audio a) {
+                tipo = "audio";
+                duracion = a.getDuracion();
+                formato = a.getFormato();
+            } else if (material instanceof Video v) {
+                tipo = "video";
+                duracion = v.getDuracion();
+                formato = v.getFormato();
+            }
+
+            tableModel.addRow(new Object[]{
+                material.getId(),
+                material.getAnio(),
+                material.getTitulo(),
+                material.getRutaArchivo(),
+                material.isDisponible() ? "Disponible" : "No disponible",
+                autoresId, // solo IDs
+                tipo,
+                editorial,
+                numPaginas,
+                numero, //.getNumero() == 0 ? "" : material.getNumero(),
+                duracion, //.getDuracion() == 0f ? "" : material.getDuracion(),
+                formato
+            });
+        }
+    }
+
+    @Override
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    @Override
+    public MaterialBiblioteca getMaterialSeleccionado() {
+        int selectedRow = materialesTable.getSelectedRow();
+        if (selectedRow < 0) return null;
+
+        int id = (int) tableModel.getValueAt(selectedRow, 0);
+        int anio = (int) tableModel.getValueAt(selectedRow, 1);
+        String titulo = (String) tableModel.getValueAt(selectedRow, 2);
+        String rutaArchivo = (String) tableModel.getValueAt(selectedRow, 3);
+        boolean disponible = "Disponible".equals(tableModel.getValueAt(selectedRow, 4));
+
+        String autoresIdStr = (String) tableModel.getValueAt(selectedRow, 5);
+        List<Autor> autores = new ArrayList<>();
+        if (autoresIdStr != null && !autoresIdStr.isEmpty()) {
+            for (String sId : autoresIdStr.split(",")) {
+                int aId = Integer.parseInt(sId.trim());
+                autores.add(new Autor(aId, "")); // solo con ID, nombre puede obtenerse de DB si quieres
+            }
+        }
+
+        String tipo = (String) tableModel.getValueAt(selectedRow, 6);
+
+        MaterialBiblioteca material = switch (tipo) {
+            case "libro" -> new Libro(id, titulo, anio, rutaArchivo,
+                                      (String) tableModel.getValueAt(selectedRow, 7),
+                                      (int) tableModel.getValueAt(selectedRow, 8));
+            case "revista" -> new Revista(id, titulo, anio, rutaArchivo,
+                                          (String) tableModel.getValueAt(selectedRow, 7),
+                                          (int) tableModel.getValueAt(selectedRow, 9));
+            case "audio" -> new Audio(id, titulo, anio, rutaArchivo,
+                                      ((Number) tableModel.getValueAt(selectedRow, 10)).floatValue(),
+                                      (String) tableModel.getValueAt(selectedRow, 11));
+            case "video" -> new Video(id, titulo, anio, rutaArchivo,
+                                      ((Number) tableModel.getValueAt(selectedRow, 10)).floatValue(),
+                                      (String) tableModel.getValueAt(selectedRow, 11));
+            default -> null;
+        };
+
+        if (material != null) {
+            material.setDisponible(disponible);
+            autores.forEach(material::agregarAutor);
+        }
+
+        return material;
+    }
+
+    @Override
+    public String pedirTipoMaterial(String tipoActual) {
+         String[] opciones = {"Libro", "Revista", "Audio", "Video"};
+
+        // Determinar la opción inicial según el tipo actual
+        int seleccionInicial = 0;
+        for (int i = 0; i < opciones.length; i++) {
+            if (opciones[i].equalsIgnoreCase(tipoActual)) {
+                seleccionInicial = i;
+                break;
+            }
+        }
+
+        int seleccion = JOptionPane.showOptionDialog(
+            this,
+            "Seleccione el tipo de material:",
+            "Tipo de material",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opciones,
+            opciones[seleccionInicial]
+        );
+
+        // Retorna la opción seleccionada, o el tipoActual si cierra el diálogo
+        return seleccion >= 0 ? opciones[seleccion] : tipoActual;
+    }
+
+    @Override
+    public String pedirNuevoTituloMaterial(String tituloActual) {
+        // Muestra un diálogo para que el usuario ingrese un titulo
+        return JOptionPane.showInputDialog(this, "Ingrese el titulo del material:", tituloActual);
+    }
+
+    @Override
+    public int pedirAnioMaterial(int anioActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese el año del material:", anioActual);
+        try {
+            return (input == null || input.trim().isEmpty()) ? anioActual : Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            return anioActual;
+        }
+    }
+
+    @Override
+    public String pedirRutaArchivo(String rutaActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese la ruta del archivo:", rutaActual);
+        return (input == null || input.trim().isEmpty()) ? rutaActual : input.trim();
+    }
+
+    @Override
+    public List<Integer> pedirIdsAutores() {
+        String input = JOptionPane.showInputDialog(this, "Ingrese los IDs de los autores separados por comas:"); 
+        if (input == null || input.trim().isEmpty()) { 
+            return java.util.Collections.emptyList(); 
+        }
+        String[] partes = input.split(","); 
+        List<Integer> ids = new java.util.ArrayList<>(); 
+        for (String p : partes) { 
+            ids.add(Integer.parseInt(p.trim())); 
+        } 
+        return ids;
+    }
+
+    @Override
+    public String pedirEditorial(String editorialActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese la editorial:", editorialActual);
+        return (input == null || input.trim().isEmpty()) ? editorialActual : input.trim();
+    }
+
+    @Override
+    public Integer pedirNumPaginas(Integer numPaginasActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese el número de páginas:", numPaginasActual);
+        try {
+            return (input == null || input.trim().isEmpty()) ? numPaginasActual : Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            return numPaginasActual;
+        }
+    }
+
+    @Override
+    public int pedirNumero(int numeroActual) {
+        String valorPorDefecto = (numeroActual == -1) ? "" : String.valueOf(numeroActual);
+        String input = JOptionPane.showInputDialog(this, "Ingrese el número de la revista:", numeroActual);
+        try {
+            return (input == null || input.trim().isEmpty()) ? numeroActual : Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            return numeroActual;
+        }
+    }
+
+    @Override
+    public float pedirDuracion(float duracionActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese la duración (en minutos):", duracionActual);
+        try {
+            return (input == null || input.trim().isEmpty()) ? duracionActual : Float.parseFloat(input.trim());
+        } catch (NumberFormatException e) {
+            return duracionActual;
+        }
+    }
+
+    @Override
+    public String pedirFormato(String formatoActual) {
+        String input = JOptionPane.showInputDialog(this, "Ingrese el formato:", formatoActual);
+        return (input == null || input.trim().isEmpty()) ? formatoActual : input.trim();
+    }
+
+    public boolean pedirEstadoMaterial(boolean estadoActual) {
+        // Opciones a mostrar
+        String[] opciones = {"Sí", "No"};
+
+        // Determinar opción inicial según el estado actual
+        int seleccionInicial = estadoActual ? 0 : 1;
+
+        // Mostrar el cuadro de diálogo con opciones
+        int seleccion = JOptionPane.showOptionDialog(
+            this,
+            "Seleccione el estado del material,  ¿esta disponible?:",
+            "Estado del material",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opciones,
+            opciones[seleccionInicial]
+        );
+
+        // Retorna true si selecciona "Sí", false si selecciona "No" o cierra el diálogo
+        return seleccion == 0;
+    }
+    
+    @Override
+    public boolean confirmarEliminacion(String tituloMaterial) {
+        // Muestra un diálogo de confirmación
+        int respuesta = JOptionPane.showConfirmDialog(this, 
+                "¿Está seguro de que desea eliminar el material '" + tituloMaterial + "'?", 
+                "Confirmar Eliminación", 
+                JOptionPane.YES_NO_OPTION);
+        return respuesta == JOptionPane.YES_OPTION;
+    }
+
+    @Override
+    public JFrame getFrame() {
+        return this;
+    }
+}
+```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\GestionMaterialesViewInterface.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.views;
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JFrame;
+
+/**
+ *
+ * @author Diego Garcia
+ */
+public interface GestionMaterialesViewInterface {
+    
+    // Métodos para que el Controlador registre listeners
+    void addNuevoListener(ActionListener listener);
+    void addEditarListener(ActionListener listener);
+    void addEliminarListener(ActionListener listener);
+    
+    // Métodos para que el Controlador actualice la Vista
+    void mostrarMateriales(List<MaterialBiblioteca> materiales);
+    void mostrarMensaje(String mensaje);
+    
+    // Métodos para que el Controlador obtenga datos de la Vista ---------------
+    // Para todos los materiales
+    MaterialBiblioteca getMaterialSeleccionado();
+    String pedirTipoMaterial(String tipoActual);
+    String pedirNuevoTituloMaterial(String tituloActual);
+    int pedirAnioMaterial(int anioActual);
+    String pedirRutaArchivo(String rutaActual);
+    List<Integer> pedirIdsAutores();
+    boolean pedirEstadoMaterial(boolean estadoActual);
+
+    // Para Libro
+    String pedirEditorial(String editorialActual);
+    Integer pedirNumPaginas(Integer numPaginasActual);
+
+    // Para Revista
+    int pedirNumero(int numeroActual);
+
+    // Para Video y Audio
+    float pedirDuracion(float duracionActual);
+    String pedirFormato(String formatoActual);
+    // -------------------------------------------------------------------------
+    
+    boolean confirmarEliminacion(String tituloMaterial);
+    
+    // Métodos para controlar la ventana
+    JFrame getFrame();
+    void setVisible(boolean visible);
+}
+```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\GestionPrestamosView.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.views;
+
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.Prestamo;
+import com.bibliotecadigital.presentation.desktop.controllers.GestionPrestamosController;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+public class GestionPrestamosView extends javax.swing.JFrame implements GestionPrestamosViewInterface {
+    
+    private GestionPrestamosController controller;
+    private DefaultTableModel prestamosModel;
+
+    /**
+     * Creates new form GestionPrestamosView
+     */
+    public GestionPrestamosView() {
+        initComponents();
+        
+        // Configuración adicional
+        setSize(900, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        // Crear modelo de tabla no editable
+        prestamosModel = new DefaultTableModel(
+            new Object [][] {},
+            new String [] {
+                "ID", "Usuario", "Fecha Préstamo", "Fecha Devolución", "Materiales"
+            }
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        prestamosTable.setModel(prestamosModel);
+        
+      
+    }
+    
+    /**
+     * Establece el controlador para esta vista
+     * @param controller Controlador de préstamos
+     */
+    public void setController(GestionPrestamosController controller) {
+        this.controller = controller;
+    }
+
+   
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        prestamosTable = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        btnNuevoPrestamo = new javax.swing.JButton();
+        btnFinalizarPrestamo = new javax.swing.JButton();
+        btnRefrescar = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestión de Préstamos");
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Gestión de Préstamos");
+        getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        prestamosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Usuario", "Fecha Préstamo", "Fecha Devolución", "Materiales"
+            }
+        ));
+        prestamosTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(prestamosTable);
+
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        btnNuevoPrestamo.setText("Nuevo Préstamo");
+        jPanel1.add(btnNuevoPrestamo);
+
+        btnFinalizarPrestamo.setText("Finalizar Préstamo");
+        jPanel1.add(btnFinalizarPrestamo);
+
+        btnRefrescar.setText("Actualizar");
+        jPanel1.add(btnRefrescar);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    // Implementación de GestionPrestamosViewInterface
+    
+    @Override
+    public void addNuevoPrestamoListener(ActionListener listener) {
+        btnNuevoPrestamo.addActionListener(listener);
+    }
+    
+    @Override
+    public void addFinalizarPrestamoListener(ActionListener listener) {
+        btnFinalizarPrestamo.addActionListener(listener);
+    }
+    
+    @Override
+    public void addRefrescarListener(ActionListener listener) {
+        btnRefrescar.addActionListener(listener);
+    }
+    
+    @Override
+    public void mostrarPrestamos(List<Prestamo> prestamos) {
+        // Limpiar tabla
+        prestamosModel.setRowCount(0);
+        
+        // Formato para fechas
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        // Llenar tabla con préstamos
+        for (Prestamo prestamo : prestamos) {
+            String fechaPrestamo = prestamo.getFechaPrestamo() != null ? 
+                prestamo.getFechaPrestamo().format(dateFormatter) : "No registrada";
+                
+            String fechaDevolucion = prestamo.getFechaDevolucion() != null ? 
+                prestamo.getFechaDevolucion().format(dateFormatter) : "Pendiente";
+                
+            // Formar la lista de materiales
+            StringBuilder materialesStr = new StringBuilder();
+            List<MaterialBiblioteca> materiales = prestamo.getMateriales();
+            if (materiales != null && !materiales.isEmpty()) {
+                for (int i = 0; i < materiales.size(); i++) {
+                    if (i > 0) {
+                        materialesStr.append(", ");
+                    }
+                    materialesStr.append(materiales.get(i).getTitulo());
+                }
+            } else {
+                materialesStr.append("Sin materiales");
+            }
+            
+            prestamosModel.addRow(new Object[]{
+                prestamo.getId(),
+                prestamo.getUsuario() != null ? prestamo.getUsuario().getNombre() : "Desconocido",
+                fechaPrestamo,
+                fechaDevolucion,
+                materialesStr.toString()
+            });
+        }
+    }
+    
+    @Override
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    @Override
+    public void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    @Override
+    public Prestamo getPrestamoSeleccionado() {
+        int filaSeleccionada = prestamosTable.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            return null;
+        }
+
+        // En este punto solo tenemos el ID del préstamo seleccionado
+        int id = (Integer) prestamosModel.getValueAt(filaSeleccionada, 0);
+
+        // Utilizar el controlador para buscar el préstamo completo
+        return controller != null ? controller.buscarPrestamoPorId(id) : null;
+    }
+    
+    @Override
+    public void abrirDialogoNuevoPrestamo() {
+        NuevoPrestamoDialog dialog = new NuevoPrestamoDialog(this, controller);
+        dialog.setVisible(true);
+    }
+    
+    @Override
+    public boolean confirmarFinalizacionPrestamo(Prestamo prestamo) {
+        int opcion = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro de finalizar el préstamo seleccionado?",
+            "Confirmar finalización",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+        
+        return opcion == JOptionPane.YES_OPTION;
+    }
+    
+    @Override
+    public JFrame getFrame() {
+        return this;
+    }
+    
+    @Override
+    public void actualizarListaPrestamos() {
+        if (controller != null) {
+            controller.cargarPrestamos();
+        }
+    }
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GestionPrestamosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GestionPrestamosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GestionPrestamosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GestionPrestamosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GestionPrestamosView().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinalizarPrestamo;
+    private javax.swing.JButton btnNuevoPrestamo;
+    private javax.swing.JButton btnRefrescar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable prestamosTable;
+    // End of variables declaration//GEN-END:variables
+}
+```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\GestionPrestamosViewInterface.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.views;
+
+import com.bibliotecadigital.domain.model.Prestamo;
+import com.bibliotecadigital.domain.model.Usuario;
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JFrame;
+
+/**
+ * Interfaz que define los métodos que debe implementar la vista para la gestión de préstamos.
+ */
+public interface GestionPrestamosViewInterface {
+    
+    // Métodos para registrar listeners
+    void addNuevoPrestamoListener(ActionListener listener);
+    void addFinalizarPrestamoListener(ActionListener listener);
+    void addRefrescarListener(ActionListener listener);
+    
+    // Métodos para actualizar la vista
+    void mostrarPrestamos(List<Prestamo> prestamos);
+    void mostrarMensaje(String mensaje);
+    void mostrarError(String mensaje);
+    
+    // Métodos para obtener información
+    Prestamo getPrestamoSeleccionado();
+    
+    // Métodos para diálogos de préstamo
+    void abrirDialogoNuevoPrestamo();
+    boolean confirmarFinalizacionPrestamo(Prestamo prestamo);
+    
+    // Métodos de control de la ventana
+    JFrame getFrame();
+    void setVisible(boolean visible);
+    void actualizarListaPrestamos();
+}```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\GestionUsuariosView.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.views;
+
+import com.bibliotecadigital.domain.model.RolUsuario;
+import com.bibliotecadigital.domain.model.Usuario;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Hp EliteBook
+ */
+public class GestionUsuariosView extends javax.swing.JFrame implements GestionUsuariosViewInterface {
+    
+    private DefaultTableModel modelo;
+    private List<Usuario> listaUsuarios = new ArrayList<>();
+    
+    /**
+     * Creates new form GestionUsuariosView
+     */
+    public GestionUsuariosView() {
+        initComponents();
+        modelo = new DefaultTableModel(new String[]{"id","Nombre","Email","Rol"},0);
+        tablaUsuarios.setModel(modelo); // Tabla con el modelo
+        tablaUsuarios.setDefaultEditor(Object.class, null); // bloquea edición
+    } 
+   
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaUsuarios = new javax.swing.JTable();
+        agregarButton = new javax.swing.JButton();
+        eliminarButton = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaUsuarios);
+
+        agregarButton.setText("Agregar ");
+
+        eliminarButton.setText("Eliminar");
+
+        modificarButton.setText("Modificar");
+
+        jLabel1.setFont(new java.awt.Font("Roboto SemiBold", 0, 18)); // NOI18N
+        jLabel1.setText("Bienvenido al adminsitrador de Usuarios");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(eliminarButton)
+                        .addGap(106, 106, 106)
+                        .addComponent(modificarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(agregarButton)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(64, 64, 64))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(agregarButton)
+                    .addComponent(eliminarButton)
+                    .addComponent(modificarButton))
+                .addGap(30, 30, 30))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GestionUsuariosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GestionUsuariosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GestionUsuariosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GestionUsuariosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GestionUsuariosView().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarButton;
+    private javax.swing.JButton eliminarButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton modificarButton;
+    private javax.swing.JTable tablaUsuarios;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void addCrearListener(ActionListener listener) {
+        agregarButton.addActionListener(listener);
+    }
+
+    @Override
+    public void addModificarListener(ActionListener listener) {
+        modificarButton.addActionListener(listener);
+    }
+
+    @Override
+    public void addEliminarListener(ActionListener listener) {
+        eliminarButton.addActionListener(listener);
+    }
+    
+    @Override
+    public void mostrarUsuarios(List<Usuario> usuarios) {
+        this.listaUsuarios = usuarios;  // 🔹 Mantener sincronizada la lista
+        DefaultTableModel modelo = (DefaultTableModel) tablaUsuarios.getModel();
+        modelo.setRowCount(0); // Limpia la tabla
+
+        for (Usuario u : usuarios) {
+            modelo.addRow(new Object[]{
+                u.getId(),
+                u.getNombre(),
+                u.getEmail(),
+                u.getRol()
+            });
+        }
+    }
+    @Override
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    @Override
+    public Usuario getUsuarioSeleccionado() {
+        int fila = tablaUsuarios.getSelectedRow();
+        if (fila >= 0 && listaUsuarios != null && fila < listaUsuarios.size()) {
+            return listaUsuarios.get(fila);
+        }
+        return null;
+    }
+
+    @Override
+    public String pedirNuevoNombreUsuario(String nombreActual) {
+        return JOptionPane.showInputDialog(this, "Nuevo nombre:", nombreActual);
+    }
+
+    @Override
+    public boolean confirmarEliminacion(String nombreUsuario) {
+        int opcion = JOptionPane.showConfirmDialog(this, 
+            "¿Eliminar usuario " + nombreUsuario + "?", 
+            "Confirmar", 
+            JOptionPane.YES_NO_OPTION);
+        return opcion == JOptionPane.YES_OPTION;
+    }
+
+    @Override
+    public JFrame getFrame() {
+        return this; // el JFrame en sí mismo
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+    }
+    
+    public class NuevoUsuarioDialog extends JDialog {
+        private JTextField txtNombre, txtEmail;
+        private JPasswordField txtPassword;
+        private JComboBox<RolUsuario> comboRol;
+        private Usuario usuarioCreado;
+
+        public NuevoUsuarioDialog(JFrame parent) {
+            super(parent,"Nuevo Usuario", true);
+            setLayout(new GridLayout(5,2,5,5));
+            setSize(300,250);
+            setLocationRelativeTo(parent);
+
+            add(new JLabel("Nombre:")); txtNombre = new JTextField(); add(txtNombre);
+            add(new JLabel("Email:")); txtEmail = new JTextField(); add(txtEmail);
+            add(new JLabel("Contraseña:")); txtPassword = new JPasswordField(); add(txtPassword);
+            add(new JLabel("Rol:")); comboRol = new JComboBox<>(RolUsuario.values()); add(comboRol);
+
+            JButton btnGuardar = new JButton("Guardar");
+            JButton btnCancelar = new JButton("Cancelar");
+            add(btnGuardar); add(btnCancelar);
+
+            btnGuardar.addActionListener(e -> {
+                String nombre = txtNombre.getText().trim();
+                String email = txtEmail.getText().trim();
+                String password = new String(txtPassword.getPassword()).trim();
+                RolUsuario rol = (RolUsuario) comboRol.getSelectedItem();
+
+                if(nombre.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
+                    return;
+                }
+
+                usuarioCreado = new Usuario(nombre, email, password, rol);
+                dispose(); // cierra el diálogo
+            });
+
+            btnCancelar.addActionListener(e -> {
+                usuarioCreado = null;
+                dispose();
+            });
+        }
+
+        public Usuario getUsuarioCreado() { return usuarioCreado; }
+    }
+
+    public class EditarUsuarioDialog extends JDialog {
+        private JTextField txtNombre, txtEmail;
+        private JComboBox<RolUsuario> comboRol;
+        private Usuario usuarioEditado;
+
+        public EditarUsuarioDialog(JFrame parent, Usuario usuario) {
+            super(parent, "Editar Usuario", true);
+            setSize(300, 200);
+            setLocationRelativeTo(parent);
+            setLayout(new GridLayout(4, 2, 5, 5));
+
+            usuarioEditado = usuario;
+
+            add(new JLabel("Nombre:")); txtNombre = new JTextField(usuario.getNombre()); add(txtNombre);
+            add(new JLabel("Gmail:")); txtEmail = new JTextField(usuario.getEmail()); add(txtEmail);
+            add(new JLabel("Rol:")); comboRol = new JComboBox<>(RolUsuario.values()); comboRol.setSelectedItem(usuario.getRol()); add(comboRol);
+
+            JButton btnGuardar = new JButton("Guardar");
+            JButton btnCancelar = new JButton("Cancelar");
+            add(btnGuardar); add(btnCancelar);
+
+            btnGuardar.addActionListener(e -> {
+                usuarioEditado.setNombre(txtNombre.getText());
+                usuarioEditado.setEmail(txtEmail.getText());
+                usuarioEditado.setRol((RolUsuario)comboRol.getSelectedItem());
+                dispose();
+            });
+
+            btnCancelar.addActionListener(e -> dispose());
+        }
+
+        public Usuario getUsuarioEditado() { return usuarioEditado; }
+    }
+
+    public class DetalleUsuarioDialog extends JDialog {
+        public DetalleUsuarioDialog(JFrame parent, Usuario usuario) {
+            super(parent,"Detalle Usuario", true);
+            setLayout(new GridLayout(3,2,5,5));
+            setSize(300,150);
+            setLocationRelativeTo(parent);
+
+            add(new JLabel("Nombre:")); add(new JLabel(usuario.getNombre()));
+            add(new JLabel("Email:")); add(new JLabel(usuario.getEmail()));
+            add(new JLabel("Rol:")); add(new JLabel(usuario.getRol().name()));
+
+            JButton btnCerrar = new JButton("Cerrar");
+            add(btnCerrar);
+            btnCerrar.addActionListener(e -> dispose());
+        }
+    }
+
+}
+```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\GestionUsuariosViewInterface.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.views;
+
+import com.bibliotecadigital.domain.model.Usuario;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JFrame;
+
+/**
+ *
+ * @author Manu Hdz
+ */
+public interface GestionUsuariosViewInterface {
+    void addCrearListener(ActionListener listener);
+    void addModificarListener(ActionListener listener);
+    void addEliminarListener(ActionListener listener);
+    
+    // Métodos para que el Controlador actualice la Vista
+    void mostrarUsuarios(List<Usuario> usuarios);
+    void mostrarMensaje(String mensaje);
+    
+    // Métodos para que el Controlador obtenga datos de la Vista
+    Usuario getUsuarioSeleccionado();
+    String pedirNuevoNombreUsuario(String nombreActual);
+    boolean confirmarEliminacion(String nombreAutor);
+    
+    // Métodos para controlar la ventana
+    JFrame getFrame();
+    void setVisible(boolean visible);
+}
+```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\NuevoPrestamoDialog.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ */
+package com.bibliotecadigital.presentation.desktop.views;
+
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.model.Usuario;
+import com.bibliotecadigital.presentation.desktop.controllers.GestionPrestamosController;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.List;
+
+public class NuevoPrestamoDialog extends javax.swing.JDialog {
+
+    private final GestionPrestamosController controller;
+    private DefaultTableModel materialesDisponiblesModel;
+    private DefaultTableModel materialesSeleccionadosModel;
+    private List<MaterialBiblioteca> materialesSeleccionados = new ArrayList<>();
+    
+    /**
+     * Creates new form NuevoPrestamoDialog
+     */
+    public NuevoPrestamoDialog(java.awt.Frame parent, GestionPrestamosController controller) {
+        super(parent, "Nuevo Préstamo", true);
+        this.controller = controller;
+        initComponents();
+        
+        try {
+            configurarModelos();
+            cargarUsuarios();
+            configurarEventos();
+        } catch (Exception e) {
+            System.err.println("Error al inicializar el diálogo: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                "Error al inicializar el diálogo: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        
+        setSize(800, 600);
+        setLocationRelativeTo(parent);
+    }
+    
+
+    
+    /**
+    * Inicializa el diálogo con datos y configuraciones
+    */
+    public void inicializar() {
+        try {
+            configurarModelos();
+            cargarUsuarios();
+            configurarEventos();
+        } catch (Exception e) {
+            System.err.println("Error al inicializar el diálogo: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                "Error al inicializar el diálogo: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    /**
+     * Configura los modelos de las tablas
+     */
+    private void configurarModelos() {
+        // Configurar modelo para materiales disponibles
+        String[] columnNames = {"ID", "Título", "Autor", "Tipo"};
+        materialesDisponiblesModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        materialesDisponiblesTable.setModel(materialesDisponiblesModel);
+        
+        // Configurar modelo para materiales seleccionados
+        materialesSeleccionadosModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        materialesSeleccionadosTable.setModel(materialesSeleccionadosModel);
+    }
+    
+    /**
+     * Carga la lista de usuarios en el combobox
+     */
+    @SuppressWarnings("unchecked") 
+    private void cargarUsuarios() {
+        // modelo genérico
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        List<Usuario> usuarios = controller.obtenerUsuarios();
+        
+        for (Usuario usuario : usuarios) {
+            model.addElement(usuario);
+        }
+        
+        usuarioComboBox.setModel(model);
+    }
+    
+    /**
+     * Configura los eventos de los botones
+     */
+    private void configurarEventos() {
+        buscarButton.addActionListener(evt -> buscarMateriales());
+        agregarButton.addActionListener(evt -> agregarMaterial());
+        quitarButton.addActionListener(evt -> quitarMaterial());
+        crearPrestamoButton.addActionListener(evt -> crearPrestamo());
+        cancelarButton.addActionListener(evt -> dispose());
+    }
+    
+    /**
+     * Busca materiales según el texto ingresado
+     */
+    private void buscarMateriales() {
+        String termino = busquedaField.getText().trim();
+        if (termino.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor ingrese un término de búsqueda", 
+                "Búsqueda vacía", 
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        List<MaterialBiblioteca> resultados = controller.buscarMaterialesPorTitulo(termino);
+        
+        // Limpiar tabla de disponibles
+        materialesDisponiblesModel.setRowCount(0);
+        
+        // Llenar con resultados, excluyendo los ya seleccionados
+        for (MaterialBiblioteca material : resultados) {
+            if (!materialesSeleccionados.contains(material) && material.isDisponible()) {
+                String autorNombre = !material.getAutores().isEmpty() ? 
+                                   material.getAutores().get(0).getNombre() : "Desconocido";
+                                   
+                materialesDisponiblesModel.addRow(new Object[]{
+                    material.getId(),
+                    material.getTitulo(),
+                    autorNombre,
+                    material.getClass().getSimpleName()
+                });
+            }
+        }
+    }
+    
+    /**
+     * Agrega un material a la lista de seleccionados
+     */
+    private void agregarMaterial() {
+        int filaSeleccionada = materialesDisponiblesTable.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this,
+                "Por favor seleccione un material",
+                "Selección vacía",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Obtener datos del material seleccionado
+        int id = (Integer) materialesDisponiblesModel.getValueAt(filaSeleccionada, 0);
+        String titulo = (String) materialesDisponiblesModel.getValueAt(filaSeleccionada, 1);
+        String autor = (String) materialesDisponiblesModel.getValueAt(filaSeleccionada, 2);
+        String tipo = (String) materialesDisponiblesModel.getValueAt(filaSeleccionada, 3);
+        
+        // Buscar el material completo en los resultados de búsqueda
+        String termino = busquedaField.getText().trim();
+        List<MaterialBiblioteca> resultados = controller.buscarMaterialesPorTitulo(termino);
+        
+        MaterialBiblioteca materialSeleccionado = null;
+        for (MaterialBiblioteca material : resultados) {
+            if (material.getId() == id) {
+                materialSeleccionado = material;
+                break;
+            }
+        }
+        
+        if (materialSeleccionado != null) {
+            materialesSeleccionados.add(materialSeleccionado);
+            materialesSeleccionadosModel.addRow(new Object[]{id, titulo, autor, tipo});
+            
+            materialesDisponiblesModel.removeRow(filaSeleccionada);
+        }
+    }
+    
+    /**
+     * Quita un material de la lista de seleccionados
+     */
+    private void quitarMaterial() {
+        int filaSeleccionada = materialesSeleccionadosTable.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this,
+                "Por favor seleccione un material",
+                "Selección vacía",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Obtener datos del material seleccionado
+        int id = (Integer) materialesSeleccionadosModel.getValueAt(filaSeleccionada, 0);
+        
+        // Buscar en la lista de materiales seleccionados
+        MaterialBiblioteca materialAQuitar = null;
+        for (MaterialBiblioteca material : materialesSeleccionados) {
+            if (material.getId() == id) {
+                materialAQuitar = material;
+                break;
+            }
+        }
+        
+        if (materialAQuitar != null) {
+            // Quitar de seleccionados
+            materialesSeleccionados.remove(materialAQuitar);
+            materialesSeleccionadosModel.removeRow(filaSeleccionada);
+            
+            // Si está activa la búsqueda actual, volver a agregarlo a disponibles
+            String termino = busquedaField.getText().trim();
+            if (!termino.isEmpty() && materialAQuitar.getTitulo().toLowerCase().contains(termino.toLowerCase())) {
+                String autorNombre = !materialAQuitar.getAutores().isEmpty() ? 
+                                   materialAQuitar.getAutores().get(0).getNombre() : "Desconocido";
+                
+                materialesDisponiblesModel.addRow(new Object[]{
+                    materialAQuitar.getId(),
+                    materialAQuitar.getTitulo(),
+                    autorNombre,
+                    materialAQuitar.getClass().getSimpleName()
+                });
+            }
+        }
+    }
+    
+    /**
+     * Crea un nuevo préstamo con los datos seleccionados
+     */
+    private void crearPrestamo() {
+        Usuario usuarioSeleccionado = (Usuario) usuarioComboBox.getSelectedItem();
+        
+        if (usuarioSeleccionado == null) {
+            JOptionPane.showMessageDialog(this,
+                "Debe seleccionar un usuario",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (materialesSeleccionados.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Debe seleccionar al menos un material",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Crear el préstamo a través del controlador
+        controller.crearPrestamo(usuarioSeleccionado, materialesSeleccionados);
+        dispose();
+    }
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        usuarioComboBox = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        busquedaField = new javax.swing.JTextField();
+        buscarButton = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        materialesDisponiblesTable = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        agregarButton = new javax.swing.JButton();
+        quitarButton = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        materialesSeleccionadosTable = new javax.swing.JTable();
+        jPanel8 = new javax.swing.JPanel();
+        crearPrestamoButton = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Nuevo Préstamo");
+        setModal(true);
+        setSize(new java.awt.Dimension(800, 600));
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setText("Usuario:");
+        jPanel2.add(jLabel1);
+
+        usuarioComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        usuarioComboBox.setPreferredSize(new java.awt.Dimension(90, 22));
+        jPanel2.add(usuarioComboBox);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
+
+        jLabel2.setText("Buscar material:");
+        jPanel3.add(jLabel2);
+
+        busquedaField.setPreferredSize(new java.awt.Dimension(120, 22));
+        jPanel3.add(busquedaField);
+
+        buscarButton.setText("Buscar");
+        jPanel3.add(buscarButton);
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel4.setLayout(new java.awt.GridLayout(1, 3));
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jLabel3.setText("Materiales disponibles:");
+        jPanel5.add(jLabel3, java.awt.BorderLayout.NORTH);
+
+        materialesDisponiblesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(materialesDisponiblesTable);
+
+        jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel4.add(jPanel5);
+
+        agregarButton.setText(">>");
+        jPanel6.add(agregarButton);
+
+        quitarButton.setText("<<");
+        jPanel6.add(quitarButton);
+
+        jPanel4.add(jPanel6);
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        jLabel4.setText("Materiales seleccionados:");
+        jPanel7.add(jLabel4, java.awt.BorderLayout.NORTH);
+
+        materialesSeleccionadosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(materialesSeleccionadosTable);
+
+        jPanel7.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel4.add(jPanel7);
+
+        getContentPane().add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        crearPrestamoButton.setText("Crear Préstamo");
+        jPanel8.add(crearPrestamoButton);
+
+        cancelarButton.setText("Cancelar");
+        jPanel8.add(cancelarButton);
+
+        getContentPane().add(jPanel8, java.awt.BorderLayout.PAGE_END);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarButton;
+    private javax.swing.JButton buscarButton;
+    private javax.swing.JTextField busquedaField;
+    private javax.swing.JButton cancelarButton;
+    private javax.swing.JButton crearPrestamoButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable materialesDisponiblesTable;
+    private javax.swing.JTable materialesSeleccionadosTable;
+    private javax.swing.JButton quitarButton;
+    private javax.swing.JComboBox<String> usuarioComboBox;
+    // End of variables declaration//GEN-END:variables
+}
+```
+
 ## `BibliotecaDigital\src\main\java\com\mycompany\bibliotecadigital\BibliotecaDigital.java`
 
 ```java
@@ -1790,8 +4161,11 @@ package com.mycompany.bibliotecadigital;
 import com.bibliotecadigital.domain.service.BibliotecaService;
 import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
 import com.bibliotecadigital.presentation.desktop.controllers.GestionAutoresController;
+import com.bibliotecadigital.presentation.desktop.controllers.GestionMaterialesController;
 import com.bibliotecadigital.presentation.desktop.views.GestionAutoresView; // <-- Asegúrate de importar la clase concreta
 import com.bibliotecadigital.presentation.desktop.views.GestionAutoresViewInterface;
+import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesView;
+import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesViewInterface;
 
 public class BibliotecaDigital {
 
@@ -1805,1773 +4179,17 @@ public class BibliotecaDigital {
             // ...y se asigna a una variable del tipo de la INTERFAZ.
             // Esta es la mejor práctica.
             GestionAutoresViewInterface vistaAutores = new GestionAutoresView();
-
+            GestionMaterialesViewInterface vistaMateriales= new GestionMaterialesView();
+            
             // 3. Instanciar el Controlador, inyectando Modelo y Vista
             new GestionAutoresController(servicio, vistaAutores);
-
+            new GestionMaterialesController(servicio, vistaMateriales);
+            
             // 4. Hacer visible la GUI
             // El método setVisible debe ser parte de tu interfaz
-            vistaAutores.setVisible(true); 
+            vistaAutores.setVisible(true);
+            vistaMateriales.setVisible(true); 
         });
     }
 }```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\BibliotecaServiceTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.model.Libro;
-import com.bibliotecadigital.domain.model.MaterialBiblioteca;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
-
-public class BibliotecaServiceTest {
-    private InMemoryBibliotecaRepository bibliotecaService;
-    
-    @BeforeEach
-    void setUp() {
-        bibliotecaService = new InMemoryBibliotecaRepository();
-    }
-    
-    @Test
-    void testRegistrarMaterialValido() {
-        Autor autor = new Autor(1, "Gabriel García Márquez");
-        bibliotecaService.registrarAutor(autor);
-        
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/ruta/cien-anios-soledad.pdf", "Editorial Sudamericana", 432);
-        libro.agregarAutor(autor);
-        
-        Libro registrado = (Libro) bibliotecaService.registrarMaterial(libro);
-        
-        assertNotNull(registrado);
-        assertTrue(registrado.getId() > 0);
-        assertEquals("Cien años de soledad", registrado.getTitulo());
-        assertEquals(1967, registrado.getAnio());
-        assertEquals("/ruta/cien-anios-soledad.pdf", registrado.getRutaArchivo());
-        assertEquals("Editorial Sudamericana", registrado.getEditorial());
-        assertEquals(432, registrado.getNumPaginas());
-        assertTrue(registrado.isDisponible());
-    }
-    
-    @Test
-    void testRegistrarMaterialInvalido() {
-        // Libro sin título (debería fallar)
-        Libro libro = new Libro(0, "", 1967, 
-                               "/ruta/cien-anios-soledad.pdf", "Editorial Sudamericana", 432);
-        
-        assertThrows(IllegalArgumentException.class, () -> {
-            bibliotecaService.registrarMaterial(libro);
-        });
-    }
-    
-    @Test
-    void testRegistrarMaterialConMultiplesAutores() {
-        Autor autor1 = new Autor(1, "Gabriel García Márquez");
-        Autor autor2 = new Autor(2, "Mario Vargas Llosa");
-        bibliotecaService.registrarAutor(autor1);
-        bibliotecaService.registrarAutor(autor2);
-        
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/ruta/cien-anios-soledad.pdf", "Editorial Sudamericana", 432);
-        libro.agregarAutor(autor1);
-        libro.agregarAutor(autor2);
-        
-        Libro registrado = (Libro) bibliotecaService.registrarMaterial(libro);
-        
-        assertNotNull(registrado);
-        assertEquals(2, registrado.getAutores().size());
-        assertTrue(registrado.getAutores().contains(autor1));
-        assertTrue(registrado.getAutores().contains(autor2));
-    }
-    
-    @Test
-    void testBuscarMaterialPorId() {
-        Autor autor = new Autor(1, "Gabriel García Márquez");
-        bibliotecaService.registrarAutor(autor);
-        
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/ruta/cien-anios-soledad.pdf", "Editorial Sudamericana", 432);
-        libro.agregarAutor(autor);
-        
-        Libro registrado = (Libro) bibliotecaService.registrarMaterial(libro);
-        int id = registrado.getId();
-        
-        MaterialBiblioteca encontrado = bibliotecaService.buscarMaterialPorId(id);
-        
-        assertNotNull(encontrado);
-        assertEquals(id, encontrado.getId());
-        assertEquals("Cien años de soledad", encontrado.getTitulo());
-    }
-    
-    @Test
-    void testBuscarMaterialPorIdNoExistente() {
-        MaterialBiblioteca resultado = bibliotecaService.buscarMaterialPorId(9999);
-        assertNull(resultado);
-    }
-    
-    @Test
-    void testBuscarMaterialPorTitulo() {
-        Autor autor = new Autor(1, "Gabriel García Márquez");
-        bibliotecaService.registrarAutor(autor);
-        
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/ruta/cien-anios-soledad.pdf", "Editorial Sudamericana", 432);
-        libro.agregarAutor(autor);
-        
-        bibliotecaService.registrarMaterial(libro);
-        
-        List<MaterialBiblioteca> resultados = bibliotecaService.buscarMaterialesPorTitulo("soledad");
-        
-        assertFalse(resultados.isEmpty());
-        assertEquals("Cien años de soledad", resultados.get(0).getTitulo());
-    }
-    
-    @Test
-    void testBuscarMaterialPorTituloNoExistente() {
-        List<MaterialBiblioteca> resultados = bibliotecaService.buscarMaterialesPorTitulo("Título desconocido");
-        assertTrue(resultados.isEmpty());
-    }
-    
-    @Test
-    void testBuscarMaterialPorAutor() {
-        Autor autor = new Autor(1, "Gabriel García Márquez");
-        bibliotecaService.registrarAutor(autor);
-        
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/ruta/cien-anios-soledad.pdf", "Editorial Sudamericana", 432);
-        libro.agregarAutor(autor);
-        
-        bibliotecaService.registrarMaterial(libro);
-        
-        List<MaterialBiblioteca> resultados = bibliotecaService.buscarMaterialesPorAutor("García");
-        
-        assertFalse(resultados.isEmpty());
-        assertEquals("Cien años de soledad", resultados.get(0).getTitulo());
-    }
-    
-    @Test
-    void testBuscarMaterialPorAutorNoExistente() {
-        List<MaterialBiblioteca> resultados = bibliotecaService.buscarMaterialesPorAutor("Autor Desconocido");
-        assertTrue(resultados.isEmpty());
-    }
-    
-    @Test
-    void testListarMateriales() {
-        Autor autor = new Autor(1, "Gabriel García Márquez");
-        bibliotecaService.registrarAutor(autor);
-        
-        Libro libro1 = new Libro(0, "Cien años de soledad", 1967, 
-                                "/ruta/cien-anios-soledad.pdf", "Editorial Sudamericana", 432);
-        libro1.agregarAutor(autor);
-        
-        Libro libro2 = new Libro(0, "El amor en los tiempos del cólera", 1985, 
-                                "/ruta/amor-tiempos-colera.pdf", "Editorial Oveja Negra", 368);
-        libro2.agregarAutor(autor);
-        
-        bibliotecaService.registrarMaterial(libro1);
-        bibliotecaService.registrarMaterial(libro2);
-        
-        List<MaterialBiblioteca> materiales = bibliotecaService.listarMateriales();
-        
-        assertEquals(2, materiales.size());
-    }
-    
-    @Test
-    void testListarMaterialesVacio() {
-        List<MaterialBiblioteca> materiales = bibliotecaService.listarMateriales();
-        assertTrue(materiales.isEmpty());
-    }
-    
-    @Test
-    void testRegistrarAutor() {
-        Autor autor = new Autor(0, "Gabriel García Márquez");
-        Autor registrado = bibliotecaService.registrarAutor(autor);
-        
-        assertNotNull(registrado);
-        assertTrue(registrado.getId() > 0);
-        assertEquals("Gabriel García Márquez", registrado.getNombre());
-    }
-    
-    @Test
-    void testBuscarAutorPorId() {
-        Autor autor = new Autor(0, "Gabriel García Márquez");
-        Autor registrado = bibliotecaService.registrarAutor(autor);
-        int id = registrado.getId();
-        
-        Autor encontrado = bibliotecaService.buscarAutorPorId(id);
-        
-        assertNotNull(encontrado);
-        assertEquals(id, encontrado.getId());
-        assertEquals("Gabriel García Márquez", encontrado.getNombre());
-    }
-    
-    @Test
-    void testBuscarAutorPorIdNoExistente() {
-        Autor resultado = bibliotecaService.buscarAutorPorId(9999);
-        assertNull(resultado);
-    }
-    
-    @Test
-    void testListarAutores() {
-        Autor autor1 = new Autor(0, "Gabriel García Márquez");
-        Autor autor2 = new Autor(0, "Mario Vargas Llosa");
-        
-        bibliotecaService.registrarAutor(autor1);
-        bibliotecaService.registrarAutor(autor2);
-        
-        List<Autor> autores = bibliotecaService.listarAutores();
-        
-        assertEquals(2, autores.size());
-    }
-    
-    @Test
-    void testListarAutoresVacio() {
-        List<Autor> autores = bibliotecaService.listarAutores();
-        assertTrue(autores.isEmpty());
-    } 
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU10BibliotecaDigitalTest.java`
-
-```java
-package test.java.com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.RolUsuario;
-import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.domain.service.AuthenticationService;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-/**
- *
- * @author jesus
- */
-public class HU10BibliotecaDigitalTest {
-
-    private InMemoryBibliotecaRepository biblioteca;
-    private AuthenticationService auth;
-
-    @BeforeEach
-    void setUp() {
-        biblioteca = new InMemoryBibliotecaRepository();
-        auth = new AuthenticationService(biblioteca);
-    }
-
-    @Test
-    void testRegistrarUsuarioConRol() {
-        boolean resultado = biblioteca.registrarUsuario("Admin", "admin@mail.com", "admin123", RolUsuario.ADMINISTRADOR);
-        assertTrue(resultado);
-        
-        Usuario usuario = biblioteca.buscarUsuarioPorEmail("admin@mail.com");
-        assertNotNull(usuario);
-        assertEquals(RolUsuario.ADMINISTRADOR, usuario.getRol());
-    }
-    
-    @Test
-    void testActualizarRolUsuario() {
-        biblioteca.registrarUsuario("Usuario", "user@mail.com", "user123", RolUsuario.CLIENTE);
-        
-        boolean resultado = biblioteca.actualizarRolUsuario("user@mail.com", RolUsuario.ENCARGADO);
-        assertTrue(resultado);
-        
-        Usuario usuario = biblioteca.buscarUsuarioPorEmail("user@mail.com");
-        assertEquals(RolUsuario.ENCARGADO, usuario.getRol());
-    }
-    
-    @Test
-    void testVerificacionPermisosAdministrador() {
-        biblioteca.registrarUsuario("Admin", "admin@mail.com", "admin123", RolUsuario.ADMINISTRADOR);
-        Usuario admin = auth.login("admin@mail.com", "admin123");
-        
-        // Simulación de la lógica de permisos mejorada con Enum
-        assertTrue(auth.tienePermiso(admin, "configuracion_sistema"));
-        assertTrue(auth.tienePermiso(admin, "gestion_usuarios"));
-        assertTrue(auth.tienePermiso(admin, "buscar_materiales"));
-    }
-    
-    @Test
-    void testVerificacionPermisosCliente() {
-        biblioteca.registrarUsuario("Cliente", "cliente@mail.com", "cliente123", RolUsuario.CLIENTE);
-        Usuario cliente = auth.login("cliente@mail.com", "cliente123");
-        
-        assertTrue(auth.tienePermiso(cliente, "buscar_materiales"));
-        assertFalse(auth.tienePermiso(cliente, "configuracion_sistema"));
-        assertFalse(auth.tienePermiso(cliente, "gestion_usuarios"));
-    }
-    
-    @Test
-    void testVerificacionPermisosEncargado() {
-        biblioteca.registrarUsuario("Encargado", "encargado@mail.com", "encargado123", RolUsuario.ENCARGADO);
-        Usuario encargado = auth.login("encargado@mail.com", "encargado123");
-        
-        assertTrue(auth.tienePermiso(encargado, "gestion_usuarios"));
-        assertTrue(auth.tienePermiso(encargado, "buscar_materiales"));
-        assertFalse(auth.tienePermiso(encargado, "configuracion_sistema"));
-    }
-
-    /**
-     * Método main para ejecutar los tests manualmente desde la consola o el IDE.
-     * Simula el comportamiento de JUnit al crear una nueva instancia para cada test.
-     */
-    public static void main(String[] args) {
-        System.out.println("--- Ejecutando Pruebas de HU10 Manualmente ---");
-
-        // --- Test 1 ---
-        try {
-            System.out.print("Ejecutando: testRegistrarUsuarioConRol... ");
-            HU10BibliotecaDigitalTest test1 = new HU10BibliotecaDigitalTest();
-            test1.setUp();
-            test1.testRegistrarUsuarioConRol();
-            System.out.println(" PASSED");
-        } catch (AssertionError e) {
-            System.out.println(" FAILED");
-            System.out.println("   Causa: " + e.getMessage());
-        }
-
-        // --- Test 2 ---
-        try {
-            System.out.print("Ejecutando: testActualizarRolUsuario... ");
-            HU10BibliotecaDigitalTest test2 = new HU10BibliotecaDigitalTest();
-            test2.setUp();
-            test2.testActualizarRolUsuario();
-            System.out.println(" PASSED");
-        } catch (AssertionError e) {
-            System.out.println(" FAILED");
-            System.out.println("   Causa: " + e.getMessage());
-        }
-
-        // --- Test 3 ---
-        try {
-            System.out.print("Ejecutando: testVerificacionPermisosAdministrador... ");
-            HU10BibliotecaDigitalTest test3 = new HU10BibliotecaDigitalTest();
-            test3.setUp();
-            test3.testVerificacionPermisosAdministrador();
-            System.out.println(" PASSED");
-        } catch (AssertionError e) {
-            System.out.println(" FAILED");
-            System.out.println("   Causa: " + e.getMessage());
-        }
-
-        // --- Test 4 ---
-        try {
-            System.out.print("Ejecutando: testVerificacionPermisosCliente... ");
-            HU10BibliotecaDigitalTest test4 = new HU10BibliotecaDigitalTest();
-            test4.setUp();
-            test4.testVerificacionPermisosCliente();
-            System.out.println(" PASSED");
-        } catch (AssertionError e) {
-            System.out.println(" FAILED");
-            System.out.println("   Causa: " + e.getMessage());
-        }
-
-        // --- Test 5 ---
-        try {
-            System.out.print("Ejecutando: testVerificacionPermisosEncargado... ");
-            HU10BibliotecaDigitalTest test5 = new HU10BibliotecaDigitalTest();
-            test5.setUp();
-            test5.testVerificacionPermisosEncargado();
-            System.out.println(" PASSED");
-        } catch (AssertionError e) {
-            System.out.println(" FAILED");
-            System.out.println("   Causa: " + e.getMessage());
-        }
-
-        System.out.println("--- Pruebas Finalizadas ---");
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU11PersistenciaTest.java`
-
-```java
-package test.java.com.bibliotecadigital.domain.service;
-
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-public class HU11PersistenciaTest {
-
-    @Test
-    void testInicializacionJPAyConexionDB() {
-        EntityManagerFactory emf = null;
-        try {
-            // Intenta crear el EntityManagerFactory usando el nombre de la unidad de persistencia de persistence.xml
-            emf = Persistence.createEntityManagerFactory("biblioteca-pu");
-            
-            // Si la línea anterior no lanza una excepción, la configuración es correcta.
-            assertNotNull(emf, "El EntityManagerFactory no debería ser nulo si la conexión fue exitosa.");
-            
-        } catch (Exception e) {
-            // Si algo falla (ej. no encuentra el driver, XML mal formado), este test fallará.
-            fail("Falló la inicialización de JPA y la conexión a la base de datos.", e);
-        } finally {
-            if (emf != null && emf.isOpen()) {
-                emf.close();
-            }
-        }
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU12JpaRepositoryTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-/**
- *
- * @author jesus
- */
-
-import com.bibliotecadigital.domain.model.*;
-import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import org.junit.jupiter.api.*;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
-
-public class HU12JpaRepositoryTest {
-
-    private static EntityManagerFactory emf;
-    private JpaBibliotecaRepository repository;
-
-    @BeforeAll
-    static void setUpAll() {
-        // Se crea el EMF una sola vez para todas las pruebas
-        emf = Persistence.createEntityManagerFactory("biblioteca-pu");
-    }
-
-    @AfterAll
-    static void tearDownAll() {
-        if (emf != null) {
-            emf.close();
-        }
-    }
-
-    @BeforeEach
-    void setUp() {
-        // Se crea una nueva instancia del repositorio para cada test
-        repository = new JpaBibliotecaRepository();
-        // Limpiar la base de datos antes de cada prueba para asegurar el aislamiento
-        clearDatabase();
-    }
-    
-    private void clearDatabase() {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.createQuery("DELETE FROM Prestamo").executeUpdate();
-        em.createQuery("DELETE FROM MaterialBiblioteca").executeUpdate();
-        em.createQuery("DELETE FROM Autor").executeUpdate();
-        em.createQuery("DELETE FROM Usuario").executeUpdate();
-        em.getTransaction().commit();
-        em.close();
-    }
-
-    @Test
-    @DisplayName("Debería registrar un usuario y encontrarlo por email")
-    void testRegistrarYBuscarUsuario() {
-        // Act
-        boolean registrado = repository.registrarUsuario("Ana JPA", "ana.jpa@mail.com", "pass123", RolUsuario.CLIENTE);
-        Usuario encontrado = repository.buscarUsuarioPorEmail("ana.jpa@mail.com");
-
-        // Assert
-        assertTrue(registrado);
-        assertNotNull(encontrado);
-        assertEquals("Ana JPA", encontrado.getNombre());
-    }
-    
-    @Test
-    @DisplayName("Debería crear un préstamo y marcar los materiales como no disponibles")
-    void testCrearPrestamoYVerificarDisponibilidad() {
-        // Arrange
-        repository.registrarUsuario("Beto JPA", "beto.jpa@mail.com", "pass123", RolUsuario.CLIENTE);
-        Usuario usuario = repository.buscarUsuarioPorEmail("beto.jpa@mail.com");
-
-        Libro libro = new Libro(0, "Libro para Prestar", 2025, "/ruta/jpa.pdf", "Ed. JPA", 100);
-        libro.agregarAutor(new Autor(0, "Autor JPA"));
-        repository.registrarMaterial(libro);
-
-        // Act
-        repository.crearPrestamo(usuario, List.of(libro));
-        
-        // Assert
-        MaterialBiblioteca materialPrestado = repository.buscarMaterialPorId(libro.getId());
-        assertFalse(materialPrestado.isDisponible(), "El material debería estar marcado como no disponible en la BD.");
-        assertEquals(1, repository.listarPrestamos().size(), "Debería haber un préstamo registrado.");
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU14AutoresCrudTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-/**
- *
- * @author jesus
- */
-import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
-import com.bibliotecadigital.presentation.desktop.controllers.GestionAutoresController;
-import com.bibliotecadigital.presentation.desktop.views.GestionAutoresViewInterface;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-// Mock de la Vista para simular la interacción del usuario sin levantar una GUI real
-class MockGestionAutoresView implements GestionAutoresViewInterface {
-    public String nombrePedido;
-    public Autor autorSeleccionado;
-    public boolean confirmacionDada = true;
-    // ... (implementar todos los métodos de la interfaz, la mayoría pueden estar vacíos)
-    @Override public void mostrarAutores(java.util.List<Autor> autores) {}
-    @Override public void addNuevoListener(java.awt.event.ActionListener listener) {}
-    @Override public void addEditarListener(java.awt.event.ActionListener listener) {}
-    @Override public void addEliminarListener(java.awt.event.ActionListener listener) {}
-    @Override public void mostrarMensaje(String mensaje) {}
-    @Override public Autor getAutorSeleccionado() { return autorSeleccionado; }
-    @Override public String pedirNuevoNombreAutor(String n) { return nombrePedido; }
-    @Override public boolean confirmarEliminacion(String n) { return confirmacionDada; }
-    @Override public javax.swing.JFrame getFrame() { return null; }
-    @Override public void setVisible(boolean v) {}
-}
-
-public class HU14AutoresCrudTest {
-    
-    private BibliotecaService servicio;
-    private MockGestionAutoresView vistaMock;
-    private GestionAutoresController controlador;
-
-    @BeforeEach
-    void setUp() {
-        servicio = new JpaBibliotecaRepository(); // Usa el repositorio real
-        vistaMock = new MockGestionAutoresView();
-        controlador = new GestionAutoresController(servicio, vistaMock);
-    }
-
-    @Test
-    void testCrearYEncontrarAutorDesdeController() {
-        // Arrange: Simular que el usuario escribe "Gabriel García Márquez" en el diálogo
-        vistaMock.nombrePedido = "Gabriel García Márquez";
-        
-        // Act: Simular el clic en "Añadir Nuevo" llamando directamente al método del controlador
-        controlador.crearNuevoAutor();
-        
-        // Assert: Verificar directamente en la base de datos que el autor fue creado
-        assertFalse(servicio.listarAutores().isEmpty());
-        assertEquals("Gabriel García Márquez", servicio.listarAutores().get(0).getNombre());
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU1BibliotecaDigitalTest.java`
-
-```java
-package test.java.com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.model.Libro;
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import com.bibliotecadigital.presentation.desktop.controllers.MaterialController;
-
-public class HU1BibliotecaDigitalTest {
-    public static void main(String[] args) {
-        // Tu código de demostración aquí
-        BibliotecaService servicio = new InMemoryBibliotecaRepository();
-        MaterialController controlador = new MaterialController(servicio);
-
-        // Registrar autores
-        Autor autor1 = controlador.registrarAutor(new Autor(0, "Gabriel García Márquez"));
-        Autor autor2 = controlador.registrarAutor(new Autor(0, "Mario Vargas Llosa"));
-
-        // Registrar un libro
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/ruta/cien-anios-soledad.pdf", "Editorial Sudamericana", 432);
-        libro.agregarAutor(autor1);
-
-        Libro registrado = (Libro) controlador.registrarMaterial(libro);
-        System.out.println("Libro registrado: " + registrado.getTitulo());
-
-        // Resto del código...
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU2BibliotecaDigitalTest.java`
-
-```java
-package test.java.com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.*;
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import com.bibliotecadigital.presentation.desktop.controllers.MaterialController;
-import java.util.List;
-import java.util.Scanner;
-
-public class HU2BibliotecaDigitalTest {
-    private static MaterialController controlador;
-
-    public static void main(String[] args) {
-        BibliotecaService servicio = new InMemoryBibliotecaRepository();
-        controlador = new MaterialController(servicio);
-        cargarDatosDePrueba();
-        iniciarMenu();
-    }
-
-    private static void iniciarMenu() {
-        Scanner scanner = new Scanner(System.in);
-        int opcion = 0;
-
-        while (opcion != 3) {
-            System.out.println("\n== BÚSQUEDA EN BIBLIOTECA ==");
-            System.out.println("1. Buscar por Título");
-            System.out.println("2. Buscar por Autor");
-            System.out.println("3. Salir");
-            System.out.print("Opción: ");
-
-            try {
-                opcion = Integer.parseInt(scanner.nextLine().trim());
-                switch (opcion) {
-                    case 1 -> buscarPorTitulo(scanner);
-                    case 2 -> buscarPorAutor(scanner);
-                    case 3 -> System.out.println("Programa terminado");
-                    default -> System.out.println("Opción no válida");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Ingrese un número válido");
-            }
-        }
-        scanner.close();
-    }
-
-    private static void buscarPorTitulo(Scanner scanner) {
-        System.out.print("Ingrese título: ");
-        String titulo = scanner.nextLine().trim();
-        List<MaterialBiblioteca> resultados = controlador.buscarMaterialesPorTitulo(titulo);
-        mostrarResultados(resultados);
-    }
-
-    private static void buscarPorAutor(Scanner scanner) {
-        System.out.print("Ingrese autor: ");
-        String autor = scanner.nextLine().trim();
-        List<MaterialBiblioteca> resultados = controlador.buscarMaterialesPorAutor(autor);
-        mostrarResultados(resultados);
-    }
-
-    private static void mostrarResultados(List<MaterialBiblioteca> resultados) {
-        if (resultados.isEmpty()) {
-            System.out.println("No se encontraron resultados");
-            return;
-        }
-
-        System.out.println("\nResultados encontrados: " + resultados.size());
-        for (MaterialBiblioteca material : resultados) {
-            System.out.println("------------------");
-            System.out.println(material.mostrarInformacion());
-        }
-    }
-
-    private static void cargarDatosDePrueba() {
-        // Autores
-        Autor garcia = controlador.registrarAutor(new Autor(0, "Gabriel García Márquez"));
-        Autor beethoven = controlador.registrarAutor(new Autor(0, "Ludwig van Beethoven"));
-        Autor natgeo = controlador.registrarAutor(new Autor(0, "National Geographic"));
-        Autor spielberg = controlador.registrarAutor(new Autor(0, "Steven Spielberg"));
-
-        // 1. Libros
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/libros/cien_anios.pdf", "Sudamericana", 496);
-        libro.agregarAutor(garcia);
-        controlador.registrarMaterial(libro);
-
-        // 2. Revistas
-        Revista revista1 = new Revista(0, "National Geographic: Amazonas", 2023, 
-                                     "/revistas/natgeo_2023.pdf", "National Geographic", 1);
-        revista1.agregarAutor(natgeo);
-        controlador.registrarMaterial(revista1);
-
-        Revista revista2 = new Revista(0, "Cien maravillas del mundo", 2023, 
-                                     "/revistas/maravillas.pdf", "Discovery", 12);
-        revista2.agregarAutor(natgeo);
-        controlador.registrarMaterial(revista2);
-
-        // 3. Videos
-        Video video1 = new Video(0, "Jurassic Park", 1993, 
-                                "/videos/jurassic.mp4", 127, "MP4");
-        video1.agregarAutor(spielberg);
-        controlador.registrarMaterial(video1);
-
-        Video video2 = new Video(0, "Cien años de cine", 2020, 
-                                "/videos/historia_cine.mp4", 180, "MP4");
-        video2.agregarAutor(spielberg);
-        controlador.registrarMaterial(video2);
-
-        // 4. Audios
-        Audio audio1 = new Audio(0, "Sinfonía No. 5", 1808, 
-                                "/audios/sinfonia5.mp3", 45, "MP3");
-        audio1.agregarAutor(beethoven);
-        controlador.registrarMaterial(audio1);
-
-        Audio audio2 = new Audio(0, "Cien melodías clásicas", 2022, 
-                                "/audios/melodias.mp3", 120, "MP3");
-        audio2.agregarAutor(beethoven);
-        controlador.registrarMaterial(audio2);
-
-        System.out.println("\nDatos de prueba cargados:");
-        System.out.println("- 4 autores diferentes");
-        System.out.println("- 7 materiales:");
-        System.out.println("  * 1 libro");
-        System.out.println("  * 2 revistas");
-        System.out.println("  * 2 videos");
-        System.out.println("  * 2 audios");
-        
-        System.out.println("\nEjemplos de búsqueda:");
-        System.out.println("1. Búsqueda por título parcial:");
-        System.out.println("   - 'Cien' (4 materiales diferentes)");
-        System.out.println("   - 'National' (1 revista)");
-        
-        System.out.println("\n2. Búsqueda por título exacto:");
-        System.out.println("   - 'Sinfonía No. 5' (1 audio)");
-        System.out.println("   - 'Jurassic Park' (1 video)");
-        
-        System.out.println("\n3. Búsqueda por autor parcial:");
-        System.out.println("   - 'Steven' (2 videos)");
-        System.out.println("   - 'National' (2 revistas)");
-        
-        System.out.println("\n4. Búsqueda por autor exacto:");
-        System.out.println("   - 'Ludwig van Beethoven' (2 audios)");
-        System.out.println("   - 'Steven Spielberg' (2 videos)");
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU3BibliotecaDigitalTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.*;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
-
-
-/**
- *
- * @author jesus
- */
-
-public class HU3BibliotecaDigitalTest {
-
-    private InMemoryBibliotecaRepository biblioteca;
-    private Usuario usuario;
-    private Libro libro1;
-    private Video video1;
-
-    @BeforeEach
-    void setUp() {
-        biblioteca = new InMemoryBibliotecaRepository();
-
-        // Crear un usuario de prueba
-        biblioteca.registrarUsuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
-        usuario = biblioteca.buscarUsuarioPorEmail("ana@mail.com");
-
-        // Crear materiales de prueba
-        Autor autor = new Autor(1, "Autor de Prueba");
-        libro1 = new Libro(1, "Libro de Prueba", 2025, "/ruta/libro.pdf", "Ed. Prueba", 100);
-        libro1.agregarAutor(autor);
-
-        video1 = new Video(2, "Video de Prueba", 2025, "/ruta/video.mp4", 90, "MP4");
-        video1.agregarAutor(autor);
-        
-        biblioteca.registrarMaterial(libro1);
-        biblioteca.registrarMaterial(video1);
-    }
-
-    @Test
-    void testCrearPrestamoExitosoConMultiplesMateriales() {
-        // Arrange
-        List<MaterialBiblioteca> materialesAPrestar = List.of(libro1, video1);
-
-        // Act
-        Prestamo prestamo = biblioteca.crearPrestamo(usuario, materialesAPrestar);
-
-        // Assert
-        assertNotNull(prestamo);
-        assertEquals(1, prestamo.getId());
-        assertEquals(usuario, prestamo.getUsuario());
-        assertEquals(2, prestamo.getMateriales().size());
-        assertFalse(libro1.isDisponible(), "El libro debería marcarse como no disponible.");
-        assertFalse(video1.isDisponible(), "El video debería marcarse como no disponible.");
-        assertEquals(1, biblioteca.listarPrestamos().size());
-    }
-
-    @Test
-    void testCrearPrestamoFallaSiUnMaterialNoEstaDisponible() {
-        // Arrange: prestamos el libro primero
-        biblioteca.crearPrestamo(usuario, List.of(libro1));
-        
-        // Act & Assert: intentamos prestar el libro de nuevo junto con el video
-        List<MaterialBiblioteca> segundoIntento = List.of(libro1, video1);
-        
-        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            biblioteca.crearPrestamo(usuario, segundoIntento);
-        });
-
-        assertEquals("El material 'Libro de Prueba' (ID: 1) no está disponible.", exception.getMessage());
-        assertTrue(video1.isDisponible(), "El video debería permanecer disponible ya que el préstamo falló.");
-    }
-    
-    @Test
-    void testCrearPrestamoFallaConUsuarioNulo() {
-        // Arrange
-        List<MaterialBiblioteca> materiales = List.of(libro1);
-        
-        // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            biblioteca.crearPrestamo(null, materiales);
-        });
-        
-        assertEquals("Usuario y lista de materiales no pueden ser nulos o vacíos.", exception.getMessage());
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU4BibliotecaDigitalTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-/**
- *
- * @author jesus
- */
-
-import com.bibliotecadigital.domain.model.*;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
-
-public class HU4BibliotecaDigitalTest {
-
-    private InMemoryBibliotecaRepository biblioteca;
-    private Usuario usuario;
-    private Libro libro;
-    private Video video;
-    private Prestamo prestamo;
-
-    @BeforeEach
-    void setUp() {
-        biblioteca = new InMemoryBibliotecaRepository();
-        
-        // Crear usuario y materiales
-        biblioteca.registrarUsuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
-        usuario = biblioteca.buscarUsuarioPorEmail("ana@mail.com");
-
-        Autor autor = new Autor(1, "Autor de Prueba");
-        libro = new Libro(1, "Libro a Devolver", 2025, "/ruta/libro.pdf", "Ed. Prueba", 100);
-        libro.agregarAutor(autor);
-        
-        video = new Video(2, "Video a Devolver", 2025, "/ruta/video.mp4", 90, "MP4");
-        video.agregarAutor(autor);
-
-        biblioteca.registrarMaterial(libro);
-        biblioteca.registrarMaterial(video);
-        
-        // Crear un préstamo con ambos materiales
-        prestamo = biblioteca.crearPrestamo(usuario, List.of(libro, video));
-    }
-
-    @Test
-    void testDevolucionParcialExitosa() {
-        // Act: Devolver solo el libro
-        boolean resultado = biblioteca.registrarDevolucion(prestamo, libro);
-
-        // Assert
-        assertTrue(resultado, "La devolución debería ser exitosa.");
-        assertTrue(libro.isDisponible(), "El libro devuelto debe estar disponible.");
-        assertFalse(video.isDisponible(), "El video no devuelto debe seguir no disponible.");
-        assertNull(prestamo.getFechaDevolucion(), "El préstamo no debe cerrarse en una devolución parcial.");
-    }
-
-    @Test
-    void testDevolucionCompletaCierraElPrestamo() {
-        // Act: Devolver ambos materiales
-        biblioteca.registrarDevolucion(prestamo, libro);
-        biblioteca.registrarDevolucion(prestamo, video);
-        
-        // Assert
-        assertTrue(libro.isDisponible(), "El libro devuelto debe estar disponible.");
-        assertTrue(video.isDisponible(), "El video devuelto debe estar disponible.");
-        assertNotNull(prestamo.getFechaDevolucion(), "El préstamo debe tener una fecha de devolución al completarse.");
-    }
-
-    @Test
-    void testDevolucionFallaSiMaterialNoPerteneceAlPrestamo() {
-        // Arrange: Crear un material extra que no está en el préstamo
-        Revista revista = new Revista(3, "Revista Aparte", 2025, "/ruta/revista.pdf", "Ed. Otra", 10);
-        revista.agregarAutor(new Autor(2, "Otro Autor"));
-        biblioteca.registrarMaterial(revista);
-
-        // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            biblioteca.registrarDevolucion(prestamo, revista);
-        });
-        
-        assertEquals("El material no pertenece al préstamo especificado.", exception.getMessage());
-    }
-
-    @Test
-    void testDevolucionFallaSiMaterialYaFueDevuelto() {
-        // Arrange: Devolvemos el libro una vez
-        biblioteca.registrarDevolucion(prestamo, libro);
-        
-        // Act & Assert: Intentamos devolverlo de nuevo
-        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            biblioteca.registrarDevolucion(prestamo, libro);
-        });
-        
-        assertEquals("El material 'Libro a Devolver' ya figura como disponible.", exception.getMessage());
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU5BibliotecaDigitalTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.*;
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import com.bibliotecadigital.presentation.desktop.controllers.MaterialController;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-/**
- *
- * @author Diego Garcia
- */
-public class HU5BibliotecaDigitalTest {
-    private static MaterialController controlador;
-    private static BibliotecaService servicio;
-    
-    public static void main(String[] args) {
-        servicio = new InMemoryBibliotecaRepository();
-        controlador = new MaterialController(servicio);
-        cargarDatosDePrueba(); // Carga lo mismo que HU2
-        iniciarMenu();
-    }
-    
-    private static void iniciarMenu() {
-        Scanner scanner = new Scanner(System.in);
-        int opcion = 0;
-
-        while (opcion != 3) {
-            System.out.println("\n== LISTAR MATERIALES DE LA BIBLIOTECA ==");
-            System.out.println("1. Listar todos los materiales");
-            System.out.println("2. Filtrar por tipo de material");
-            System.out.println("3. Salir");
-            System.out.print("Opción: ");
-
-            try {
-                opcion = Integer.parseInt(scanner.nextLine().trim());
-                switch (opcion) {
-                    case 1:
-                        listarMateriales();
-                        break;
-                    case 2:
-                        listarMaterialesPorTipo();
-                        break;
-                    case 3:
-                        System.out.println("Programa terminado");
-                        break;
-                    default:
-                        System.out.println("Opción no válida");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Ingrese un número válido");
-            }
-        }
-        scanner.close();
-    }
-    
-    private static void listarMateriales() {
-        List<MaterialBiblioteca> lista = servicio.listarMateriales();
-        System.out.println("\n\t\t\t=== Lista de todos los materiales ===");
-        imprimirTablaMateriales(lista);
-    }
-    
-    private static void listarMaterialesPorTipo() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el tipo de material a filtrar (Libro, Revista, Video, Audio): ");
-        String tipo = scanner.nextLine().trim();
-
-        List<MaterialBiblioteca> todos = servicio.listarMateriales(); // lista todo
-        List<MaterialBiblioteca> filtrados = new ArrayList<>();
-
-        for (MaterialBiblioteca m : todos) {
-            if (m.getClass().getSimpleName().equalsIgnoreCase(tipo)) {
-                filtrados.add(m);
-            }
-        }
-
-        if (filtrados.isEmpty()) {
-            System.out.println("No hay materiales de tipo '" + tipo + "'.");
-        } else {
-            System.out.println("\n\t\t\t=== Lista de materiales de tipo " + tipo + " ===");
-            imprimirTablaMateriales(filtrados);
-        }
-    }
-
-    private static void cargarDatosDePrueba() {
-        // Autores
-        Autor garcia = controlador.registrarAutor(new Autor(0, "Gabriel García Márquez"));
-        Autor beethoven = controlador.registrarAutor(new Autor(0, "Ludwig van Beethoven"));
-        Autor natgeo = controlador.registrarAutor(new Autor(0, "National Geographic"));
-        Autor spielberg = controlador.registrarAutor(new Autor(0, "Steven Spielberg"));
-
-        // 1. Libros
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/libros/cien_anios.pdf", "Sudamericana", 496);
-        libro.agregarAutor(garcia);
-        controlador.registrarMaterial(libro);
-
-        // 2. Revistas
-        Revista revista1 = new Revista(0, "National Geographic: Amazonas", 2023, 
-                                     "/revistas/natgeo_2023.pdf", "National Geographic", 1);
-        revista1.agregarAutor(natgeo);
-        controlador.registrarMaterial(revista1);
-
-        Revista revista2 = new Revista(0, "Cien maravillas del mundo", 2023, 
-                                     "/revistas/maravillas.pdf", "Discovery", 12);
-        revista2.agregarAutor(natgeo);
-        controlador.registrarMaterial(revista2);
-
-        // 3. Videos
-        Video video1 = new Video(0, "Jurassic Park", 1993, 
-                                "/videos/jurassic.mp4", 127, "MP4");
-        video1.agregarAutor(spielberg);
-        controlador.registrarMaterial(video1);
-
-        Video video2 = new Video(0, "Cien años de cine", 2020, 
-                                "/videos/historia_cine.mp4", 180, "MP4");
-        video2.agregarAutor(spielberg);
-        controlador.registrarMaterial(video2);
-
-        // 4. Audios
-        Audio audio1 = new Audio(0, "Sinfonía No. 5", 1808, 
-                                "/audios/sinfonia5.mp3", 45, "MP3");
-        audio1.agregarAutor(beethoven);
-        controlador.registrarMaterial(audio1);
-
-        Audio audio2 = new Audio(0, "Cien melodías clásicas", 2022, 
-                                "/audios/melodias.mp3", 120, "MP3");
-        audio2.agregarAutor(beethoven);
-        controlador.registrarMaterial(audio2);
-
-        System.out.println("\nDatos de prueba cargados:");
-        System.out.println("- 4 autores diferentes");
-        System.out.println("- 7 materiales:");
-        System.out.println("  * 1 libro");
-        System.out.println("  * 2 revistas");
-        System.out.println("  * 2 videos");
-        System.out.println("  * 2 audios");
-        
-        System.out.println("\nEjemplos de búsqueda:");
-        System.out.println("1. Búsqueda por título parcial:");
-        System.out.println("   - 'Cien' (4 materiales diferentes)");
-        System.out.println("   - 'National' (1 revista)");
-        
-        System.out.println("\n2. Búsqueda por título exacto:");
-        System.out.println("   - 'Sinfonía No. 5' (1 audio)");
-        System.out.println("   - 'Jurassic Park' (1 video)");
-        
-        System.out.println("\n3. Búsqueda por autor parcial:");
-        System.out.println("   - 'Steven' (2 videos)");
-        System.out.println("   - 'National' (2 revistas)");
-        
-        System.out.println("\n4. Búsqueda por autor exacto:");
-        System.out.println("   - 'Ludwig van Beethoven' (2 audios)");
-        System.out.println("   - 'Steven Spielberg' (2 videos)");
-    }
-    
-    // Método para imprimir tabla, reutilizable
-    private static void imprimirTablaMateriales(List<MaterialBiblioteca> materiales) {
-        if (materiales.isEmpty()) {
-            System.out.println("No hay materiales para mostrar.");
-            return;
-        }
-
-        // Encabezados
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-4s | %-30s | %-25s | %-4s | %-10s | %-10s | %-30s%n",
-                          "ID", "Título", "Autor(es)", "Año", "Tipo", "Estado", "Ruta de archivo");
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-
-        // Filas con datos
-        for (MaterialBiblioteca m : materiales) {
-            String autoresStr = m.getAutores().isEmpty() ? "-" :
-                                String.join(", ", m.getAutores().stream().map(a -> a.getNombre()).toArray(String[]::new));
-            String tipo = m.getClass().getSimpleName();
-            String estado = m.isDisponible() ? "Disponible" : "Prestado";
-
-            System.out.printf("%-4d | %-30s | %-25s | %-4d | %-10s | %-10s | %-30s%n",
-                              m.getId(), m.getTitulo(), autoresStr, m.getAnio(), tipo, estado, m.getRutaArchivo());
-        }
-    }
-
-}
-```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU6CitasApaTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-/**
- *
- * @author jesus
- */
-
-import com.bibliotecadigital.domain.model.*;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-public class HU6CitasApaTest {
-
-    @Test
-    void testCitaApaLibroUnAutor() {
-        // Arrange
-        Autor autor = new Autor(1, "Gabriel García Márquez");
-        Libro libro = new Libro(101, "Cien años de soledad", 1967, "ruta", "Editorial Sudamericana", 496);
-        libro.agregarAutor(autor);
-        
-        // Act
-        String cita = libro.generarCitaAPA();
-        
-        // Assert
-        assertEquals("García Márquez, G. (1967). Cien años de soledad. Editorial Sudamericana.", cita);
-    }
-
-    @Test
-    void testCitaApaLibroMultiplesAutores() {
-        // Arrange
-        Autor autor1 = new Autor(1, "Erich Gamma");
-        Autor autor2 = new Autor(2, "Richard Helm");
-        Libro libro = new Libro(102, "Design Patterns", 1994, "ruta", "Addison-Wesley", 395);
-        libro.agregarAutor(autor1);
-        libro.agregarAutor(autor2);
-
-        // Act
-        String cita = libro.generarCitaAPA();
-
-        // Assert
-        assertEquals("Gamma, E. et al. (1994). Design Patterns. Addison-Wesley.", cita);
-    }
-    
-    @Test
-    void testCitaApaVideo() {
-        // Arrange
-        Autor autor = new Autor(1, "Steven Spielberg");
-        Video video = new Video(201, "Jurassic Park", 1993, "ruta", 127, "MP4");
-        video.agregarAutor(autor);
-
-        // Act
-        String cita = video.generarCitaAPA();
-        
-        // Assert
-        assertEquals("Spielberg, S. (1993). Jurassic Park [Video].", cita);
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU7BibliotecaDigitalTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-/**
- *
- * @author jesus
- */
-
-import com.bibliotecadigital.domain.model.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-public class HU7BibliotecaDigitalTest {
-
-    private Autor autor;
-
-    @BeforeEach
-    void setUp() {
-        autor = new Autor(1, "Autor de Prueba");
-    }
-
-    @Test
-    void testMostrarInformacionLibro() {
-        // Arrange
-        Libro libro = new Libro(101, "El Gran Libro", 2025, "/libros/gran_libro.pdf", "Editorial Test", 350);
-        libro.agregarAutor(autor);
-        libro.setDisponible(false); // Para probar el estado
-
-        // Act
-        String info = libro.mostrarInformacion();
-
-        // Assert
-        assertTrue(info.contains("LIBRO"), "Debe indicar que es un LIBRO.");
-        assertTrue(info.contains("Título: El Gran Libro"), "Debe mostrar el título correcto.");
-        assertTrue(info.contains("Editorial: Editorial Test"), "Debe mostrar la editorial.");
-        assertTrue(info.contains("Disponible: No"), "Debe mostrar el estado 'No disponible'.");
-    }
-
-    @Test
-    void testMostrarInformacionVideo() {
-        // Arrange
-        Video video = new Video(202, "El Gran Video", 2024, "/videos/gran_video.mp4", 125.5f, "MP4");
-        video.agregarAutor(autor);
-
-        // Act
-        String info = video.mostrarInformacion();
-
-        // Assert
-        assertTrue(info.contains("VIDEO"), "Debe indicar que es un VIDEO.");
-        assertTrue(info.contains("Duración: 125.5 minutos"), "Debe mostrar la duración.");
-        assertTrue(info.contains("Formato: MP4"), "Debe mostrar el formato.");
-        assertTrue(info.contains("Disponible: Sí"), "Debe mostrar el estado 'Disponible'.");
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU8BibliotecaDigitalTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-/**
- *
- * @author jesus
- */
-
-import com.bibliotecadigital.domain.model.*;
-import com.bibliotecadigital.domain.service.AuthenticationService;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
-
-public class HU8BibliotecaDigitalTest {
-
-    private InMemoryBibliotecaRepository biblioteca;
-    private AuthenticationService auth;
-
-    @BeforeEach
-    void setUp() {
-        biblioteca = new InMemoryBibliotecaRepository();
-        auth = new AuthenticationService(biblioteca);
-    }
-
-    @Test
-    @DisplayName("Prueba de integración: Flujo completo desde registro hasta devolución.")
-    void testFlujoCompleto_RegistroHastaDevolucion() {
-
-        // === PASO 1: REGISTRO DE USUARIOS Y MATERIALES ===
-        System.out.println("PASO 1: Registrando usuarios y materiales...");
-        biblioteca.registrarUsuario("Admin Carlos", "admin@mail.com", "passAdmin", RolUsuario.ADMINISTRADOR);
-        biblioteca.registrarUsuario("Cliente Ana", "cliente@mail.com", "passCliente", RolUsuario.CLIENTE);
-
-        Autor autor = biblioteca.registrarAutor(new Autor(0, "Autor Integral"));
-        Libro libro = new Libro(0, "Libro Integral", 2025, "/ruta/libro.pdf", "Ed. Test", 150);
-        libro.agregarAutor(autor);
-        Video video = new Video(0, "Video Integral", 2025, "/ruta/video.mp4", 120, "MP4");
-        video.agregarAutor(autor);
-
-        // Simula que el admin registra los materiales
-        biblioteca.registrarMaterial(libro);
-        biblioteca.registrarMaterial(video);
-
-        assertNotNull(biblioteca.buscarUsuarioPorEmail("admin@mail.com"));
-        assertNotNull(biblioteca.buscarMaterialesPorTitulo("Libro Integral").get(0));
-        System.out.println("-> OK: Usuarios y materiales registrados.");
-
-        // === PASO 2: LOGIN Y CREACIÓN DE PRÉSTAMO ===
-        System.out.println("\nPASO 2: Cliente inicia sesión y realiza un préstamo...");
-        Usuario clienteLogueado = auth.login("cliente@mail.com", "passCliente");
-        assertNotNull(clienteLogueado);
-        
-        List<MaterialBiblioteca> materialesAPrestar = List.of(libro, video);
-        Prestamo prestamo = biblioteca.crearPrestamo(clienteLogueado, materialesAPrestar);
-
-        assertNotNull(prestamo);
-        assertEquals(1, biblioteca.listarPrestamos().size());
-        assertFalse(libro.isDisponible(), "El libro debe estar no disponible después del préstamo.");
-        assertFalse(video.isDisponible(), "El video debe estar no disponible después del préstamo.");
-        System.out.println("-> OK: Préstamo creado exitosamente. Materiales no disponibles.");
-
-        // === PASO 3: DEVOLUCIÓN PARCIAL ===
-        System.out.println("\nPASO 3: Cliente realiza una devolución parcial (solo el libro)...");
-        boolean devolucionLibro = biblioteca.registrarDevolucion(prestamo, libro);
-
-        assertTrue(devolucionLibro);
-        assertTrue(libro.isDisponible(), "El libro devuelto debe estar disponible.");
-        assertFalse(video.isDisponible(), "El video no devuelto debe permanecer no disponible.");
-        assertNull(prestamo.getFechaDevolucion(), "El préstamo no debe cerrarse tras una devolución parcial.");
-        System.out.println("-> OK: Devolución parcial correcta.");
-
-        // === PASO 4: DEVOLUCIÓN COMPLETA ===
-        System.out.println("\nPASO 4: Cliente realiza la devolución final (el video)...");
-        boolean devolucionVideo = biblioteca.registrarDevolucion(prestamo, video);
-        
-        assertTrue(devolucionVideo);
-        assertTrue(video.isDisponible(), "El video ahora debe estar disponible.");
-        assertNotNull(prestamo.getFechaDevolucion(), "El préstamo debe tener fecha de devolución al completarse.");
-        System.out.println("-> OK: Devolución completa correcta. Préstamo cerrado.");
-        
-        System.out.println("\n✅ FLUJO DE INTEGRACIÓN COMPLETADO EXITOSAMENTE.");
-    }
-}```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\HU9BibliotecaDigitalTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.RolUsuario;
-import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.domain.service.AuthenticationService;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-
-/**
- *
- * @author Manu-Hdz
- * @author Angel-Mtz
- * Nota: Modifique la creación de Usuarios para que no marqué error
- */
-public class HU9BibliotecaDigitalTest {
-    public static void main(String[] args) {
-        InMemoryBibliotecaRepository biblioteca = new InMemoryBibliotecaRepository();
-        AuthenticationService auth = new AuthenticationService(biblioteca);
-
-        // Registro de usuarios
-        biblioteca.registrarUsuario("Carlos", "carlos@mail.com", "12345", RolUsuario.ADMINISTRADOR);
-        biblioteca.registrarUsuario("Ana", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
-        
-        System.out.println("Usuarios Registrado"
-                + "\n Carlos, carlos@gmail.com, 12345"
-                + "\n Ana, ana@gmail.com, abc123");
-        
-        // Intento de login
-        System.out.println("\n Primer intento de login"
-                + "\n Usuario carlos@gmail.com, password: 12345");
-        
-        Usuario user = auth.login("carlos@mail.com", "12345");
-        System.out.println(user == null ? "Login fallido." : "Login correcto.");
-
-        // Intento con contraseña incorrecta
-        System.out.println("\n Segundo intento de login"
-                + "\n Usuario ana@gmail.com, password: incorrecta");
-        
-        Usuario user2 = auth.login("ana@mail.com", "Incorrecta");
-        System.out.println(user2 == null ? "Login fallido." : "Login correcto.");
-    }
-}
-```
-
-## `BibliotecaDigital\src\test\java\test\java\com\bibliotecadigital\domain\service\IntegralBibliotecaDigitalTest.java`
-
-```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package test.java.com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.Audio;
-import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.model.Libro;
-import com.bibliotecadigital.domain.model.MaterialBiblioteca;
-import com.bibliotecadigital.domain.model.Revista;
-import com.bibliotecadigital.domain.model.RolUsuario;
-import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.domain.model.Video;
-import com.bibliotecadigital.domain.service.AuthenticationService;
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
-import com.bibliotecadigital.presentation.desktop.controllers.MaterialController;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-/**
- *
- * @author Hp EliteBook
- */
-public class IntegralBibliotecaDigitalTest {
-    private static MaterialController controlador;
-    private static BibliotecaService servicio;
-    private static InMemoryBibliotecaRepository biblioteca;
-    private static AuthenticationService auth;
-    private static Scanner sc = new Scanner(System.in);
-    
-    
-    public static void main(String[] args) {
-        biblioteca = new InMemoryBibliotecaRepository();
-        auth = new AuthenticationService(biblioteca);
-        menuInicioSesion();
-        
-    }
-    
-    private static void iniciarMenu() {
-        int opcion = 0;
-        while (opcion != 5) {
-            System.out.println("\n== LISTAR MATERIALES DE LA BIBLIOTECA ==");
-            System.out.println("1. Listar todos los materiales");
-            System.out.println("2. Filtrar por tipo de material");
-            System.out.println("3. Ver Detalle de un Material (por ID)");
-            System.out.println("4. Generar Cita APA (por ID)"); 
-            System.out.println("5. Salir");
-            System.out.print("Opción: ");
-            try {
-                opcion = Integer.parseInt(sc.nextLine());
-                switch (opcion) {
-                    case 1:
-                        listarMateriales();
-                        break;
-                    case 2:
-                        listarMaterialesPorTipo();
-                        break;
-                    case 3:
-                        verDetalleMaterial();
-                        break;
-                    case 4:
-                        generarCita(); 
-                        break;
-                    case 5: 
-                        System.out.println("Volviendo al menú principal...\n"); 
-                        break;
-                    default:
-                        System.out.println("Opción no válida");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Ingrese un número válido");
-            }
-        }
-    }
-    
-    private static void generarCita() {
-        System.out.print("Ingrese el ID del material para generar su cita APA: ");
-        try {
-            int id = Integer.parseInt(sc.nextLine());
-            MaterialBiblioteca material = servicio.buscarMaterialPorId(id);
-
-            if (material != null) {
-                System.out.println("\n--- CITA APA GENERADA ---");
-                // Aquí se invoca el método de la HU
-                System.out.println(material.generarCitaAPA());
-                System.out.println("---------------------------");
-            } else {
-                System.out.println("Error: No se encontró ningún material con el ID " + id + ".");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Error: Por favor, ingrese un ID numérico válido.");
-        }
-    }
-    
-    private static void verDetalleMaterial() {
-        System.out.print("Ingrese el ID del material para ver sus detalles: ");
-        try {
-            int id = Integer.parseInt(sc.nextLine());
-            MaterialBiblioteca material = servicio.buscarMaterialPorId(id);
-
-            if (material != null) {
-                System.out.println("\n--- DETALLES DEL MATERIAL ID: " + id + " ---");
-                // Aquí se utiliza el método que ya estaba implementado
-                System.out.println(material.mostrarInformacion());
-                System.out.println("------------------------------------");
-            } else {
-                System.out.println("Error: No se encontró ningún material con el ID " + id + ".");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Error: Por favor, ingrese un ID numérico válido.");
-        }
-    }
-    
-    private static void listarMateriales() {
-        List<MaterialBiblioteca> lista = servicio.listarMateriales();
-        System.out.println("\n\t\t\t=== Lista de todos los materiales ===");
-        imprimirTablaMateriales(lista);
-    }
-    
-    private static void listarMaterialesPorTipo() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el tipo de material a filtrar (Libro, Revista, Video, Audio): ");
-        String tipo = scanner.nextLine().trim();
-
-        List<MaterialBiblioteca> todos = servicio.listarMateriales(); // lista todo
-        List<MaterialBiblioteca> filtrados = new ArrayList<>();
-
-        for (MaterialBiblioteca m : todos) {
-            if (m.getClass().getSimpleName().equalsIgnoreCase(tipo)) {
-                filtrados.add(m);
-            }
-        }
-
-        if (filtrados.isEmpty()) {
-            System.out.println("No hay materiales de tipo '" + tipo + "'.");
-        } else {
-            System.out.println("\n\t\t\t=== Lista de materiales de tipo " + tipo + " ===");
-            imprimirTablaMateriales(filtrados);
-        }
-    }
-
-    private static void cargarDatosDePrueba() {
-        // Autores
-        Autor garcia = controlador.registrarAutor(new Autor(0, "Gabriel García Márquez"));
-        Autor beethoven = controlador.registrarAutor(new Autor(0, "Ludwig van Beethoven"));
-        Autor natgeo = controlador.registrarAutor(new Autor(0, "National Geographic"));
-        Autor spielberg = controlador.registrarAutor(new Autor(0, "Steven Spielberg"));
-
-        // 1. Libros
-        Libro libro = new Libro(0, "Cien años de soledad", 1967, 
-                               "/libros/cien_anios.pdf", "Sudamericana", 496);
-        libro.agregarAutor(garcia);
-        controlador.registrarMaterial(libro);
-
-        // 2. Revistas
-        Revista revista1 = new Revista(0, "National Geographic: Amazonas", 2023, 
-                                     "/revistas/natgeo_2023.pdf", "National Geographic", 1);
-        revista1.agregarAutor(natgeo);
-        controlador.registrarMaterial(revista1);
-
-        Revista revista2 = new Revista(0, "Cien maravillas del mundo", 2023, 
-                                     "/revistas/maravillas.pdf", "Discovery", 12);
-        revista2.agregarAutor(natgeo);
-        controlador.registrarMaterial(revista2);
-
-        // 3. Videos
-        Video video1 = new Video(0, "Jurassic Park", 1993, 
-                                "/videos/jurassic.mp4", 127, "MP4");
-        video1.agregarAutor(spielberg);
-        controlador.registrarMaterial(video1);
-
-        Video video2 = new Video(0, "Cien años de cine", 2020, 
-                                "/videos/historia_cine.mp4", 180, "MP4");
-        video2.agregarAutor(spielberg);
-        controlador.registrarMaterial(video2);
-
-        // 4. Audios
-        Audio audio1 = new Audio(0, "Sinfonía No. 5", 1808, 
-                                "/audios/sinfonia5.mp3", 45, "MP3");
-        audio1.agregarAutor(beethoven);
-        controlador.registrarMaterial(audio1);
-
-        Audio audio2 = new Audio(0, "Cien melodías clásicas", 2022, 
-                                "/audios/melodias.mp3", 120, "MP3");
-        audio2.agregarAutor(beethoven);
-        controlador.registrarMaterial(audio2);
-
-        System.out.println("\nDatos de prueba cargados:");
-        System.out.println("- 4 autores diferentes");
-        System.out.println("- 7 materiales:");
-        System.out.println("  * 1 libro");
-        System.out.println("  * 2 revistas");
-        System.out.println("  * 2 videos");
-        System.out.println("  * 2 audios");
-        
-        System.out.println("\nEjemplos de búsqueda:");
-        System.out.println("1. Búsqueda por título parcial:");
-        System.out.println("   - 'Cien' (4 materiales diferentes)");
-        System.out.println("   - 'National' (1 revista)");
-        
-        System.out.println("\n2. Búsqueda por título exacto:");
-        System.out.println("   - 'Sinfonía No. 5' (1 audio)");
-        System.out.println("   - 'Jurassic Park' (1 video)");
-        
-        System.out.println("\n3. Búsqueda por autor parcial:");
-        System.out.println("   - 'Steven' (2 videos)");
-        System.out.println("   - 'National' (2 revistas)");
-        
-        System.out.println("\n4. Búsqueda por autor exacto:");
-        System.out.println("   - 'Ludwig van Beethoven' (2 audios)");
-        System.out.println("   - 'Steven Spielberg' (2 videos)");
-    }
-    
-    // Método para imprimir tabla, reutilizable
-    private static void imprimirTablaMateriales(List<MaterialBiblioteca> materiales) {
-        if (materiales.isEmpty()) {
-            System.out.println("No hay materiales para mostrar.");
-            return;
-        }
-
-        // Encabezados
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-4s | %-30s | %-25s | %-4s | %-10s | %-10s | %-30s%n",
-                          "ID", "Título", "Autor(es)", "Año", "Tipo", "Estado", "Ruta de archivo");
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-
-        // Filas con datos
-        for (MaterialBiblioteca m : materiales) {
-            String autoresStr = m.getAutores().isEmpty() ? "-" :
-                                String.join(", ", m.getAutores().stream().map(a -> a.getNombre()).toArray(String[]::new));
-            String tipo = m.getClass().getSimpleName();
-            String estado = m.isDisponible() ? "Disponible" : "Prestado";
-
-            System.out.printf("%-4d | %-30s | %-25s | %-4d | %-10s | %-10s | %-30s%n",
-                              m.getId(), m.getTitulo(), autoresStr, m.getAnio(), tipo, estado, m.getRutaArchivo());
-        }
-    }
-    
-    private static void menuInicioSesion(){
-        //Se registran 2 usuario por defecto
-        int eleccion = 0;
-        while (eleccion != 3){ 
-            eleccion = 0;
-            System.out.println("Bienvenido al sistema de biblioteca"
-                + "\n Que desea realizar? "
-                + "\n 1. Inicio Sesion"
-                + "\n 2. Registrar Nuevo Usuario"
-                + "\n 3. Salir");
-            try{
-                eleccion = Integer.parseInt(sc.nextLine());
-                switch(eleccion){
-                    case 1: inicioSesion(); break;
-                    case 2: registrarUsuario(); break;
-                    case 3: System.exit(0); break;
-                    default: break;
-                }
-            }catch(Exception e){
-                System.out.println("Ingrese valores numericos");
-            }  
-        }
-    }
-    
-    private static void inicioSesion(){
-        biblioteca.registrarUsuario("Carlos Admin", "carlos@mail.com", "12345", RolUsuario.ADMINISTRADOR);
-        biblioteca.registrarUsuario("Ana Cliente", "ana@mail.com", "abc123", RolUsuario.CLIENTE);
-    
-        boolean loginExitoso = false;
-        
-        while(!loginExitoso){
-            System.out.print("Correo del Usuario: ");
-            String email = sc.nextLine();
-            System.out.print("Password: ");
-            String password = sc.nextLine();
-            
-            Usuario user = auth.login(email,password);
-            if(user!= null){ 
-                loginExitoso = true;
-                System.out.println("\n Bienvenido "+ user.getNombre() + " \n");
-                servicio = new InMemoryBibliotecaRepository();
-                controlador = new MaterialController(servicio);
-                cargarDatosDePrueba(); // Carga lo mismo que HU2
-                iniciarMenu();
-            }
-            else System.out.println("Datos Incorrectos");
-        }
-    }
-    
-    private static void registrarUsuario(){
-        String nombre, correo, password;
-        RolUsuario rol = null;
-
-        System.out.println("\n REGISTRO DE UN NUEVO USUARIO");
-        System.out.println("");
-        System.out.print("Nombre: ");
-        nombre = sc.nextLine();
-        System.out.println("Correo: ");
-        correo = sc.nextLine();
-        System.out.println("Password: ");     
-        password = sc.nextLine();
-
-        // Selección de rol
-        System.out.println("Seleccione el rol:");
-        System.out.println("1. Administrador");
-        System.out.println("2. Encargado");
-        System.out.println("3. Cliente");
-        System.out.print("Opción: ");
-
-        try {
-            int opcionRol = Integer.parseInt(sc.nextLine());
-            switch(opcionRol) {
-                case 1: rol = RolUsuario.ADMINISTRADOR; break;
-                case 2: rol = RolUsuario.ENCARGADO; break;
-                case 3: rol = RolUsuario.CLIENTE; break;
-                default: 
-                    System.out.println("Opción inválida, se asignará rol de Cliente");
-                    rol = RolUsuario.CLIENTE;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Opción inválida, se asignará rol de Cliente");
-            rol = RolUsuario.CLIENTE;
-        }
-
-        boolean exito = biblioteca.registrarUsuario(nombre, correo, password, rol);
-        if (exito) {
-            System.out.println("Usuario registrado con rol: " + rol);
-        } else {
-            System.out.println("Error: el usuario ya existe");
-        }
-    }
-    
-    private static void prueba(){
-        System.out.println("Prueba");
-    }
-}
-```
 

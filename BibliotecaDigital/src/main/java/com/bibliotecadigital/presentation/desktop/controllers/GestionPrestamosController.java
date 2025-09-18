@@ -138,15 +138,15 @@ public class GestionPrestamosController {
         // 1. Crear usuarios de prueba si no existen (para garantizar que haya datos)
         // Esto solo se ejecuta la primera vez que se llame al método
         if (servicio.buscarUsuarioPorEmail("admin@biblioteca.com") == null) {
-            servicio.registrarUsuario("Administrador", "admin@biblioteca.com", "admin123", RolUsuario.ADMINISTRADOR);
+            servicio.registrarUsuario(new Usuario ("Administrador", "admin@biblioteca.com", "admin123", RolUsuario.ADMINISTRADOR));
         }
 
         if (servicio.buscarUsuarioPorEmail("cliente@biblioteca.com") == null) {
-            servicio.registrarUsuario("Cliente", "cliente@biblioteca.com", "cliente123", RolUsuario.CLIENTE);
+            servicio.registrarUsuario(new Usuario ("Cliente", "cliente@biblioteca.com", "cliente123", RolUsuario.CLIENTE));
         }
 
         if (servicio.buscarUsuarioPorEmail("encargado@biblioteca.com") == null) {
-            servicio.registrarUsuario("Encargado", "encargado@biblioteca.com", "encargado123", RolUsuario.ENCARGADO);
+            servicio.registrarUsuario(new Usuario ("Encargado", "encargado@biblioteca.com", "encargado123", RolUsuario.ENCARGADO));
         }
 
         // 2. Buscar usuarios conocidos por correo y añadirlos a la lista

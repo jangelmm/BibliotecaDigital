@@ -260,5 +260,10 @@ public class InMemoryBibliotecaRepository implements BibliotecaService {
     public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
         
     }
+
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

@@ -87,9 +87,9 @@ private static void cargarDatosPrueba(BibliotecaService servicio) {
     servicio.registrarMaterial(revista1);
 
     // Crear algunos usuarios con los roles correctos: ADMINISTRADOR, CLIENTE, ENCARGADO
-    servicio.registrarUsuario("Admin", "admin@biblioteca.com", "admin123", RolUsuario.ADMINISTRADOR);
-    servicio.registrarUsuario("Juan Pérez", "juan@ejemplo.com", "clave123", RolUsuario.CLIENTE);
-    servicio.registrarUsuario("Ana García", "ana@ejemplo.com", "clave456", RolUsuario.ENCARGADO);
+    servicio.registrarUsuario(new Usuario ("Admin", "admin@biblioteca.com", "admin123", RolUsuario.ADMINISTRADOR));
+    servicio.registrarUsuario(new Usuario ("Juan Pérez", "juan@ejemplo.com", "clave123", RolUsuario.CLIENTE));
+    servicio.registrarUsuario(new Usuario ("Ana García", "ana@ejemplo.com", "clave456", RolUsuario.ENCARGADO));
 
     // Crear un préstamo para mostrar en la interfaz
     Usuario usuario = servicio.buscarUsuarioPorEmail("juan@ejemplo.com");
