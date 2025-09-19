@@ -15,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -428,5 +431,26 @@ public class GestionMaterialesView extends javax.swing.JFrame implements Gestion
     @Override
     public JFrame getFrame() {
         return this;
+    }
+    
+    @Override
+    public List<Autor> pedirSeleccionAutores(List<Autor> todosLosAutores) {
+        if (todosLosAutores == null || todosLosAutores.isEmpty()) {
+            mostrarMensaje("No hay autores registrados. Por favor, agregue autores primero.");
+            return null;
+        }
+
+        // Convertimos la lista de autores a un array para el JList
+        Autor[] autoresArray = todosLosAutores.toArray(new Autor[0]);
+        JList<Autor> listaAutores = new JList<>(autoresArray);
+        listaAutores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        int resultado = JOptionPane.showConfirmDialog(this, new JScrollPane(listaAutores), 
+                "Seleccione uno o más autores", JOptionPane.OK_CANCEL_OPTION);
+
+        if (resultado == JOptionPane.OK_OPTION) {
+            return listaAutores.getSelectedValuesList();
+        }
+        return null; // El usuario canceló
     }
 }

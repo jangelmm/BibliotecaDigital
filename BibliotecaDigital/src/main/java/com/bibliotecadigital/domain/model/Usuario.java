@@ -57,5 +57,9 @@ public class Usuario {
     public void setEmail(String email) { this.email = email; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     
-    
+    @Override
+    public String toString() {
+        // Devuelve el nombre del usuario, que es lo que quieres mostrar en el ComboBox.
+        return this.nombre;
+    }
 }

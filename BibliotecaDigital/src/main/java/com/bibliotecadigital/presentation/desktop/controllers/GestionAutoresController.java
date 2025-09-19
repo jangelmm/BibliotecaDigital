@@ -10,16 +10,16 @@ package com.bibliotecadigital.presentation.desktop.controllers;
  */
 
 import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.service.BibliotecaService;
+import com.bibliotecadigital.domain.service.AutorRepository;
 import com.bibliotecadigital.presentation.desktop.views.GestionAutoresViewInterface;
 
 public class GestionAutoresController {
 
-    private final BibliotecaService servicio;
+    private final AutorRepository autorRepo;
     private final GestionAutoresViewInterface vista;
 
-    public GestionAutoresController(BibliotecaService servicio, GestionAutoresViewInterface vista) {
-        this.servicio = servicio;
+    public GestionAutoresController(AutorRepository autorRepo, GestionAutoresViewInterface vista) {
+        this.autorRepo = autorRepo;
         this.vista = vista;
         
         // Conectar los listeners de la vista con los métodos de este controlador
@@ -32,13 +32,13 @@ public class GestionAutoresController {
     }
 
     public void cargarAutores() {
-        vista.mostrarAutores(servicio.listarAutores());
+        vista.mostrarAutores(autorRepo.findAll());
     }
 
     public void crearNuevoAutor() {
         String nombre = vista.pedirNuevoNombreAutor("");
         if (nombre != null && !nombre.trim().isEmpty()) {
-            servicio.registrarAutor(new Autor(0, nombre));
+            autorRepo.save(new Autor(0, nombre));
             cargarAutores(); // Refrescar la tabla
             vista.mostrarMensaje("Autor creado exitosamente.");
         }
@@ -54,7 +54,7 @@ public class GestionAutoresController {
         String nuevoNombre = vista.pedirNuevoNombreAutor(autorSeleccionado.getNombre());
         if (nuevoNombre != null && !nuevoNombre.trim().isEmpty()) {
             autorSeleccionado.setNombre(nuevoNombre);
-            servicio.actualizarAutor(autorSeleccionado);
+            autorRepo.save(autorSeleccionado);
             cargarAutores(); // Refrescar la tabla
             vista.mostrarMensaje("Autor actualizado exitosamente.");
         }
@@ -69,7 +69,7 @@ public class GestionAutoresController {
 
         if (vista.confirmarEliminacion(autorSeleccionado.getNombre())) {
             try {
-                servicio.eliminarAutor(autorSeleccionado.getId());
+                autorRepo.deleteById(autorSeleccionado.getId());
                 cargarAutores(); // Refrescar la tabla
                 vista.mostrarMensaje("Autor eliminado exitosamente.");
             } catch (Exception e) {
