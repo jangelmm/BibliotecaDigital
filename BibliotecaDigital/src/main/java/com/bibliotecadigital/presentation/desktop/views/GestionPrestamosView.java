@@ -66,23 +66,18 @@ public class GestionPrestamosView extends javax.swing.JFrame implements GestionP
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         prestamosTable = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        panelBotones = new javax.swing.JPanel();
         btnNuevoPrestamo = new javax.swing.JButton();
         btnFinalizarPrestamo = new javax.swing.JButton();
         btnRefrescar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Préstamos");
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Gestión de Préstamos");
-        getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_START);
-
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane1.setBorder(null);
 
         prestamosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,23 +93,25 @@ public class GestionPrestamosView extends javax.swing.JFrame implements GestionP
         prestamosTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(prestamosTable);
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jScrollPane1);
+
+        panelBotones.setLayout(new java.awt.GridLayout(1, 0));
 
         btnNuevoPrestamo.setText("Nuevo Préstamo");
-        jPanel1.add(btnNuevoPrestamo);
+        panelBotones.add(btnNuevoPrestamo);
 
         btnFinalizarPrestamo.setText("Finalizar Préstamo");
-        jPanel1.add(btnFinalizarPrestamo);
+        panelBotones.add(btnFinalizarPrestamo);
 
         btnRefrescar.setText("Actualizar");
-        jPanel1.add(btnRefrescar);
+        panelBotones.add(btnRefrescar);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(panelBotones);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Implementación de GestionPrestamosViewInterface
+    // Implementación de GespanelBotonesstamosViewInterface
     
     @Override
     public void addNuevoPrestamoListener(ActionListener listener) {
@@ -199,6 +196,8 @@ public class GestionPrestamosView extends javax.swing.JFrame implements GestionP
     public void abrirDialogoNuevoPrestamo() {
         // Aquí pasamos 'this.controller' al constructor del diálogo
         NuevoPrestamoDialog dialog = new NuevoPrestamoDialog(this, this.controller);
+        dialog.setLocationRelativeTo(null);
+        dialog.setSize(1000, 500);
         dialog.setVisible(true);
     }
     
@@ -266,9 +265,8 @@ public class GestionPrestamosView extends javax.swing.JFrame implements GestionP
     private javax.swing.JButton btnFinalizarPrestamo;
     private javax.swing.JButton btnNuevoPrestamo;
     private javax.swing.JButton btnRefrescar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelBotones;
     private javax.swing.JTable prestamosTable;
     // End of variables declaration//GEN-END:variables
 }

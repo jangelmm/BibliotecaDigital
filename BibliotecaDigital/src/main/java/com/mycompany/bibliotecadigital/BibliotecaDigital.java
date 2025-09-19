@@ -11,24 +11,26 @@ package com.mycompany.bibliotecadigital;
 
 import com.bibliotecadigital.presentation.desktop.controllers.MenuController;
 import com.bibliotecadigital.presentation.desktop.views.MenuView;
+import com.formdev.flatlaf.FlatIconColors;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import javax.swing.UIManager;
 
 public class BibliotecaDigital {
 
     public static void main(String[] args) {
-        // 1. El EntityManagerFactory se crea UNA SOLA VEZ
+        try {
+            UIManager.setLookAndFeel(new FlatMacLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("biblioteca-pu");
 
-        // 2. Lanzar la aplicación GUI
+        
         java.awt.EventQueue.invokeLater(() -> {
-            // 3. Instanciar la Vista del Menú
             MenuView menu = new MenuView();
-
-            // 4. Instanciar el Controlador del Menú, pasándole el EMF
             new MenuController(menu, emf);
-
-            // 5. Hacer visible el Menú
             menu.setVisible(true);
         });
     }
