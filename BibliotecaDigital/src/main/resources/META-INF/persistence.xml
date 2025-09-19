@@ -5,18 +5,19 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
         <properties>
-            <property name="jakarta.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:biblioteca.db"/>
-            <property name="jakarta.persistence.jdbc.user" value=""/>
-            <property name="jakarta.persistence.jdbc.password" value=""/>
-            
-            <property name="hibernate.dialect" value="org.hibernate.community.dialect.SQLiteDialect"/>
-            
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-        </properties>
+        <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblioteca_db?serverTimezone=UTC"/>
+
+        <property name="jakarta.persistence.jdbc.user" value="root"/>
+        <property name="jakarta.persistence.jdbc.password" value="password"/>
+
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+
+        <property name="hibernate.hbm2ddl.auto" value="update"/>
+        <property name="hibernate.show_sql" value="true"/>
+        <property name="hibernate.format_sql" value="true"/>
+    </properties>
         
     </persistence-unit>
 </persistence>
