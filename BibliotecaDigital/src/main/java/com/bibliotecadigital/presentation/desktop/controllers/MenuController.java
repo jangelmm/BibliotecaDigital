@@ -30,6 +30,8 @@ public class MenuController {
         GestionAutoresViewInterface vista = new GestionAutoresView();
         new GestionAutoresController(autorRepo, vista);
         vista.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cierra solo esta ventana
+        vista.getFrame().setSize(1000, 500);
+        vista.getFrame().setLocationRelativeTo(null);
         vista.setVisible(true);
     }
     
@@ -39,6 +41,8 @@ public class MenuController {
         GestionMaterialesViewInterface vista = new GestionMaterialesView();
         new GestionMaterialesController(materialRepo, autorRepo, vista);
         vista.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        vista.getFrame().setSize(1000, 500);
+        vista.getFrame().setLocationRelativeTo(null);
         vista.setVisible(true);
     }
     
@@ -47,6 +51,8 @@ public class MenuController {
         GestionUsuariosViewInterface vista = new GestionUsuariosView();
         new GestionUsuariosController(usuarioRepo, vista);
         vista.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        vista.getFrame().setSize(1000, 500);
+        vista.getFrame().setLocationRelativeTo(null);
         vista.setVisible(true);
     }
 
@@ -57,6 +63,8 @@ public class MenuController {
         GestionPrestamosViewInterface vista = new GestionPrestamosView();
         new GestionPrestamosController(prestamoRepo, usuarioRepo, materialRepo, vista);
         vista.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        vista.getFrame().setSize(1000, 500);
+        vista.getFrame().setLocationRelativeTo(null);
         vista.setVisible(true);
     }
 }

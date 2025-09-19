@@ -51,11 +51,14 @@ public class GestionAutoresView extends javax.swing.JFrame implements GestionAut
 
         scrollPanelTabla = new javax.swing.JScrollPane();
         autoresTable = new javax.swing.JTable();
+        panelBotones = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
         editarButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestion Autores");
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
         autoresTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,37 +73,20 @@ public class GestionAutoresView extends javax.swing.JFrame implements GestionAut
         ));
         scrollPanelTabla.setViewportView(autoresTable);
 
+        getContentPane().add(scrollPanelTabla);
+
+        panelBotones.setLayout(new java.awt.GridLayout());
+
         nuevoButton.setText("Nuevo");
+        panelBotones.add(nuevoButton);
 
         editarButton.setText("Editar");
+        panelBotones.add(editarButton);
 
         eliminarButton.setText("Eliminar");
+        panelBotones.add(eliminarButton);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nuevoButton)
-                .addGap(67, 67, 67)
-                .addComponent(editarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(eliminarButton)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(scrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nuevoButton)
-                    .addComponent(editarButton)
-                    .addComponent(eliminarButton))
-                .addGap(0, 38, Short.MAX_VALUE))
-        );
+        getContentPane().add(panelBotones);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,6 +131,7 @@ public class GestionAutoresView extends javax.swing.JFrame implements GestionAut
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
     private javax.swing.JButton nuevoButton;
+    private javax.swing.JPanel panelBotones;
     private javax.swing.JScrollPane scrollPanelTabla;
     // End of variables declaration//GEN-END:variables
 

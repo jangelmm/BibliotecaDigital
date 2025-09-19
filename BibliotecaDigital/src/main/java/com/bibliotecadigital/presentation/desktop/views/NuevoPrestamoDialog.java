@@ -278,8 +278,8 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         materialesDisponiblesTable = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
-        agregarButton = new javax.swing.JButton();
         quitarButton = new javax.swing.JButton();
+        agregarButton = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -292,8 +292,9 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
         setTitle("Nuevo Préstamo");
         setModal(true);
         setSize(new java.awt.Dimension(800, 600));
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel1.setText("Usuario:");
         jPanel2.add(jLabel1);
@@ -302,7 +303,7 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
         usuarioComboBox.setPreferredSize(new java.awt.Dimension(90, 22));
         jPanel2.add(usuarioComboBox);
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
+        jPanel1.add(jPanel2);
 
         jLabel2.setText("Buscar material:");
         jPanel3.add(jLabel2);
@@ -313,11 +314,11 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
         buscarButton.setText("Buscar");
         jPanel3.add(buscarButton);
 
-        jPanel1.add(jPanel3, java.awt.BorderLayout.CENTER);
+        jPanel1.add(jPanel3);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(jPanel1);
 
-        jPanel4.setLayout(new java.awt.GridLayout(1, 3));
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
@@ -341,11 +342,15 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
 
         jPanel4.add(jPanel5);
 
-        agregarButton.setText(">>");
-        jPanel6.add(agregarButton);
+        jPanel6.setMinimumSize(new java.awt.Dimension(155, 20));
+        jPanel6.setPreferredSize(new java.awt.Dimension(100, 37));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         quitarButton.setText("<<");
-        jPanel6.add(quitarButton);
+        jPanel6.add(quitarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 1, -1, -1));
+
+        agregarButton.setText(">>");
+        jPanel6.add(agregarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 29, -1, -1));
 
         jPanel4.add(jPanel6);
 
@@ -371,9 +376,9 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
 
         jPanel4.add(jPanel7);
 
-        getContentPane().add(jPanel4, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel4);
 
-        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel8.setLayout(new java.awt.GridLayout(1, 0));
 
         crearPrestamoButton.setText("Crear Préstamo");
         jPanel8.add(crearPrestamoButton);
@@ -381,7 +386,7 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
         cancelarButton.setText("Cancelar");
         jPanel8.add(cancelarButton);
 
-        getContentPane().add(jPanel8, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(jPanel8);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

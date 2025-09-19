@@ -62,11 +62,14 @@ public class GestionMaterialesView extends javax.swing.JFrame implements Gestion
 
         scrollPanelTabla = new javax.swing.JScrollPane();
         materialesTable = new javax.swing.JTable();
+        panelBotones = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
         editarButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestion de Materiales");
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
         materialesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,45 +84,25 @@ public class GestionMaterialesView extends javax.swing.JFrame implements Gestion
         ));
         scrollPanelTabla.setViewportView(materialesTable);
 
+        getContentPane().add(scrollPanelTabla);
+
+        panelBotones.setLayout(new java.awt.GridLayout());
+
         nuevoButton.setText("Nuevo");
         nuevoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoButtonActionPerformed(evt);
             }
         });
+        panelBotones.add(nuevoButton);
 
         editarButton.setText("Editar");
+        panelBotones.add(editarButton);
 
         eliminarButton.setText("Eliminar");
+        panelBotones.add(eliminarButton);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPanelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nuevoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nuevoButton)
-                    .addComponent(editarButton)
-                    .addComponent(eliminarButton))
-                .addGap(37, 37, 37))
-        );
+        getContentPane().add(panelBotones);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -168,6 +151,7 @@ public class GestionMaterialesView extends javax.swing.JFrame implements Gestion
     private javax.swing.JButton eliminarButton;
     private javax.swing.JTable materialesTable;
     private javax.swing.JButton nuevoButton;
+    private javax.swing.JPanel panelBotones;
     private javax.swing.JScrollPane scrollPanelTabla;
     // End of variables declaration//GEN-END:variables
 

@@ -50,12 +50,14 @@ public class GestionUsuariosView extends javax.swing.JFrame implements GestionUs
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
+        panelBotones = new javax.swing.JPanel();
         agregarButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
         modificarButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestion de Usuarios");
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,49 +72,20 @@ public class GestionUsuariosView extends javax.swing.JFrame implements GestionUs
         ));
         jScrollPane1.setViewportView(tablaUsuarios);
 
+        getContentPane().add(jScrollPane1);
+
+        panelBotones.setLayout(new java.awt.GridLayout());
+
         agregarButton.setText("Agregar ");
+        panelBotones.add(agregarButton);
 
         eliminarButton.setText("Eliminar");
+        panelBotones.add(eliminarButton);
 
         modificarButton.setText("Modificar");
+        panelBotones.add(modificarButton);
 
-        jLabel1.setFont(new java.awt.Font("Roboto SemiBold", 0, 18)); // NOI18N
-        jLabel1.setText("Bienvenido al adminsitrador de Usuarios");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(eliminarButton)
-                        .addGap(106, 106, 106)
-                        .addComponent(modificarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(agregarButton)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(64, 64, 64))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agregarButton)
-                    .addComponent(eliminarButton)
-                    .addComponent(modificarButton))
-                .addGap(30, 30, 30))
-        );
+        getContentPane().add(panelBotones);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,9 +129,9 @@ public class GestionUsuariosView extends javax.swing.JFrame implements GestionUs
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarButton;
     private javax.swing.JButton eliminarButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificarButton;
+    private javax.swing.JPanel panelBotones;
     private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
 
