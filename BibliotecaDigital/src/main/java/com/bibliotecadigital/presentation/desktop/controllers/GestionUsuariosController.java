@@ -5,10 +5,9 @@
 package com.bibliotecadigital.presentation.desktop.controllers;
 
 import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
 import com.bibliotecadigital.presentation.desktop.views.GestionUsuariosView;
 import com.bibliotecadigital.presentation.desktop.views.GestionUsuariosViewInterface;
+import com.bibliotecadigital.domain.service.UsuarioRepository;
 import java.util.List;
 
 /**
@@ -16,26 +15,22 @@ import java.util.List;
  * @author Manu Hdz
  */
 public class GestionUsuariosController {
-    private final BibliotecaService servicio;
-    private final JpaBibliotecaRepository baseDatos;
+    private final UsuarioRepository usuarioRepo; // <-- Cambia a la interfaz específica
     private final GestionUsuariosViewInterface vista;
 
-    public GestionUsuariosController(BibliotecaService servicio, GestionUsuariosViewInterface vista, JpaBibliotecaRepository baseDatos) {
-        this.servicio = servicio;
+    public GestionUsuariosController(UsuarioRepository usuarioRepo, GestionUsuariosViewInterface vista) {
+        this.usuarioRepo = usuarioRepo;
         this.vista = vista;
-        this.baseDatos = baseDatos;
-        // Conectar los listeners de la vista con los métodos de este controlador
+        
         this.vista.addCrearListener(e -> crearUsuario());
         this.vista.addModificarListener(e -> modificarUsuario());
         this.vista.addEliminarListener(e -> eliminarUsuario());
         
-        // Cargar los datos iniciales
         cargarUsuarios();
     }
 
     private void cargarUsuarios() {
-        List<Usuario> usuarios = baseDatos.listarUsuarios();  // 🔹 Obtiene desde la BD
-        vista.mostrarUsuarios(usuarios);                     // 🔹 Muestra en la tabla
+        vista.mostrarUsuarios(usuarioRepo.findAll()); // Usa el nuevo repositorio
     }
     
     private void eliminarUsuario() {
@@ -43,7 +38,7 @@ public class GestionUsuariosController {
 
     if (seleccionado != null && vista.confirmarEliminacion(seleccionado.getNombre())) {
         // Llamamos al servicio para eliminar de la BD
-        baseDatos.eliminarUsuario(seleccionado);
+        usuarioRepo.delete(seleccionado);
 
         // Refrescamos la tabla
         cargarUsuarios();
@@ -56,23 +51,20 @@ public class GestionUsuariosController {
     
     private void crearUsuario() {
         GestionUsuariosView.NuevoUsuarioDialog dialog = ((GestionUsuariosView) vista).new NuevoUsuarioDialog(vista.getFrame());
-        
-        dialog.setVisible(true); // bloquea hasta cerrar
+        dialog.setVisible(true);
 
         Usuario nuevo = dialog.getUsuarioCreado();
-        if(nuevo != null) {
-            boolean agregado = false;
+        if (nuevo != null) {
             try {
-                agregado = baseDatos.registrarUsuario(nuevo);
-            } catch(Exception ex) {
-                vista.mostrarMensaje("Error al agregar usuario: " + ex.getMessage());
-            }
 
-            if(agregado) {
+                usuarioRepo.save(nuevo);
+
                 vista.mostrarMensaje("Usuario agregado correctamente");
                 cargarUsuarios(); // refresca tabla desde BD
-            } else {
-                vista.mostrarMensaje("No se pudo agregar usuario. ¿Email duplicado?");
+
+            } catch (Exception ex) {
+                // Capturar excepciones de la BD, como un email duplicado
+                vista.mostrarMensaje("No se pudo agregar usuario. ¿Email duplicado? Error: " + ex.getMessage());
             }
         }
     }
@@ -87,7 +79,7 @@ public class GestionUsuariosController {
             Usuario editado = dialog.getUsuarioEditado();
             if (editado != null) {
                 // Actualizamos en la BD
-                baseDatos.actualizarUsuario(editado);
+                usuarioRepo.save(editado);
 
                 // Refrescamos la tabla
                 cargarUsuarios();

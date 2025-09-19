@@ -4,13 +4,14 @@
  */
 package com.bibliotecadigital.presentation.desktop.controllers;
 
+import com.bibliotecadigital.domain.service.AutorRepository;
+import com.bibliotecadigital.domain.service.MaterialRepository;
 import com.bibliotecadigital.domain.model.Audio;
 import com.bibliotecadigital.domain.model.Autor;
 import com.bibliotecadigital.domain.model.Libro;
 import com.bibliotecadigital.domain.model.MaterialBiblioteca;
 import com.bibliotecadigital.domain.model.Revista;
 import com.bibliotecadigital.domain.model.Video;
-import com.bibliotecadigital.domain.service.BibliotecaService;
 import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesViewInterface;
 import java.util.List;
 
@@ -20,24 +21,25 @@ import java.util.List;
  */
 public class GestionMaterialesController {
     
-    private final BibliotecaService servicio;
+    private final MaterialRepository materialRepo;
+    private final AutorRepository autorRepo;
     private final GestionMaterialesViewInterface vista;
 
-    public GestionMaterialesController(BibliotecaService servicio, GestionMaterialesViewInterface vista) {
-        this.servicio = servicio;
+    // El constructor ahora pide los repositorios específicos que necesita
+    public GestionMaterialesController(MaterialRepository materialRepo, AutorRepository autorRepo, GestionMaterialesViewInterface vista) {
+        this.materialRepo = materialRepo;
+        this.autorRepo = autorRepo;
         this.vista = vista;
         
-        // Conectar los listeners de la vista con los métodos de este controlador
         this.vista.addNuevoListener(e -> crearNuevoMaterial());
         this.vista.addEditarListener(e -> editarMaterialSeleccionado());
         this.vista.addEliminarListener(e -> eliminarMaterialSeleccionado());
         
-        // Cargar los datos iniciales
         cargarMateriales();
     }
 
     public void cargarMateriales() {
-        vista.mostrarMateriales(servicio.listarMateriales());
+        vista.mostrarMateriales(materialRepo.findAll());
     }
 
     public void crearNuevoMaterial() {
@@ -47,7 +49,13 @@ public class GestionMaterialesController {
         int anio = vista.pedirAnioMaterial(0);
         String rutaArchivo = vista.pedirRutaArchivo("");
         boolean disponible = true; // disponible por default
-        List<Integer> autorIds = vista.pedirIdsAutores( ); // por ejemplo: [1, 2, 5]
+        
+        // --- NUEVO FLUJO PARA AUTORES ---
+        List<Autor> autoresSeleccionados = vista.pedirSeleccionAutores(autorRepo.findAll());
+        if (autoresSeleccionados == null || autoresSeleccionados.isEmpty()) {
+            vista.mostrarMensaje("La selección de autores fue cancelada o está vacía. No se creó el material.");
+            return;
+        }
 
         MaterialBiblioteca material = null;
 
@@ -85,8 +93,9 @@ public class GestionMaterialesController {
         System.out.println("Creando material tipo: " + tipo);
 
         if (material != null) {
-            material.setDisponible(disponible); // establecemos estado
-            servicio.registrarMaterialConAutores(material, autorIds);
+            material.setAutores(autoresSeleccionados);
+            // Usa el método 'save' que ahora es más potente
+            materialRepo.save(material); 
             cargarMateriales();
             vista.mostrarMensaje("Material creado exitosamente.");
         }
@@ -149,7 +158,7 @@ public class GestionMaterialesController {
         }
 
         // Guardar cambios
-        servicio.actualizarMaterial(materialSeleccionado);
+        materialRepo.save(materialSeleccionado);
         cargarMateriales(); // Refrescar la tabla
         vista.mostrarMensaje("Material actualizado exitosamente.");
 
@@ -164,7 +173,7 @@ public class GestionMaterialesController {
 
         if (vista.confirmarEliminacion(materialSeleccionado.getTitulo())) {
             try {
-                servicio.eliminarMaterial(materialSeleccionado.getId());
+                materialRepo.deleteById(materialSeleccionado.getId());
                 cargarMateriales(); // Refrescar la tabla
                 vista.mostrarMensaje("Material eliminado exitosamente.");
             } catch (Exception e) {

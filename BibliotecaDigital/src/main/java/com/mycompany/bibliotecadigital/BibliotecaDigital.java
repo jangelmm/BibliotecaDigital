@@ -9,38 +9,27 @@ package com.mycompany.bibliotecadigital;
  * @author jesus
  */
 
-// --- IMPORTS NECESARIOS ---
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
-import com.bibliotecadigital.presentation.desktop.controllers.GestionAutoresController;
-import com.bibliotecadigital.presentation.desktop.controllers.GestionMaterialesController;
-import com.bibliotecadigital.presentation.desktop.views.GestionAutoresView; // <-- Asegúrate de importar la clase concreta
-import com.bibliotecadigital.presentation.desktop.views.GestionAutoresViewInterface;
-import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesView;
-import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesViewInterface;
+import com.bibliotecadigital.presentation.desktop.controllers.MenuController;
+import com.bibliotecadigital.presentation.desktop.views.MenuView;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 public class BibliotecaDigital {
 
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> {
-            // 1. Instanciar el Repositorio (Modelo)
-            BibliotecaService servicio = new JpaBibliotecaRepository();
+        // 1. El EntityManagerFactory se crea UNA SOLA VEZ
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("biblioteca-pu");
 
-            // 2. Instanciar la Vista
-            // Se crea un objeto de la clase CONCRETA (GestionAutoresView)...
-            // ...y se asigna a una variable del tipo de la INTERFAZ.
-            // Esta es la mejor práctica.
-            GestionAutoresViewInterface vistaAutores = new GestionAutoresView();
-            GestionMaterialesViewInterface vistaMateriales= new GestionMaterialesView();
-            
-            // 3. Instanciar el Controlador, inyectando Modelo y Vista
-            new GestionAutoresController(servicio, vistaAutores);
-            new GestionMaterialesController(servicio, vistaMateriales);
-            
-            // 4. Hacer visible la GUI
-            // El método setVisible debe ser parte de tu interfaz
-            vistaAutores.setVisible(true);
-            vistaMateriales.setVisible(true); 
+        // 2. Lanzar la aplicación GUI
+        java.awt.EventQueue.invokeLater(() -> {
+            // 3. Instanciar la Vista del Menú
+            MenuView menu = new MenuView();
+
+            // 4. Instanciar el Controlador del Menú, pasándole el EMF
+            new MenuController(menu, emf);
+
+            // 5. Hacer visible el Menú
+            menu.setVisible(true);
         });
     }
 }

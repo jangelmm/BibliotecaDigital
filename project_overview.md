@@ -21,11 +21,16 @@ BibliotecaDigital
 │   │       │       │   │   │   └── Video.java
 │   │       │       │   │   └── service
 │   │       │       │   │       ├── AuthenticationService.java
-│   │       │       │   │       └── BibliotecaService.java
+│   │       │       │   │       ├── AutorRepository.java
+│   │       │       │   │       ├── MaterialRepository.java
+│   │       │       │   │       ├── PrestamoRepository.java
+│   │       │       │   │       └── UsuarioRepository.java
 │   │       │       │   ├── infrastructure
 │   │       │       │   │   └── persistence
-│   │       │       │   │       ├── InMemoryBibliotecaRepository.java
-│   │       │       │   │       └── JpaBibliotecaRepository.java
+│   │       │       │   │       ├── JpaAutorRepository.java
+│   │       │       │   │       ├── JpaMaterialRepository.java
+│   │       │       │   │       ├── JpaPrestamoRepository.java
+│   │       │       │   │       └── JpaUsuarioRepository.java
 │   │       │       │   └── presentation
 │   │       │       │       └── desktop
 │   │       │       │           ├── controllers
@@ -33,7 +38,7 @@ BibliotecaDigital
 │   │       │       │           │   ├── GestionMaterialesController.java
 │   │       │       │           │   ├── GestionPrestamosController.java
 │   │       │       │           │   ├── GestionUsuariosController.java
-│   │       │       │           │   └── MaterialController.java
+│   │       │       │           │   └── MenuController.java
 │   │       │       │           └── views
 │   │       │       │               ├── GestionAutoresView.form
 │   │       │       │               ├── GestionAutoresView.java
@@ -47,6 +52,7 @@ BibliotecaDigital
 │   │       │       │               ├── GestionUsuariosView.form
 │   │       │       │               ├── GestionUsuariosView.java
 │   │       │       │               ├── GestionUsuariosViewInterface.java
+│   │       │       │               ├── MenuView.java
 │   │       │       │               ├── NuevoPrestamoDialog.form
 │   │       │       │               └── NuevoPrestamoDialog.java
 │   │       │       └── mycompany
@@ -73,12 +79,18 @@ BibliotecaDigital
 │   │   │       │   │   │   ├── Usuario.class
 │   │   │       │   │   │   └── Video.class
 │   │   │       │   │   └── service
+│   │   │       │   │       ├── AuthenticationService$1.class
 │   │   │       │   │       ├── AuthenticationService.class
-│   │   │       │   │       └── BibliotecaService.class
+│   │   │       │   │       ├── AutorRepository.class
+│   │   │       │   │       ├── MaterialRepository.class
+│   │   │       │   │       ├── PrestamoRepository.class
+│   │   │       │   │       └── UsuarioRepository.class
 │   │   │       │   ├── infrastructure
 │   │   │       │   │   └── persistence
-│   │   │       │   │       ├── InMemoryBibliotecaRepository.class
-│   │   │       │   │       └── JpaBibliotecaRepository.class
+│   │   │       │   │       ├── JpaAutorRepository.class
+│   │   │       │   │       ├── JpaMaterialRepository.class
+│   │   │       │   │       ├── JpaPrestamoRepository.class
+│   │   │       │   │       └── JpaUsuarioRepository.class
 │   │   │       │   └── presentation
 │   │   │       │       └── desktop
 │   │   │       │           ├── controllers
@@ -86,7 +98,7 @@ BibliotecaDigital
 │   │   │       │           │   ├── GestionMaterialesController.class
 │   │   │       │           │   ├── GestionPrestamosController.class
 │   │   │       │           │   ├── GestionUsuariosController.class
-│   │   │       │           │   └── MaterialController.class
+│   │   │       │           │   └── MenuController.class
 │   │   │       │           └── views
 │   │   │       │               ├── GestionAutoresView$1.class
 │   │   │       │               ├── GestionAutoresView$2.class
@@ -111,6 +123,7 @@ BibliotecaDigital
 │   │   │       │               ├── GestionUsuariosView.class
 │   │   │       │               ├── GestionUsuariosView.form
 │   │   │       │               ├── GestionUsuariosViewInterface.class
+│   │   │       │               ├── MenuView.class
 │   │   │       │               ├── NuevoPrestamoDialog$1.class
 │   │   │       │               ├── NuevoPrestamoDialog$2.class
 │   │   │       │               ├── NuevoPrestamoDialog.class
@@ -144,7 +157,8 @@ BibliotecaDigital
 │   │   └── hu8.md
 │   ├── Sprints
 │   │   ├── S1.md
-│   │   └── S2.md
+│   │   ├── S2.md
+│   │   └── S3.md
 │   ├── DesignThinking.md
 │   ├── LearnStartup.md
 │   ├── ProductBacklog.md
@@ -159,138 +173,6 @@ BibliotecaDigital
 
 ```text
 /BibliotecaDigital/target/
-```
-
-## `script.py`
-
-```python
-import os
-import argparse
-
-# Directorios a ignorar (incluye caches de Python)
-IGNORE_DIRS = {'.web', 'venv', '__pycache__', 'test'}
-
-# Extensiones de archivo permitidas
-ALLOWED_EXTS = {'.py', '.java', '.cpp', '.c'}
-
-# Archivos específicos a incluir siempre (aunque empiecen con '.'
-# o tengan extensión fuera de ALLOWED_EXTS)
-INCLUDED_FILES = {'requirements.txt', 'rxconfig.py', '.gitignore'}
-
-# Prefijos para el tree
-TREE_PREFIXES = {
-    'branch': '├── ',
-    'last':   '└── ',
-    'indent': '    ',
-    'pipe':   '│   '
-}
-
-
-def build_tree(root_path):
-    """
-    Genera una lista de líneas representando la estructura de directorios,
-    ignorando IGNORE_DIRS, pero incluyendo archivos en INCLUDED_FILES.
-    """
-    tree_lines = []
-
-    def _tree(dir_path, prefix=''):
-        entries = sorted(os.listdir(dir_path))
-        # Filtrar: ignora los directorios deseados; oculta dot-files salvo INCLUDED_FILES
-        entries = [
-            e for e in entries
-            if e not in IGNORE_DIRS
-               and (not e.startswith('.') or e in INCLUDED_FILES)
-        ]
-
-        dirs = [e for e in entries if os.path.isdir(os.path.join(dir_path, e))]
-        files = [e for e in entries if os.path.isfile(os.path.join(dir_path, e))]
-        total = len(dirs) + len(files)
-
-        for idx, name in enumerate(dirs + files):
-            path = os.path.join(dir_path, name)
-            connector = TREE_PREFIXES['last'] if idx == total - 1 else TREE_PREFIXES['branch']
-            tree_lines.append(f"{prefix}{connector}{name}")
-            if os.path.isdir(path):
-                extension = TREE_PREFIXES['indent'] if idx == total - 1 else TREE_PREFIXES['pipe']
-                _tree(path, prefix + extension)
-
-    tree_lines.append(os.path.basename(root_path) or root_path)
-    _tree(root_path)
-    return tree_lines
-
-
-def collect_files(root_path):
-    """
-    Recorre el árbol e incluye:
-    - Archivos con extensiones en ALLOWED_EXTS
-    - Archivos listados en INCLUDED_FILES (en cualquier carpeta)
-    """
-    paths = []
-    for dirpath, dirnames, filenames in os.walk(root_path):
-        # Excluir carpetas no deseadas
-        dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
-
-        for fname in sorted(filenames):
-            rel = os.path.relpath(os.path.join(dirpath, fname), root_path)
-            ext = os.path.splitext(fname)[1]
-            if ext in ALLOWED_EXTS or fname in INCLUDED_FILES:
-                paths.append(os.path.join(dirpath, fname))
-
-    return paths
-
-
-def ext_to_lang(ext):
-    """Mapea extensión de archivo a lenguaje para Markdown."""
-    return {
-        '.py': 'python',
-        '.java': 'java',
-        '.cpp': 'cpp',
-        '.c': 'c',
-        '.txt': 'text',
-        '': 'text'   # Para archivos como .gitignore
-    }.get(ext, 'text')
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Genera un Markdown con la estructura tipo tree y el código fuente.")
-    parser.add_argument(
-        'output', nargs='?', default='project_overview.md',
-        help='Nombre del archivo Markdown de salida. (default: project_overview.md)')
-    args = parser.parse_args()
-
-    root = os.getcwd()
-    tree_lines = build_tree(root)
-    code_files = collect_files(root)
-
-    with open(args.output, 'w', encoding='utf-8') as md:
-        # Título
-        md.write("# Estructura del proyecto\n\n")
-
-        # Árbol de directorios
-        md.write("```\n")
-        md.write("\n".join(tree_lines))
-        md.write("\n```\n\n")
-
-        # Contenido de cada archivo
-        for path in code_files:
-            rel_path = os.path.relpath(path, root)
-            ext = os.path.splitext(path)[1]
-            lang = ext_to_lang(ext)
-            md.write(f"## `{rel_path}`\n\n")
-            md.write(f"```{lang}\n")
-            try:
-                with open(path, 'r', encoding='utf-8') as f:
-                    md.write(f.read())
-            except Exception as e:
-                md.write(f"# Error al leer el archivo: {e}\n")
-            md.write("```\n\n")
-
-    print(f"Archivo Markdown generado: {args.output}")
-
-
-if __name__ == '__main__':
-    main()
 ```
 
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\model\Audio.java`
@@ -642,25 +524,45 @@ import java.util.List;
 
 @Entity
 public class Prestamo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuario_id") 
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @ManyToMany(fetch = FetchType.EAGER) // Un préstamo tiene MUCHOS materiales
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "prestamo_material",
         joinColumns = @JoinColumn(name = "prestamo_id"),
         inverseJoinColumns = @JoinColumn(name = "material_id")
     )
     private List<MaterialBiblioteca> materiales;
+    
     private LocalDate fechaPrestamo;
-    private LocalDate fechaDevolucion; // Puede ser nula hasta que se devuelva todo
+    private LocalDate fechaDevolucion;
 
+    /**
+     * Constructor vacío, OBLIGATORIO para JPA.
+     */
     public Prestamo() {
-        
     }
+
+    /**
+     * CONSTRUCTOR NUEVO: Para crear préstamos donde la BD genera el ID.
+     * Este es el que tu controlador necesita.
+     */
+    public Prestamo(Usuario usuario, List<MaterialBiblioteca> materiales) {
+        this.usuario = usuario;
+        this.materiales = materiales;
+        this.fechaPrestamo = LocalDate.now();
+    }
+    
+    /**
+     * Constructor original, útil para pruebas o casos específicos.
+     */
     public Prestamo(int id, Usuario usuario, List<MaterialBiblioteca> materiales) {
         this.id = id;
         this.usuario = usuario;
@@ -668,30 +570,13 @@ public class Prestamo {
         this.fechaPrestamo = LocalDate.now();
     }
 
-    // Getters
-    public int getId() {
-        return id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public List<MaterialBiblioteca> getMateriales() {
-        return materiales;
-    }
-
-    public LocalDate getFechaPrestamo() {
-        return fechaPrestamo;
-    }
-    
-    public LocalDate getFechaDevolucion() {
-        return fechaDevolucion;
-    }
-    
-    public void setFechaDevolucion(LocalDate fechaDevolucion) {
-        this.fechaDevolucion = fechaDevolucion;
-    }
+    // --- Getters y Setters ---
+    public int getId() { return id; }
+    public Usuario getUsuario() { return usuario; }
+    public List<MaterialBiblioteca> getMateriales() { return materiales; }
+    public LocalDate getFechaPrestamo() { return fechaPrestamo; }
+    public LocalDate getFechaDevolucion() { return fechaDevolucion; }
+    public void setFechaDevolucion(LocalDate fechaDevolucion) { this.fechaDevolucion = fechaDevolucion; }
 }```
 
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\model\Revista.java`
@@ -918,41 +803,45 @@ public class Video extends MaterialBiblioteca {
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\service\AuthenticationService.java`
 
 ```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.bibliotecadigital.domain.service;
 
 import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
+import java.util.Optional; // Importar Optional
 
-/**
- *
- * @author Manu-hdz
- * @author Jesus-Mtz
- */
 public class AuthenticationService {
-    private InMemoryBibliotecaRepository biblioteca;
+    
+    // 1. La dependencia ahora es contra la INTERFAZ, no la clase concreta.
+    private final UsuarioRepository usuarioRepo;
 
-    public AuthenticationService(InMemoryBibliotecaRepository biblioteca) {
-        this.biblioteca = biblioteca;
+    // 2. El constructor ahora pide un UsuarioRepository. Esto se llama Inyección de Dependencias.
+    public AuthenticationService(UsuarioRepository usuarioRepo) {
+        this.usuarioRepo = usuarioRepo;
     }
 
-    public Usuario login(String email, String password) {
-        Usuario usuario = biblioteca.buscarUsuarioPorEmail(email);
-        if (usuario != null && usuario.verificarPassword(password)) {
-            return usuario; // login correcto
-        }
-        return null; // login fallido
+    /**
+     * Intenta autenticar a un usuario.
+     * @param email El email del usuario.
+     * @param password La contraseña en texto plano.
+     * @return Un Optional que contiene al Usuario si el login es exitoso, o un Optional vacío si falla.
+     */
+    public Optional<Usuario> login(String email, String password) {
+        // 3. Usamos el nuevo repositorio y manejamos el Optional.
+        Optional<Usuario> usuarioOpt = usuarioRepo.findByEmail(email);
+
+        // 4. Lógica moderna y segura con map y filter de Optional.
+        return usuarioOpt.filter(usuario -> usuario.verificarPassword(password));
     }
     
+    /**
+     * Verifica si un usuario tiene permiso para una funcionalidad.
+     * (Este método no cambia, pero es bueno mantenerlo aquí).
+     */
     public boolean tienePermiso(Usuario usuario, String funcionalidad) {
         if (usuario == null) return false;
         
         switch(usuario.getRol()) {
             case ADMINISTRADOR:
-                return true; // Los administradores tienen acceso a todo
+                return true; // Acceso total
             case ENCARGADO:
                 return !funcionalidad.equals("configuracion_sistema");
             case CLIENTE:
@@ -965,324 +854,110 @@ public class AuthenticationService {
     }
 }```
 
-## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\service\BibliotecaService.java`
-
-```java
-package com.bibliotecadigital.domain.service;
-
-import com.bibliotecadigital.domain.model.*;
-import java.util.List;
-
-public interface BibliotecaService {
-    // Métodos para materiales
-    MaterialBiblioteca registrarMaterial(MaterialBiblioteca material);
-    MaterialBiblioteca buscarMaterialPorId(int id);
-    List<MaterialBiblioteca> listarMateriales();
-    List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo);
-    List<MaterialBiblioteca> buscarMaterialesPorAutor(String autor);
-    MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material);
-    void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds);
-    void eliminarMaterial(int id);
-    
-    // Métodos para autores
-    Autor registrarAutor(Autor autor);
-    Autor buscarAutorPorId(int id);
-    List<Autor> listarAutores();
-    Autor actualizarAutor(Autor autor);
-    void eliminarAutor(int id);
-    
-    // Métodos para usuarios
-    boolean registrarUsuario(Usuario usuario);
-    Usuario buscarUsuarioPorEmail(String email);
-    List<Usuario> listarUsuarios();
-    boolean actualizarRolUsuario(String email, RolUsuario nuevoRol);
-    void eliminarUsuario(Usuario usuario);
-    
-    // Métodos de validación
-    boolean validarMaterial(MaterialBiblioteca material);
-    
-    // Métodos para préstamos
-    Prestamo crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales);
-    List<Prestamo> listarPrestamos();
-    
-    // Método para devoluciones
-    boolean registrarDevolucion(Prestamo prestamo, MaterialBiblioteca material);
-}```
-
-## `BibliotecaDigital\src\main\java\com\bibliotecadigital\infrastructure\persistence\InMemoryBibliotecaRepository.java`
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\service\AutorRepository.java`
 
 ```java
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bibliotecadigital.infrastructure.persistence;
+package com.bibliotecadigital.domain.service;
 
-import com.bibliotecadigital.domain.model.*; // Importa todos los modelos
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import java.time.LocalDate;
-import java.util.ArrayList;
+/**
+ *
+ * @author jesus
+ */
+
+import com.bibliotecadigital.domain.model.Autor;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Optional;
 
-public class InMemoryBibliotecaRepository implements BibliotecaService {
-    private List<MaterialBiblioteca> materiales;
-    private List<Autor> autores;
-    private AtomicInteger materialIdCounter;
-    private AtomicInteger autorIdCounter;
-    private List<Usuario> usuarios;
-    private List<Prestamo> prestamos; 
-    private AtomicInteger prestamoIdCounter; 
-    
-    public InMemoryBibliotecaRepository() {
-        this.materiales = new ArrayList<>();
-        this.autores = new ArrayList<>();
-        this.materialIdCounter = new AtomicInteger(1);
-        this.autorIdCounter = new AtomicInteger(1);
-        this.usuarios = new ArrayList<>();
-        this.prestamos = new ArrayList<>();
-        this.prestamoIdCounter = new AtomicInteger(1);
-    }
-    
-    @Override
-    public MaterialBiblioteca registrarMaterial(MaterialBiblioteca material) {
-        if (!validarMaterial(material)) {
-            throw new IllegalArgumentException("Datos del material incompletos o inválidos");
-        }
-        
-        // Asignar ID único si no tiene uno
-        if (material.getId() == 0) {
-            material.setId(materialIdCounter.getAndIncrement());
-        }
-        
-        materiales.add(material);
-        return material;
-    }
-    
-    @Override
-    public MaterialBiblioteca buscarMaterialPorId(int id) {
-        return materiales.stream()
-                .filter(m -> m.getId() == id)
-                .findFirst()
-                .orElse(null);
-    }
-    
-    @Override
-    public List<MaterialBiblioteca> listarMateriales() {
-        return new ArrayList<>(materiales);
-    }
-    
-    @Override
-    public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
-        if (titulo == null || titulo.trim().isEmpty()) {
-            return new ArrayList<>();
-        }
-        
-        List<MaterialBiblioteca> resultados = new ArrayList<>();
-        String tituloBusqueda = titulo.toLowerCase().trim();
-        
-        for (MaterialBiblioteca material : materiales) {
-            if (material.getTitulo().toLowerCase().contains(tituloBusqueda)) {
-                resultados.add(material);
-            }
-        }
-        return resultados;
-    }
-    
-    @Override
-    public List<MaterialBiblioteca> buscarMaterialesPorAutor(String autor) {
-        if (autor == null || autor.trim().isEmpty()) {
-            return new ArrayList<>();
-        }
-        
-        List<MaterialBiblioteca> resultados = new ArrayList<>();
-        String autorBusqueda = autor.toLowerCase().trim();
-        
-        for (MaterialBiblioteca material : materiales) {
-            for (Autor a : material.getAutores()) {
-                if (a.getNombre().toLowerCase().contains(autorBusqueda)) {
-                    resultados.add(material);
-                    break;
-                }
-            }
-        }
-        return resultados;
-    }
-    
-    @Override
-    public Autor registrarAutor(Autor autor) {
-        if (autor.getNombre() == null || autor.getNombre().trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre del autor es obligatorio");
-        }
-        
-        // Asignar ID único si no tiene uno
-        if (autor.getId() == 0) {
-            autor.setId(autorIdCounter.getAndIncrement());
-        }
-        
-        autores.add(autor);
-        return autor;
-    }
-    
-    @Override
-    public Autor buscarAutorPorId(int id) {
-        return autores.stream()
-                .filter(a -> a.getId() == id)
-                .findFirst()
-                .orElse(null);
-    }
-    
-    @Override
-    public List<Autor> listarAutores() {
-        return new ArrayList<>(autores);
-    }
-    
-    @Override
-    public boolean validarMaterial(MaterialBiblioteca material) {
-        if (material == null) return false;
-        if (material.getTitulo() == null || material.getTitulo().trim().isEmpty()) return false;
-        if (material.getAnio() <= 0) return false;
-        if (material.getRutaArchivo() == null || material.getRutaArchivo().trim().isEmpty()) return false;
-        if (material.getAutores() == null || material.getAutores().isEmpty()) return false;
-        return true;
-    }
-    
-    @Override
-    public boolean registrarUsuario(Usuario usuario) {
-        for (Usuario u : usuarios) {
-            if (u.getEmail().equals(usuario.getEmail())) {
-                return false; // ya existe
-            }
-        }
-        Usuario nuevo = usuario;
-        usuarios.add(nuevo);
-        return true;
-    }
-
-    @Override
-    public List<Usuario> listarUsuarios() {
-        return new ArrayList<>(usuarios);
-    }
-    
-    @Override
-    public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) {
-        for (Usuario u : usuarios) {
-            if (u.getEmail().equals(email)) {
-                u.setRol(nuevoRol);
-                return true;
-            }
-        }
-        return false; // usuario no encontrado
-    }
-
-    @Override
-    public Usuario buscarUsuarioPorEmail(String email) {
-        for (Usuario u : usuarios) {
-            if (u.getEmail().equals(email)) {
-                return u;
-            }
-        }
-        return null;
-    }
-    
-    @Override
-    public Prestamo crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales) {
-        if (usuario == null || materiales == null || materiales.isEmpty()) {
-            throw new IllegalArgumentException("Usuario y lista de materiales no pueden ser nulos o vacíos.");
-        }
-
-        // 1. Validar que todos los materiales estén disponibles
-        for (MaterialBiblioteca material : materiales) {
-            if (!material.isDisponible()) {
-                throw new IllegalStateException("El material '" + material.getTitulo() + "' (ID: " + material.getId() + ") no está disponible.");
-            }
-        }
-
-        // 2. Crear el préstamo
-        Prestamo nuevoPrestamo = new Prestamo(prestamoIdCounter.getAndIncrement(), usuario, materiales);
-        
-        // 3. Actualizar el estado de los materiales
-        for (MaterialBiblioteca material : materiales) {
-            material.setDisponible(false);
-        }
-
-        // 4. Guardar y retornar el préstamo
-        this.prestamos.add(nuevoPrestamo);
-        return nuevoPrestamo;
-    }
-
-    @Override
-    public List<Prestamo> listarPrestamos() {
-        return new ArrayList<>(prestamos);
-    }
-    
-    @Override
-    public boolean registrarDevolucion(Prestamo prestamo, MaterialBiblioteca material) {
-        if (prestamo == null || material == null) {
-            throw new IllegalArgumentException("El préstamo y el material no pueden ser nulos.");
-        }
-
-        // 1. Validar que el material pertenece al préstamo
-        if (!prestamo.getMateriales().contains(material)) {
-            throw new IllegalArgumentException("El material no pertenece al préstamo especificado.");
-        }
-
-        // 2. Validar que el material no haya sido devuelto ya
-        if (material.isDisponible()) {
-            throw new IllegalStateException("El material '" + material.getTitulo() + "' ya figura como disponible.");
-        }
-
-        // 3. Actualizar el estado del material
-        material.setDisponible(true);
-
-        // 4. Verificar si el préstamo se ha completado
-        boolean todosDevueltos = true;
-        for (MaterialBiblioteca m : prestamo.getMateriales()) {
-            if (!m.isDisponible()) {
-                todosDevueltos = false;
-                break;
-            }
-        }
-
-        if (todosDevueltos) {
-            prestamo.setFechaDevolucion(LocalDate.now());
-        }
-
-        return true;
-    }
-    
-    @Override
-    public Autor actualizarAutor(Autor autor) {
-        return null;
-    }
-
-    @Override
-    public void eliminarAutor(int id) {
-        
-    }
-    
-    @Override
-    public MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material) {
-        return null;
-    }
-
-    @Override
-    public void eliminarMaterial(int id) {
-        
-    }
-    
-    public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
-        
-    }
-
-    @Override
-    public void eliminarUsuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+public interface AutorRepository {
+    Autor save(Autor autor);
+    Optional<Autor> findById(int id);
+    List<Autor> findAll();
+    void deleteById(int id);
 }```
 
-## `BibliotecaDigital\src\main\java\com\bibliotecadigital\infrastructure\persistence\JpaBibliotecaRepository.java`
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\service\MaterialRepository.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.domain.service;
+
+/**
+ *
+ * @author jesus
+ */
+
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import java.util.List;
+import java.util.Optional;
+
+public interface MaterialRepository {
+    MaterialBiblioteca save(MaterialBiblioteca material);
+    Optional<MaterialBiblioteca> findById(int id);
+    List<MaterialBiblioteca> findAll();
+    List<MaterialBiblioteca> findByTitulo(String titulo);
+    void deleteById(int id);
+    void saveWithAutores(MaterialBiblioteca material, List<Integer> autorIds);
+}```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\service\PrestamoRepository.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.domain.service;
+
+/**
+ *
+ * @author jesus
+ */
+
+import com.bibliotecadigital.domain.model.Prestamo;
+import java.util.List;
+import java.util.Optional;
+
+public interface PrestamoRepository {
+    Prestamo save(Prestamo prestamo);
+    Optional<Prestamo> findById(int id);
+    List<Prestamo> findAll();
+    // Podrías añadir más métodos específicos aquí, como findByUsuario, etc.
+}```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\domain\service\UsuarioRepository.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.domain.service;
+
+/**
+ *
+ * @author jesus
+ */
+
+import com.bibliotecadigital.domain.model.Usuario;
+import java.util.List;
+import java.util.Optional;
+
+public interface UsuarioRepository {
+    Usuario save(Usuario usuario);
+    Optional<Usuario> findById(Long id);
+    Optional<Usuario> findByEmail(String email);
+    List<Usuario> findAll();
+    void delete(Usuario usuario);
+}```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\infrastructure\persistence\JpaAutorRepository.java`
 
 ```java
 /*
@@ -1294,35 +969,35 @@ package com.bibliotecadigital.infrastructure.persistence;
 /**
  *
  * @author jesus
- * Lo ideal es tener un JPAController por cada Clase en domain.model, sin embargo debido a que ya urge los CRUD, pues se usa una clase DIOS, al simplificar la lógica se conoce como
- * "Patrón de Repositorio"
  */
 
-import com.bibliotecadigital.domain.model.*;
-import com.bibliotecadigital.domain.service.BibliotecaService;
+import com.bibliotecadigital.domain.model.Autor;
+import com.bibliotecadigital.domain.service.AutorRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
-public class JpaBibliotecaRepository implements BibliotecaService {
+public class JpaAutorRepository implements AutorRepository {
 
-    // El EntityManagerFactory es pesado y se crea una sola vez para toda la aplicación.
     private final EntityManagerFactory emf;
 
-    public JpaBibliotecaRepository() {
-        // "biblioteca-pu" es el nombre que definimos en persistence.xml
-        this.emf = Persistence.createEntityManagerFactory("biblioteca-pu");
+    public JpaAutorRepository(EntityManagerFactory emf) {
+        this.emf = emf;
     }
 
-    /**
-     * Mejora de Diseño: Método de utilidad para manejar transacciones.
-     * Esto asegura que cada operación de escritura (guardar, actualizar, borrar)
-     * se ejecute dentro de una transacción segura, con begin, commit y rollback.
-     */
+    // Métodos de utilidad para manejar el EntityManager y las transacciones
+    private <T> T execute(Function<EntityManager, T> action) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return action.apply(em);
+        } finally {
+            em.close();
+        }
+    }
+
     private void executeInsideTransaction(Consumer<EntityManager> action) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -1330,9 +1005,7 @@ public class JpaBibliotecaRepository implements BibliotecaService {
             action.accept(em);
             em.getTransaction().commit();
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
             throw e;
         } finally {
             em.close();
@@ -1340,300 +1013,337 @@ public class JpaBibliotecaRepository implements BibliotecaService {
     }
 
     @Override
-    public MaterialBiblioteca registrarMaterial(MaterialBiblioteca material) {
-        executeInsideTransaction(em -> em.persist(material));
-        return material;
+    public Autor save(Autor autor) {
+        executeInsideTransaction(em -> {
+            if (autor.getId() == 0) {
+                em.persist(autor);
+            } else {
+                em.merge(autor);
+            }
+        });
+        return autor;
     }
 
     @Override
-    public MaterialBiblioteca buscarMaterialPorId(int id) {
+    public Optional<Autor> findById(int id) {
+        return Optional.ofNullable(execute(em -> em.find(Autor.class, id)));
+    }
+
+    @Override
+    public List<Autor> findAll() {
+        return execute(em -> em.createQuery("SELECT a FROM Autor a", Autor.class).getResultList());
+    }
+
+    @Override
+    public void deleteById(int id) {
+        executeInsideTransaction(em -> {
+            // Primero, busca el autor usando el EntityManager de ESTA transacción
+            Autor autorParaBorrar = em.find(Autor.class, id);
+            if (autorParaBorrar != null) {
+                // Ahora sí, borra el objeto que está gestionado ("attached")
+                em.remove(autorParaBorrar);
+            }
+        });
+    }
+}```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\infrastructure\persistence\JpaMaterialRepository.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.infrastructure.persistence;
+
+/**
+ *
+ * @author jesus
+ */
+
+import com.bibliotecadigital.domain.model.Autor;
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
+import com.bibliotecadigital.domain.service.MaterialRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public class JpaMaterialRepository implements MaterialRepository {
+
+    private final EntityManagerFactory emf;
+
+    public JpaMaterialRepository(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
+    // Métodos de utilidad para manejar el EntityManager y las transacciones
+    private <T> T execute(Function<EntityManager, T> action) {
+        EntityManager em = emf.createEntityManager();
+        try { return action.apply(em); } 
+        finally { em.close(); }
+    }
+
+    private void executeInsideTransaction(Consumer<EntityManager> action) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.find(MaterialBiblioteca.class, id);
+            em.getTransaction().begin();
+            action.accept(em);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw e;
         } finally {
             em.close();
         }
     }
-    
-    public void registrarMaterialConAutores(MaterialBiblioteca material, List<Integer> autorIds) {
-        executeInsideTransaction(em -> {
-            // Lista para guardar autores gestionados por Hibernate
-            List<Autor> autoresGestionados = new ArrayList<>();
 
+    @Override
+    public MaterialBiblioteca save(MaterialBiblioteca material) {
+        executeInsideTransaction(em -> {
+            // Re-asociar los autores a la sesión actual de persistencia
+            List<Autor> autoresGestionados = new ArrayList<>();
+            if (material.getAutores() != null) {
+                for (Autor autor : material.getAutores()) {
+                    // Busca la versión "fresca" del autor en la BD y la añade
+                    autoresGestionados.add(em.find(Autor.class, autor.getId()));
+                }
+            }
+            material.setAutores(autoresGestionados);
+
+            // Merge es la operación correcta aquí: inserta si es nuevo, actualiza si existe
+            em.merge(material);
+        });
+        return material;
+    }
+
+    @Override
+    public void saveWithAutores(MaterialBiblioteca material, List<Integer> autorIds) {
+        executeInsideTransaction(em -> {
+            List<Autor> autoresGestionados = new ArrayList<>();
             for (Integer idAutor : autorIds) {
-                Autor autor = em.find(Autor.class, idAutor); // Traemos el autor existente
+                Autor autor = em.find(Autor.class, idAutor);
                 if (autor != null) {
                     autoresGestionados.add(autor);
                 }
             }
-
-            // Asociamos los autores al material
             material.setAutores(autoresGestionados);
-
-            // Persistimos solo el material, Hibernate manejará la relación
             em.persist(material);
         });
     }
 
     @Override
-    public List<MaterialBiblioteca> listarMateriales() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<MaterialBiblioteca> query = em.createQuery("SELECT m FROM MaterialBiblioteca m", MaterialBiblioteca.class);
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
+    public Optional<MaterialBiblioteca> findById(int id) {
+        return Optional.ofNullable(execute(em -> em.find(MaterialBiblioteca.class, id)));
     }
-       
-    // Metodos nuevos para el CRUD de Materiales -------------------------------
+
     @Override
-    public MaterialBiblioteca actualizarMaterial(MaterialBiblioteca material) {
-        final MaterialBiblioteca[] materialAct = new MaterialBiblioteca[1];
-        executeInsideTransaction(em -> {
-            materialAct[0] = em.merge(material);
-        });
-        return materialAct[0];
+    public List<MaterialBiblioteca> findAll() {
+        return execute(em -> em.createQuery("SELECT m FROM MaterialBiblioteca m", MaterialBiblioteca.class).getResultList());
     }
     
     @Override
-    public void eliminarMaterial(int id) {
-        executeInsideTransaction(em -> {
-            MaterialBiblioteca material = em.find(MaterialBiblioteca.class, id);
-            if (material != null) {
-                em.remove(material);
-            }
-        });
-    }
-    // -------------------------------------------------------------------------
-    
-    @Override
-    public boolean registrarUsuario(Usuario usuario) {
-        if (buscarUsuarioPorEmail(usuario.getEmail()) != null) {
-            return false; // email duplicado
-        }
-
-        try {
-            executeInsideTransaction(em -> em.persist(usuario)); // 🔹 persiste el usuario
-            return true;
-        } catch(Exception e) {
-            e.printStackTrace(); // 🔹 opcional: para ver error en consola
-            return false;
-        }
-    }
-
-    @Override
-    public Usuario buscarUsuarioPorEmail(String email) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
-            query.setParameter("email", email);
-            return query.getSingleResult();
-        } catch (jakarta.persistence.NoResultException e) {
-            return null; // No se encontró el usuario
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public Prestamo crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales) {
-        final Prestamo[] nuevoPrestamo = new Prestamo[1];
-        executeInsideTransaction(em -> {
-            // Se asegura de que las entidades estén gestionadas por el EntityManager actual
-            Usuario usuarioPersistido = em.find(Usuario.class, usuario.getId());
-            
-            for (MaterialBiblioteca material : materiales) {
-                if (!material.isDisponible()) {
-                    throw new IllegalStateException("El material '" + material.getTitulo() + "' no está disponible.");
-                }
-                material.setDisponible(false);
-                em.merge(material); // Actualiza el estado del material en la BD
-            }
-
-            Prestamo p = new Prestamo(0, usuarioPersistido, materiales);
-            em.persist(p);
-            nuevoPrestamo[0] = p;
-        });
-        return nuevoPrestamo[0];
-    }
-
-    // ... Aquí irían las implementaciones del resto de métodos de BibliotecaService
-    // (listarPrestamos, registrarDevolucion, registrarAutor, etc.)
-    // siguiendo los mismos patrones.
-
-    @Override
-    public List<Prestamo> listarPrestamos() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            return em.createQuery("SELECT p FROM Prestamo p", Prestamo.class).getResultList();
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public boolean registrarDevolucion(Prestamo prestamo, MaterialBiblioteca material) {
-        executeInsideTransaction(em -> {
-            // Se obtienen las versiones más recientes de la BD
-            Prestamo p = em.find(Prestamo.class, prestamo.getId());
-            MaterialBiblioteca m = em.find(MaterialBiblioteca.class, material.getId());
-
-            if (p == null || m == null || !p.getMateriales().contains(m)) {
-                throw new IllegalArgumentException("El material no pertenece al préstamo.");
-            }
-            m.setDisponible(true);
-            em.merge(m);
-            // Lógica para cerrar el préstamo si todos han sido devueltos
-        });
-        return true;
-    }
-    
-    @Override
-    public Autor registrarAutor(Autor autor) {
-        executeInsideTransaction(em -> em.persist(autor));
-        return autor;
-    }
-
-    @Override
-    public Autor actualizarAutor(Autor autor) {
-        final Autor[] autorActualizado = new Autor[1];
-        executeInsideTransaction(em -> {
-            autorActualizado[0] = em.merge(autor);
-        });
-        return autorActualizado[0];
-    }
-
-    @Override
-    public void eliminarAutor(int id) {
-        executeInsideTransaction(em -> {
-            Autor autor = em.find(Autor.class, id);
-            if (autor != null) {
-                em.remove(autor);
-            }
-        });
-    }
-    
-    @Override
-    public void eliminarUsuario(Usuario u) {
-        executeInsideTransaction(em -> {
-            // Primero buscamos la entidad en el EntityManager
-            Usuario usuarioEnBD = em.find(Usuario.class, u.getId());
-            if (usuarioEnBD != null) {
-                em.remove(usuarioEnBD);
-            }
-        });
-    }
-
-    
-    @Override
-    public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
-        EntityManager em = emf.createEntityManager();
-        try {
+    public List<MaterialBiblioteca> findByTitulo(String titulo) {
+        return execute(em -> {
             TypedQuery<MaterialBiblioteca> query = em.createQuery(
-                "SELECT m FROM MaterialBiblioteca m WHERE lower(m.titulo) LIKE lower(:titulo)", 
-                MaterialBiblioteca.class
-            );
+                "SELECT m FROM MaterialBiblioteca m WHERE lower(m.titulo) LIKE lower(:titulo)", MaterialBiblioteca.class);
             query.setParameter("titulo", "%" + titulo + "%");
             return query.getResultList();
-        } finally {
-            em.close();
-        }
+        });
     }
 
     @Override
-    public List<MaterialBiblioteca> buscarMaterialesPorAutor(String nombreAutor) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<MaterialBiblioteca> query = em.createQuery(
-                "SELECT m FROM MaterialBiblioteca m JOIN m.autores a WHERE lower(a.nombre) LIKE lower(:nombreAutor)", 
-                MaterialBiblioteca.class
-            );
-            query.setParameter("nombreAutor", "%" + nombreAutor + "%");
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
+    public void deleteById(int id) {
+        executeInsideTransaction(em -> 
+            findById(id).ifPresent(em::remove)
+        );
     }
+}```
 
-    @Override
-    public Autor buscarAutorPorId(int id) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            return em.find(Autor.class, id);
-        } finally {
-            em.close();
-        }
-    }
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\infrastructure\persistence\JpaPrestamoRepository.java`
 
-    @Override
-    public List<Autor> listarAutores() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            // Esta es la implementación que corrige tu error
-            TypedQuery<Autor> query = em.createQuery("SELECT a FROM Autor a", Autor.class);
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
-    }
-    @Override
-    public List<Usuario> listarUsuarios() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.infrastructure.persistence;
+
+/**
+ *
+ * @author jesus
+ */
+
+import com.bibliotecadigital.domain.model.Prestamo;
+import com.bibliotecadigital.domain.service.PrestamoRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public class JpaPrestamoRepository implements PrestamoRepository {
+
+    private final EntityManagerFactory emf;
+
+    public JpaPrestamoRepository(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     
+    // Métodos de utilidad para manejar el EntityManager y las transacciones
+    private <T> T execute(Function<EntityManager, T> action) {
+        EntityManager em = emf.createEntityManager();
+        try { return action.apply(em); } 
+        finally { em.close(); }
+    }
+
+    private void executeInsideTransaction(Consumer<EntityManager> action) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            action.accept(em);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
 
     @Override
-    public boolean actualizarRolUsuario(String email, RolUsuario nuevoRol) {
-        final boolean[] exito = {false};
+    public Prestamo save(Prestamo prestamo) {
         executeInsideTransaction(em -> {
-            Usuario usuario = buscarUsuarioPorEmail(email);
-            if (usuario != null) {
-                usuario.setRol(nuevoRol);
-                em.merge(usuario);
-                exito[0] = true;
+            if (prestamo.getId() == 0) {
+                em.persist(prestamo);
+            } else {
+                em.merge(prestamo);
             }
         });
-        return exito[0];
+        return prestamo;
     }
-    
-    // El método validarMaterial no interactúa con JPA, su lógica puede quedar como está
-    // o ser movida a una capa de validación más adelante.
+
     @Override
-    public boolean validarMaterial(MaterialBiblioteca material) {
-        if (material == null) return false;
-        if (material.getTitulo() == null || material.getTitulo().trim().isEmpty()) return false;
-        if (material.getAnio() <= 0) return false;
-        if (material.getRutaArchivo() == null || material.getRutaArchivo().trim().isEmpty()) return false;
-        if (material.getAutores() == null || material.getAutores().isEmpty()) return false;
-        return true;
+    public Optional<Prestamo> findById(int id) {
+        return Optional.ofNullable(execute(em -> em.find(Prestamo.class, id)));
     }
-    
-    public boolean actualizarUsuario(Usuario usuario) {
-    EntityManager em = emf.createEntityManager();
-    try {
-        // Verificamos si ya existe un email igual en otro usuario
-        TypedQuery<Usuario> query = em.createQuery(
-            "SELECT u FROM Usuario u WHERE u.email = :email AND u.id <> :id", Usuario.class);
-        query.setParameter("email", usuario.getEmail());
-        query.setParameter("id", usuario.getId());
 
-        if (!query.getResultList().isEmpty()) {
-            return false; // correo duplicado
+    @Override
+    public List<Prestamo> findAll() {
+        return execute(em -> em.createQuery("SELECT p FROM Prestamo p", Prestamo.class).getResultList());
+    }
+}```
+
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\infrastructure\persistence\JpaUsuarioRepository.java`
+
+```java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.bibliotecadigital.infrastructure.persistence;
+
+/**
+ *
+ * @author jesus
+ */
+
+import com.bibliotecadigital.domain.model.Usuario;
+import com.bibliotecadigital.domain.service.UsuarioRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public class JpaUsuarioRepository implements UsuarioRepository {
+
+    private final EntityManagerFactory emf;
+
+    public JpaUsuarioRepository(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
+    // (Puedes copiar los métodos de utilidad 'execute' y 'executeInsideTransaction' de JpaAutorRepository)
+    // Métodos de utilidad para manejar el EntityManager y las transacciones
+    private <T> T execute(Function<EntityManager, T> action) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return action.apply(em);
+        } finally {
+            em.close();
         }
-
-        executeInsideTransaction(em2 -> em2.merge(usuario)); // actualiza el usuario
-        return true;
-    } finally {
-        em.close();
     }
-}
+
+    private void executeInsideTransaction(Consumer<EntityManager> action) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            action.accept(em);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Usuario save(Usuario usuario) {
+        executeInsideTransaction(em -> {
+            if (usuario.getId() == null) {
+                em.persist(usuario);
+            } else {
+                em.merge(usuario);
+            }
+        });
+        return usuario;
+    }
+
+    @Override
+    public Optional<Usuario> findById(Long id) {
+        return Optional.ofNullable(execute(em -> em.find(Usuario.class, id)));
+    }
+
+    @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return execute(em -> {
+            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
+            query.setParameter("email", email);
+            try {
+                return Optional.of(query.getSingleResult());
+            } catch (jakarta.persistence.NoResultException e) {
+                return Optional.empty();
+            }
+        });
+    }
+
+    @Override
+    public List<Usuario> findAll() {
+        return execute(em -> em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList());
+    }
+
+    @Override
+    public void delete(Usuario usuario) {
+        executeInsideTransaction(em -> {
+            if (em.contains(usuario)) {
+                em.remove(usuario);
+            } else {
+                Usuario managedUsuario = em.find(Usuario.class, usuario.getId());
+                if (managedUsuario != null) {
+                    em.remove(managedUsuario);
+                }
+            }
+        });
+    }
 }```
 
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\GestionAutoresController.java`
@@ -1651,16 +1361,16 @@ package com.bibliotecadigital.presentation.desktop.controllers;
  */
 
 import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.service.BibliotecaService;
+import com.bibliotecadigital.domain.service.AutorRepository;
 import com.bibliotecadigital.presentation.desktop.views.GestionAutoresViewInterface;
 
 public class GestionAutoresController {
 
-    private final BibliotecaService servicio;
+    private final AutorRepository autorRepo;
     private final GestionAutoresViewInterface vista;
 
-    public GestionAutoresController(BibliotecaService servicio, GestionAutoresViewInterface vista) {
-        this.servicio = servicio;
+    public GestionAutoresController(AutorRepository autorRepo, GestionAutoresViewInterface vista) {
+        this.autorRepo = autorRepo;
         this.vista = vista;
         
         // Conectar los listeners de la vista con los métodos de este controlador
@@ -1673,13 +1383,13 @@ public class GestionAutoresController {
     }
 
     public void cargarAutores() {
-        vista.mostrarAutores(servicio.listarAutores());
+        vista.mostrarAutores(autorRepo.findAll());
     }
 
     public void crearNuevoAutor() {
         String nombre = vista.pedirNuevoNombreAutor("");
         if (nombre != null && !nombre.trim().isEmpty()) {
-            servicio.registrarAutor(new Autor(0, nombre));
+            autorRepo.save(new Autor(0, nombre));
             cargarAutores(); // Refrescar la tabla
             vista.mostrarMensaje("Autor creado exitosamente.");
         }
@@ -1695,7 +1405,7 @@ public class GestionAutoresController {
         String nuevoNombre = vista.pedirNuevoNombreAutor(autorSeleccionado.getNombre());
         if (nuevoNombre != null && !nuevoNombre.trim().isEmpty()) {
             autorSeleccionado.setNombre(nuevoNombre);
-            servicio.actualizarAutor(autorSeleccionado);
+            autorRepo.save(autorSeleccionado);
             cargarAutores(); // Refrescar la tabla
             vista.mostrarMensaje("Autor actualizado exitosamente.");
         }
@@ -1710,7 +1420,7 @@ public class GestionAutoresController {
 
         if (vista.confirmarEliminacion(autorSeleccionado.getNombre())) {
             try {
-                servicio.eliminarAutor(autorSeleccionado.getId());
+                autorRepo.deleteById(autorSeleccionado.getId());
                 cargarAutores(); // Refrescar la tabla
                 vista.mostrarMensaje("Autor eliminado exitosamente.");
             } catch (Exception e) {
@@ -1730,13 +1440,14 @@ public class GestionAutoresController {
  */
 package com.bibliotecadigital.presentation.desktop.controllers;
 
+import com.bibliotecadigital.domain.service.AutorRepository;
+import com.bibliotecadigital.domain.service.MaterialRepository;
 import com.bibliotecadigital.domain.model.Audio;
 import com.bibliotecadigital.domain.model.Autor;
 import com.bibliotecadigital.domain.model.Libro;
 import com.bibliotecadigital.domain.model.MaterialBiblioteca;
 import com.bibliotecadigital.domain.model.Revista;
 import com.bibliotecadigital.domain.model.Video;
-import com.bibliotecadigital.domain.service.BibliotecaService;
 import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesViewInterface;
 import java.util.List;
 
@@ -1746,24 +1457,25 @@ import java.util.List;
  */
 public class GestionMaterialesController {
     
-    private final BibliotecaService servicio;
+    private final MaterialRepository materialRepo;
+    private final AutorRepository autorRepo;
     private final GestionMaterialesViewInterface vista;
 
-    public GestionMaterialesController(BibliotecaService servicio, GestionMaterialesViewInterface vista) {
-        this.servicio = servicio;
+    // El constructor ahora pide los repositorios específicos que necesita
+    public GestionMaterialesController(MaterialRepository materialRepo, AutorRepository autorRepo, GestionMaterialesViewInterface vista) {
+        this.materialRepo = materialRepo;
+        this.autorRepo = autorRepo;
         this.vista = vista;
         
-        // Conectar los listeners de la vista con los métodos de este controlador
         this.vista.addNuevoListener(e -> crearNuevoMaterial());
         this.vista.addEditarListener(e -> editarMaterialSeleccionado());
         this.vista.addEliminarListener(e -> eliminarMaterialSeleccionado());
         
-        // Cargar los datos iniciales
         cargarMateriales();
     }
 
     public void cargarMateriales() {
-        vista.mostrarMateriales(servicio.listarMateriales());
+        vista.mostrarMateriales(materialRepo.findAll());
     }
 
     public void crearNuevoMaterial() {
@@ -1773,7 +1485,13 @@ public class GestionMaterialesController {
         int anio = vista.pedirAnioMaterial(0);
         String rutaArchivo = vista.pedirRutaArchivo("");
         boolean disponible = true; // disponible por default
-        List<Integer> autorIds = vista.pedirIdsAutores( ); // por ejemplo: [1, 2, 5]
+        
+        // --- NUEVO FLUJO PARA AUTORES ---
+        List<Autor> autoresSeleccionados = vista.pedirSeleccionAutores(autorRepo.findAll());
+        if (autoresSeleccionados == null || autoresSeleccionados.isEmpty()) {
+            vista.mostrarMensaje("La selección de autores fue cancelada o está vacía. No se creó el material.");
+            return;
+        }
 
         MaterialBiblioteca material = null;
 
@@ -1811,8 +1529,9 @@ public class GestionMaterialesController {
         System.out.println("Creando material tipo: " + tipo);
 
         if (material != null) {
-            material.setDisponible(disponible); // establecemos estado
-            servicio.registrarMaterialConAutores(material, autorIds);
+            material.setAutores(autoresSeleccionados);
+            // Usa el método 'save' que ahora es más potente
+            materialRepo.save(material); 
             cargarMateriales();
             vista.mostrarMensaje("Material creado exitosamente.");
         }
@@ -1875,7 +1594,7 @@ public class GestionMaterialesController {
         }
 
         // Guardar cambios
-        servicio.actualizarMaterial(materialSeleccionado);
+        materialRepo.save(materialSeleccionado);
         cargarMateriales(); // Refrescar la tabla
         vista.mostrarMensaje("Material actualizado exitosamente.");
 
@@ -1890,7 +1609,7 @@ public class GestionMaterialesController {
 
         if (vista.confirmarEliminacion(materialSeleccionado.getTitulo())) {
             try {
-                servicio.eliminarMaterial(materialSeleccionado.getId());
+                materialRepo.deleteById(materialSeleccionado.getId());
                 cargarMateriales(); // Refrescar la tabla
                 vista.mostrarMensaje("Material eliminado exitosamente.");
             } catch (Exception e) {
@@ -1906,102 +1625,68 @@ public class GestionMaterialesController {
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\GestionPrestamosController.java`
 
 ```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.bibliotecadigital.presentation.desktop.controllers;
 
+import com.bibliotecadigital.domain.model.MaterialBiblioteca;
 import com.bibliotecadigital.domain.model.Prestamo;
 import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.domain.model.MaterialBiblioteca;
-import com.bibliotecadigital.domain.model.RolUsuario;
-import com.bibliotecadigital.domain.service.BibliotecaService;
+import com.bibliotecadigital.domain.service.MaterialRepository;
+import com.bibliotecadigital.domain.service.PrestamoRepository;
+import com.bibliotecadigital.domain.service.UsuarioRepository;
+import com.bibliotecadigital.presentation.desktop.views.GestionPrestamosView;
 import com.bibliotecadigital.presentation.desktop.views.GestionPrestamosViewInterface;
-
+import java.time.LocalDate;
 import java.util.List;
-import java.util.ArrayList;
 
-/**
- * Controlador para la gestión de préstamos.
- * Conecta la vista con los servicios de la aplicación.
- */
 public class GestionPrestamosController {
     
-    public final BibliotecaService servicio;
+    private final PrestamoRepository prestamoRepo;
+    private final UsuarioRepository usuarioRepo;
+    private final MaterialRepository materialRepo;
     private final GestionPrestamosViewInterface vista;
     
-    /**
-     * Constructor del controlador
-     * @param servicio Servicio de biblioteca para operaciones CRUD
-     * @param vista Vista para la interacción con el usuario
-     */
-    public GestionPrestamosController(BibliotecaService servicio, GestionPrestamosViewInterface vista) {
-        this.servicio = servicio;
+    public GestionPrestamosController(PrestamoRepository prestamoRepo, 
+                                      UsuarioRepository usuarioRepo, 
+                                      MaterialRepository materialRepo, 
+                                      GestionPrestamosViewInterface vista) {
+        this.prestamoRepo = prestamoRepo;
+        this.usuarioRepo = usuarioRepo;
+        this.materialRepo = materialRepo;
         this.vista = vista;
         
-        // Registrar los listeners en la vista
+        // Pasa la referencia de este controlador a la vista
+        if (vista instanceof GestionPrestamosView) {
+            ((GestionPrestamosView) vista).setController(this);
+        }
+        
         this.vista.addNuevoPrestamoListener(e -> abrirDialogoNuevoPrestamo());
         this.vista.addFinalizarPrestamoListener(e -> finalizarPrestamoSeleccionado());
         this.vista.addRefrescarListener(e -> cargarPrestamos());
         
-        // Cargar los préstamos iniciales
         cargarPrestamos();
     }
     
-    /**
-     * Carga todos los préstamos y los muestra en la vista
-     */
     public void cargarPrestamos() {
-        vista.mostrarPrestamos(servicio.listarPrestamos());
+        vista.mostrarPrestamos(prestamoRepo.findAll());
     }
     
-    /**
-     * Abre el diálogo para crear un nuevo préstamo
-     */
     private void abrirDialogoNuevoPrestamo() {
         vista.abrirDialogoNuevoPrestamo();
     }
     
-    /**
-     * Crea un nuevo préstamo con los datos proporcionados
-     * @param usuario Usuario que realiza el préstamo
-     * @param materiales Lista de materiales a prestar
-     */
     public void crearPrestamo(Usuario usuario, List<MaterialBiblioteca> materiales) {
-        if (usuario == null) {
-            vista.mostrarError("Debe seleccionar un usuario");
+        if (usuario == null || materiales == null || materiales.isEmpty()) {
+            vista.mostrarError("Debe seleccionar un usuario y al menos un material.");
             return;
         }
         
-        if (materiales == null || materiales.isEmpty()) {
-            vista.mostrarError("Debe seleccionar al menos un material");
-            return;
-        }
+        Prestamo nuevoPrestamo = new Prestamo(usuario, materiales);
+        prestamoRepo.save(nuevoPrestamo);
         
-        // La validación de disponibilidad se realiza en el servicio,
-        // pero verificamos previamente para dar un mensaje más específico
-        for (MaterialBiblioteca material : materiales) {
-            if (!material.isDisponible()) {
-                vista.mostrarError("El material '" + material.getTitulo() + "' no está disponible");
-                return;
-            }
-        }
-        
-        // Crear el préstamo utilizando el servicio
-        Prestamo nuevoPrestamo = servicio.crearPrestamo(usuario, materiales);
-        
-        if (nuevoPrestamo != null) {
-            vista.mostrarMensaje("Préstamo creado correctamente");
-            cargarPrestamos(); // Refrescar la tabla
-        } else {
-            vista.mostrarError("No se pudo crear el préstamo");
-        }
+        vista.mostrarMensaje("Préstamo creado correctamente con ID: " + nuevoPrestamo.getId());
+        cargarPrestamos();
     }
     
-    /**
-     * Finaliza el préstamo seleccionado
-     */
     private void finalizarPrestamoSeleccionado() {
         Prestamo prestamo = vista.getPrestamoSeleccionado();
         
@@ -2011,96 +1696,29 @@ public class GestionPrestamosController {
         }
         
         if (prestamo.getFechaDevolucion() != null) {
-            vista.mostrarError("El préstamo seleccionado ya está finalizado");
+            vista.mostrarError("El préstamo seleccionado ya está finalizado.");
             return;
         }
         
         if (vista.confirmarFinalizacionPrestamo(prestamo)) {
-            boolean todosDevueltos = true;
+            prestamo.setFechaDevolucion(LocalDate.now());
+            prestamoRepo.save(prestamo);
             
-            for (MaterialBiblioteca material : prestamo.getMateriales()) {
-                boolean devuelto = servicio.registrarDevolucion(prestamo, material);
-                if (!devuelto) {
-                    todosDevueltos = false;
-                    vista.mostrarError("Error al registrar la devolución del material: " + material.getTitulo());
-                    break;
-                }
-            }
-            
-            if (todosDevueltos) {
-                vista.mostrarMensaje("Préstamo finalizado correctamente");
-                cargarPrestamos(); // Refrescar la tabla
-            }
+            vista.mostrarMensaje("Préstamo finalizado correctamente.");
+            cargarPrestamos();
         }
     }
     
-    /**
-     * Obtiene usuarios para mostrar en la interfaz, filtrados por rol.
-     * Nota: Este método es provisional hasta tener un método adecuado en el servicio.
-     * @return Lista de usuarios disponibles
-     */
     public List<Usuario> obtenerUsuarios() {
-        List<Usuario> todosLosUsuarios = new ArrayList<>();
-        List<Usuario> usuariosFiltrados = new ArrayList<>();
-
-        // 1. Crear usuarios de prueba si no existen (para garantizar que haya datos)
-        // Esto solo se ejecuta la primera vez que se llame al método
-        if (servicio.buscarUsuarioPorEmail("admin@biblioteca.com") == null) {
-            servicio.registrarUsuario(new Usuario ("Administrador", "admin@biblioteca.com", "admin123", RolUsuario.ADMINISTRADOR));
-        }
-
-        if (servicio.buscarUsuarioPorEmail("cliente@biblioteca.com") == null) {
-            servicio.registrarUsuario(new Usuario ("Cliente", "cliente@biblioteca.com", "cliente123", RolUsuario.CLIENTE));
-        }
-
-        if (servicio.buscarUsuarioPorEmail("encargado@biblioteca.com") == null) {
-            servicio.registrarUsuario(new Usuario ("Encargado", "encargado@biblioteca.com", "encargado123", RolUsuario.ENCARGADO));
-        }
-
-        // 2. Buscar usuarios conocidos por correo y añadirlos a la lista
-        Usuario admin = servicio.buscarUsuarioPorEmail("admin@biblioteca.com");
-        if (admin != null) todosLosUsuarios.add(admin);
-
-        Usuario cliente = servicio.buscarUsuarioPorEmail("cliente@biblioteca.com");
-        if (cliente != null) todosLosUsuarios.add(cliente);
-
-        Usuario encargado = servicio.buscarUsuarioPorEmail("encargado@biblioteca.com");
-        if (encargado != null) todosLosUsuarios.add(encargado);
-
-        // 3. Filtrar usuarios según su rol
-        for (Usuario u : todosLosUsuarios) {
-            // Solo mostrar clientes y administradores para préstamos
-            if (u.getRol() == RolUsuario.CLIENTE || u.getRol() == RolUsuario.ADMINISTRADOR) {
-                usuariosFiltrados.add(u);
-            }
-        }
-
-        // 4. Imprimir información
-        System.out.println("Usuarios filtrados encontrados: " + usuariosFiltrados.size());
-        for (Usuario u : usuariosFiltrados) {
-            System.out.println("  - " + u.getNombre() + " (" + u.getRol() + ")");
-        }
-
-        return usuariosFiltrados;
+        return usuarioRepo.findAll();
     }
     
-    public Prestamo buscarPrestamoPorId(int id) {
-        List<Prestamo> prestamos = servicio.listarPrestamos();
-        for (Prestamo p : prestamos) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
-    }
-    
-    /**
-     * Busca materiales por título
-     * @param titulo Título o parte del título a buscar
-     * @return Lista de materiales que coinciden con la búsqueda
-     */
     public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
-        return servicio.buscarMaterialesPorTitulo(titulo);
+        return materialRepo.findByTitulo(titulo);
+    }
+
+    public Prestamo buscarPrestamoPorId(int id) {
+        return prestamoRepo.findById(id).orElse(null);
     }
 }```
 
@@ -2114,10 +1732,9 @@ public class GestionPrestamosController {
 package com.bibliotecadigital.presentation.desktop.controllers;
 
 import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
 import com.bibliotecadigital.presentation.desktop.views.GestionUsuariosView;
 import com.bibliotecadigital.presentation.desktop.views.GestionUsuariosViewInterface;
+import com.bibliotecadigital.domain.service.UsuarioRepository;
 import java.util.List;
 
 /**
@@ -2125,26 +1742,22 @@ import java.util.List;
  * @author Manu Hdz
  */
 public class GestionUsuariosController {
-    private final BibliotecaService servicio;
-    private final JpaBibliotecaRepository baseDatos;
+    private final UsuarioRepository usuarioRepo; // <-- Cambia a la interfaz específica
     private final GestionUsuariosViewInterface vista;
 
-    public GestionUsuariosController(BibliotecaService servicio, GestionUsuariosViewInterface vista, JpaBibliotecaRepository baseDatos) {
-        this.servicio = servicio;
+    public GestionUsuariosController(UsuarioRepository usuarioRepo, GestionUsuariosViewInterface vista) {
+        this.usuarioRepo = usuarioRepo;
         this.vista = vista;
-        this.baseDatos = baseDatos;
-        // Conectar los listeners de la vista con los métodos de este controlador
+        
         this.vista.addCrearListener(e -> crearUsuario());
         this.vista.addModificarListener(e -> modificarUsuario());
         this.vista.addEliminarListener(e -> eliminarUsuario());
         
-        // Cargar los datos iniciales
         cargarUsuarios();
     }
 
     private void cargarUsuarios() {
-        List<Usuario> usuarios = baseDatos.listarUsuarios();  // 🔹 Obtiene desde la BD
-        vista.mostrarUsuarios(usuarios);                     // 🔹 Muestra en la tabla
+        vista.mostrarUsuarios(usuarioRepo.findAll()); // Usa el nuevo repositorio
     }
     
     private void eliminarUsuario() {
@@ -2152,7 +1765,7 @@ public class GestionUsuariosController {
 
     if (seleccionado != null && vista.confirmarEliminacion(seleccionado.getNombre())) {
         // Llamamos al servicio para eliminar de la BD
-        baseDatos.eliminarUsuario(seleccionado);
+        usuarioRepo.delete(seleccionado);
 
         // Refrescamos la tabla
         cargarUsuarios();
@@ -2165,23 +1778,20 @@ public class GestionUsuariosController {
     
     private void crearUsuario() {
         GestionUsuariosView.NuevoUsuarioDialog dialog = ((GestionUsuariosView) vista).new NuevoUsuarioDialog(vista.getFrame());
-        
-        dialog.setVisible(true); // bloquea hasta cerrar
+        dialog.setVisible(true);
 
         Usuario nuevo = dialog.getUsuarioCreado();
-        if(nuevo != null) {
-            boolean agregado = false;
+        if (nuevo != null) {
             try {
-                agregado = baseDatos.registrarUsuario(nuevo);
-            } catch(Exception ex) {
-                vista.mostrarMensaje("Error al agregar usuario: " + ex.getMessage());
-            }
 
-            if(agregado) {
+                usuarioRepo.save(nuevo);
+
                 vista.mostrarMensaje("Usuario agregado correctamente");
                 cargarUsuarios(); // refresca tabla desde BD
-            } else {
-                vista.mostrarMensaje("No se pudo agregar usuario. ¿Email duplicado?");
+
+            } catch (Exception ex) {
+                // Capturar excepciones de la BD, como un email duplicado
+                vista.mostrarMensaje("No se pudo agregar usuario. ¿Email duplicado? Error: " + ex.getMessage());
             }
         }
     }
@@ -2196,7 +1806,7 @@ public class GestionUsuariosController {
             Usuario editado = dialog.getUsuarioEditado();
             if (editado != null) {
                 // Actualizamos en la BD
-                baseDatos.actualizarUsuario(editado);
+                usuarioRepo.save(editado);
 
                 // Refrescamos la tabla
                 cargarUsuarios();
@@ -2211,57 +1821,69 @@ public class GestionUsuariosController {
 }
 ```
 
-## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\MaterialController.java`
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\controllers\MenuController.java`
 
 ```java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.bibliotecadigital.presentation.desktop.controllers;
 
-import com.bibliotecadigital.domain.model.Autor;
-import com.bibliotecadigital.domain.model.MaterialBiblioteca;
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import java.util.List;
+import com.bibliotecadigital.domain.service.*;
+import com.bibliotecadigital.infrastructure.persistence.JpaAutorRepository;
+import com.bibliotecadigital.infrastructure.persistence.JpaMaterialRepository;
+import com.bibliotecadigital.infrastructure.persistence.JpaPrestamoRepository;
+import com.bibliotecadigital.infrastructure.persistence.JpaUsuarioRepository;
+import com.bibliotecadigital.presentation.desktop.views.*;
+import jakarta.persistence.EntityManagerFactory;
+import javax.swing.JFrame;
 
-public class MaterialController {
-    private BibliotecaService bibliotecaService;
-    
-    public MaterialController(BibliotecaService bibliotecaService) {
-        this.bibliotecaService = bibliotecaService;
+public class MenuController {
+
+    private final MenuView menuView;
+    private final EntityManagerFactory emf;
+
+    public MenuController(MenuView menuView, EntityManagerFactory emf) {
+        this.menuView = menuView;
+        this.emf = emf;
+        
+        // Asignar acciones a los botones del menú
+        this.menuView.addGestionarAutoresListener(e -> abrirGestionAutores());
+        this.menuView.addGestionarMaterialesListener(e -> abrirGestionMateriales());
+        this.menuView.addGestionarUsuariosListener(e -> abrirGestionUsuarios());
+        this.menuView.addGestionarPrestamosListener(e -> abrirGestionPrestamos());
+    }
+
+    private void abrirGestionAutores() {
+        AutorRepository autorRepo = new JpaAutorRepository(emf);
+        GestionAutoresViewInterface vista = new GestionAutoresView();
+        new GestionAutoresController(autorRepo, vista);
+        vista.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cierra solo esta ventana
+        vista.setVisible(true);
     }
     
-    public MaterialBiblioteca registrarMaterial(MaterialBiblioteca material) {
-        return bibliotecaService.registrarMaterial(material);
+    private void abrirGestionMateriales() {
+        MaterialRepository materialRepo = new JpaMaterialRepository(emf);
+        AutorRepository autorRepo = new JpaAutorRepository(emf);
+        GestionMaterialesViewInterface vista = new GestionMaterialesView();
+        new GestionMaterialesController(materialRepo, autorRepo, vista);
+        vista.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        vista.setVisible(true);
     }
     
-    public MaterialBiblioteca buscarMaterialPorId(int id) {
-        return bibliotecaService.buscarMaterialPorId(id);
+    private void abrirGestionUsuarios() {
+        UsuarioRepository usuarioRepo = new JpaUsuarioRepository(emf);
+        GestionUsuariosViewInterface vista = new GestionUsuariosView();
+        new GestionUsuariosController(usuarioRepo, vista);
+        vista.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        vista.setVisible(true);
     }
-    
-    public List<MaterialBiblioteca> listarMateriales() {
-        return bibliotecaService.listarMateriales();
-    }
-    
-    public List<MaterialBiblioteca> buscarMaterialesPorTitulo(String titulo) {
-        return bibliotecaService.buscarMaterialesPorTitulo(titulo);
-    }
-    
-    public List<MaterialBiblioteca> buscarMaterialesPorAutor(String autor) {
-        return bibliotecaService.buscarMaterialesPorAutor(autor);
-    }
-    
-    public Autor registrarAutor(Autor autor) {
-        return bibliotecaService.registrarAutor(autor);
-    }
-    
-    public Autor buscarAutorPorId(int id) {
-        return bibliotecaService.buscarAutorPorId(id);
-    }
-    
-    public List<Autor> listarAutores() {
-        return bibliotecaService.listarAutores();
+
+    private void abrirGestionPrestamos() {
+        PrestamoRepository prestamoRepo = new JpaPrestamoRepository(emf);
+        UsuarioRepository usuarioRepo = new JpaUsuarioRepository(emf);
+        MaterialRepository materialRepo = new JpaMaterialRepository(emf);
+        GestionPrestamosViewInterface vista = new GestionPrestamosView();
+        new GestionPrestamosController(prestamoRepo, usuarioRepo, materialRepo, vista);
+        vista.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        vista.setVisible(true);
     }
 }```
 
@@ -2544,7 +2166,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -2958,6 +2583,27 @@ public class GestionMaterialesView extends javax.swing.JFrame implements Gestion
     public JFrame getFrame() {
         return this;
     }
+    
+    @Override
+    public List<Autor> pedirSeleccionAutores(List<Autor> todosLosAutores) {
+        if (todosLosAutores == null || todosLosAutores.isEmpty()) {
+            mostrarMensaje("No hay autores registrados. Por favor, agregue autores primero.");
+            return null;
+        }
+
+        // Convertimos la lista de autores a un array para el JList
+        Autor[] autoresArray = todosLosAutores.toArray(new Autor[0]);
+        JList<Autor> listaAutores = new JList<>(autoresArray);
+        listaAutores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        int resultado = JOptionPane.showConfirmDialog(this, new JScrollPane(listaAutores), 
+                "Seleccione uno o más autores", JOptionPane.OK_CANCEL_OPTION);
+
+        if (resultado == JOptionPane.OK_OPTION) {
+            return listaAutores.getSelectedValuesList();
+        }
+        return null; // El usuario canceló
+    }
 }
 ```
 
@@ -2969,6 +2615,7 @@ public class GestionMaterialesView extends javax.swing.JFrame implements Gestion
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.bibliotecadigital.presentation.desktop.views;
+import com.bibliotecadigital.domain.model.Autor;
 import com.bibliotecadigital.domain.model.MaterialBiblioteca;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -3002,6 +2649,7 @@ public interface GestionMaterialesViewInterface {
     // Para Libro
     String pedirEditorial(String editorialActual);
     Integer pedirNumPaginas(Integer numPaginasActual);
+    List<Autor> pedirSeleccionAutores(List<Autor> todosLosAutores);
 
     // Para Revista
     int pedirNumero(int numeroActual);
@@ -3221,7 +2869,8 @@ public class GestionPrestamosView extends javax.swing.JFrame implements GestionP
     
     @Override
     public void abrirDialogoNuevoPrestamo() {
-        NuevoPrestamoDialog dialog = new NuevoPrestamoDialog(this, controller);
+        // Aquí pasamos 'this.controller' al constructor del diálogo
+        NuevoPrestamoDialog dialog = new NuevoPrestamoDialog(this, this.controller);
         dialog.setVisible(true);
     }
     
@@ -3249,8 +2898,7 @@ public class GestionPrestamosView extends javax.swing.JFrame implements GestionP
             controller.cargarPrestamos();
         }
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -3715,6 +3363,56 @@ public interface GestionUsuariosViewInterface {
 }
 ```
 
+## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\MenuView.java`
+
+```java
+package com.bibliotecadigital.presentation.desktop.views;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class MenuView extends JFrame {
+
+    private JButton btnGestionarAutores;
+    private JButton btnGestionarMateriales;
+    private JButton btnGestionarUsuarios;
+    private JButton btnGestionarPrestamos;
+
+    public MenuView() {
+        setTitle("Biblioteca Digital - Menú Principal");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new GridLayout(4, 1, 10, 10)); // 4 filas, 1 columna
+
+        btnGestionarAutores = new JButton("Gestionar Autores");
+        btnGestionarMateriales = new JButton("Gestionar Materiales");
+        btnGestionarUsuarios = new JButton("Gestionar Usuarios");
+        btnGestionarPrestamos = new JButton("Gestionar Préstamos");
+
+        add(btnGestionarAutores);
+        add(btnGestionarMateriales);
+        add(btnGestionarUsuarios);
+        add(btnGestionarPrestamos);
+    }
+    
+    // Métodos para que el controlador añada los listeners
+    public void addGestionarAutoresListener(ActionListener listener) {
+        btnGestionarAutores.addActionListener(listener);
+    }
+    public void addGestionarMaterialesListener(ActionListener listener) {
+        btnGestionarMateriales.addActionListener(listener);
+    }
+    public void addGestionarUsuariosListener(ActionListener listener) {
+        btnGestionarUsuarios.addActionListener(listener);
+    }
+    public void addGestionarPrestamosListener(ActionListener listener) {
+        btnGestionarPrestamos.addActionListener(listener);
+    }
+}```
+
 ## `BibliotecaDigital\src\main\java\com\bibliotecadigital\presentation\desktop\views\NuevoPrestamoDialog.java`
 
 ```java
@@ -3745,21 +3443,13 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
      */
     public NuevoPrestamoDialog(java.awt.Frame parent, GestionPrestamosController controller) {
         super(parent, "Nuevo Préstamo", true);
-        this.controller = controller;
-        initComponents();
+        this.controller = controller; // <-- Se asigna el controlador
+        initComponents(); // NetBeans construye los componentes
         
-        try {
-            configurarModelos();
-            cargarUsuarios();
-            configurarEventos();
-        } catch (Exception e) {
-            System.err.println("Error al inicializar el diálogo: " + e.getMessage());
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this,
-                "Error al inicializar el diálogo: " + e.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
-        }
+        // El resto de la configuración se ejecuta DESPUÉS de initComponents y de asignar el controller
+        configurarModelos();
+        cargarUsuarios(); // Ahora 'this.controller' ya no es null
+        configurarEventos();
         
         setSize(800, 600);
         setLocationRelativeTo(parent);
@@ -4157,38 +3847,27 @@ package com.mycompany.bibliotecadigital;
  * @author jesus
  */
 
-// --- IMPORTS NECESARIOS ---
-import com.bibliotecadigital.domain.service.BibliotecaService;
-import com.bibliotecadigital.infrastructure.persistence.JpaBibliotecaRepository;
-import com.bibliotecadigital.presentation.desktop.controllers.GestionAutoresController;
-import com.bibliotecadigital.presentation.desktop.controllers.GestionMaterialesController;
-import com.bibliotecadigital.presentation.desktop.views.GestionAutoresView; // <-- Asegúrate de importar la clase concreta
-import com.bibliotecadigital.presentation.desktop.views.GestionAutoresViewInterface;
-import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesView;
-import com.bibliotecadigital.presentation.desktop.views.GestionMaterialesViewInterface;
+import com.bibliotecadigital.presentation.desktop.controllers.MenuController;
+import com.bibliotecadigital.presentation.desktop.views.MenuView;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 public class BibliotecaDigital {
 
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> {
-            // 1. Instanciar el Repositorio (Modelo)
-            BibliotecaService servicio = new JpaBibliotecaRepository();
+        // 1. El EntityManagerFactory se crea UNA SOLA VEZ
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("biblioteca-pu");
 
-            // 2. Instanciar la Vista
-            // Se crea un objeto de la clase CONCRETA (GestionAutoresView)...
-            // ...y se asigna a una variable del tipo de la INTERFAZ.
-            // Esta es la mejor práctica.
-            GestionAutoresViewInterface vistaAutores = new GestionAutoresView();
-            GestionMaterialesViewInterface vistaMateriales= new GestionMaterialesView();
-            
-            // 3. Instanciar el Controlador, inyectando Modelo y Vista
-            new GestionAutoresController(servicio, vistaAutores);
-            new GestionMaterialesController(servicio, vistaMateriales);
-            
-            // 4. Hacer visible la GUI
-            // El método setVisible debe ser parte de tu interfaz
-            vistaAutores.setVisible(true);
-            vistaMateriales.setVisible(true); 
+        // 2. Lanzar la aplicación GUI
+        java.awt.EventQueue.invokeLater(() -> {
+            // 3. Instanciar la Vista del Menú
+            MenuView menu = new MenuView();
+
+            // 4. Instanciar el Controlador del Menú, pasándole el EMF
+            new MenuController(menu, emf);
+
+            // 5. Hacer visible el Menú
+            menu.setVisible(true);
         });
     }
 }```

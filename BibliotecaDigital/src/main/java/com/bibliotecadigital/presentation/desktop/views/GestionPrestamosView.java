@@ -197,7 +197,8 @@ public class GestionPrestamosView extends javax.swing.JFrame implements GestionP
     
     @Override
     public void abrirDialogoNuevoPrestamo() {
-        NuevoPrestamoDialog dialog = new NuevoPrestamoDialog(this, controller);
+        // Aquí pasamos 'this.controller' al constructor del diálogo
+        NuevoPrestamoDialog dialog = new NuevoPrestamoDialog(this, this.controller);
         dialog.setVisible(true);
     }
     
@@ -225,8 +226,7 @@ public class GestionPrestamosView extends javax.swing.JFrame implements GestionP
             controller.cargarPrestamos();
         }
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */

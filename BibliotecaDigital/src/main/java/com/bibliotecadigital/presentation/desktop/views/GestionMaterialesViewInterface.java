@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.bibliotecadigital.presentation.desktop.views;
+import com.bibliotecadigital.domain.model.Autor;
 import com.bibliotecadigital.domain.model.MaterialBiblioteca;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -36,6 +37,7 @@ public interface GestionMaterialesViewInterface {
     // Para Libro
     String pedirEditorial(String editorialActual);
     Integer pedirNumPaginas(Integer numPaginasActual);
+    List<Autor> pedirSeleccionAutores(List<Autor> todosLosAutores);
 
     // Para Revista
     int pedirNumero(int numeroActual);

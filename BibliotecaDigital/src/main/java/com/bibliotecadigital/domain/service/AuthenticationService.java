@@ -1,38 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.bibliotecadigital.domain.service;
 
 import com.bibliotecadigital.domain.model.Usuario;
-import com.bibliotecadigital.infrastructure.persistence.InMemoryBibliotecaRepository;
+import java.util.Optional; // Importar Optional
 
-/**
- *
- * @author Manu-hdz
- * @author Jesus-Mtz
- */
 public class AuthenticationService {
-    private InMemoryBibliotecaRepository biblioteca;
+    
+    // 1. La dependencia ahora es contra la INTERFAZ, no la clase concreta.
+    private final UsuarioRepository usuarioRepo;
 
-    public AuthenticationService(InMemoryBibliotecaRepository biblioteca) {
-        this.biblioteca = biblioteca;
+    // 2. El constructor ahora pide un UsuarioRepository. Esto se llama Inyección de Dependencias.
+    public AuthenticationService(UsuarioRepository usuarioRepo) {
+        this.usuarioRepo = usuarioRepo;
     }
 
-    public Usuario login(String email, String password) {
-        Usuario usuario = biblioteca.buscarUsuarioPorEmail(email);
-        if (usuario != null && usuario.verificarPassword(password)) {
-            return usuario; // login correcto
-        }
-        return null; // login fallido
+    /**
+     * Intenta autenticar a un usuario.
+     * @param email El email del usuario.
+     * @param password La contraseña en texto plano.
+     * @return Un Optional que contiene al Usuario si el login es exitoso, o un Optional vacío si falla.
+     */
+    public Optional<Usuario> login(String email, String password) {
+        // 3. Usamos el nuevo repositorio y manejamos el Optional.
+        Optional<Usuario> usuarioOpt = usuarioRepo.findByEmail(email);
+
+        // 4. Lógica moderna y segura con map y filter de Optional.
+        return usuarioOpt.filter(usuario -> usuario.verificarPassword(password));
     }
     
+    /**
+     * Verifica si un usuario tiene permiso para una funcionalidad.
+     * (Este método no cambia, pero es bueno mantenerlo aquí).
+     */
     public boolean tienePermiso(Usuario usuario, String funcionalidad) {
         if (usuario == null) return false;
         
         switch(usuario.getRol()) {
             case ADMINISTRADOR:
-                return true; // Los administradores tienen acceso a todo
+                return true; // Acceso total
             case ENCARGADO:
                 return !funcionalidad.equals("configuracion_sistema");
             case CLIENTE:

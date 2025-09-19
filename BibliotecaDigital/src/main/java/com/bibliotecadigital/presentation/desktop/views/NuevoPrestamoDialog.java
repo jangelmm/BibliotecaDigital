@@ -25,21 +25,13 @@ public class NuevoPrestamoDialog extends javax.swing.JDialog {
      */
     public NuevoPrestamoDialog(java.awt.Frame parent, GestionPrestamosController controller) {
         super(parent, "Nuevo Préstamo", true);
-        this.controller = controller;
-        initComponents();
+        this.controller = controller; // <-- Se asigna el controlador
+        initComponents(); // NetBeans construye los componentes
         
-        try {
-            configurarModelos();
-            cargarUsuarios();
-            configurarEventos();
-        } catch (Exception e) {
-            System.err.println("Error al inicializar el diálogo: " + e.getMessage());
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this,
-                "Error al inicializar el diálogo: " + e.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
-        }
+        // El resto de la configuración se ejecuta DESPUÉS de initComponents y de asignar el controller
+        configurarModelos();
+        cargarUsuarios(); // Ahora 'this.controller' ya no es null
+        configurarEventos();
         
         setSize(800, 600);
         setLocationRelativeTo(parent);
