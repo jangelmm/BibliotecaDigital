@@ -247,6 +247,10 @@ Antes de ejecutar el proyecto asegúrate de contar con el siguiente entorno:
       ¡Listo ya puedes usar ***Biblioteca Digital***!
 
       ![alt text](images/inicioBibliotecaDigital.png)
+
+      **¿Cómo funciona el programa?**
+      [Da click aquí para ir a la Guía de Uso](https://github.com/jangelmm/BibliotecaDigital/wiki/Gu%C3%ADa-de-Uso)
+      
 ---
 
 # Conclusiones
