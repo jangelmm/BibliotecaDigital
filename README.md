@@ -5,7 +5,10 @@ Con el avance de la tecnología, las bibliotecas tradicionales han experimentado
 A lo largo del documento se describen las fases de desarrollo que estructuran el proyecto, estableciendo una base sólida y organizada que permite su implementación a gran escala.
 
 ## Planteamiento del problema
-Una cierta universidad quiere y necesita desarrollar un sistema de biblioteca digital que le permita gestionar diferentes tipos de materiales como libros, revistas, videos educativos y artículos académicos.
+
+<img src="images/image.png" alt="Encabezado Biblioteca Digital" width="800"/>
+
+Una universidad quiere y necesita desarrollar un sistema de biblioteca digital que le permita gestionar diferentes tipos de materiales como libros, revistas, videos educativos y artículos académicos.
 Cada material tiene información común (título, autor, año de publicación) pero también características particulares según su tipo (número de páginas, duración en minutos, volumen y número de edición).
 El sistema deberá permitir consultar información de los materiales y mostrar detalles de manera polimórfica (el método se comporta diferente según el tipo de material). También se requiere la gestión de préstamos y devoluciones, así como, la interfaz de búsqueda para localizar material según su título o autor.
 Requisitos
@@ -75,21 +78,176 @@ Requisitos
     - Préstamos digitales temporales (descargas limitadas).
     - Integración con APIs de repositorios académicos.
 
-## Documentación Técnica
+Aquí puedes colocar enlaces a los archivos más detallados:
+- [Design Thinking aplicado a BibliotecaDigital](./docs/DesignThinking.md)
+- [Learn Startup aplicado a BibliotecaDigital](./docs/LearnStartup.md)
+- [Scrum aplicado a BibliotecaDigital](./docs/Scrum.md)
+- [Product Backlog – BibliotecaDigital: Historias de Usuario y Epicas](./docs/ProductBacklog.md)
+---
 
-## Desarrollo
-Links a documentos
-- [Design Thinking](./docs/DesignThinking.md)
-- [Learn Startup](./docs/LearnStartup.md)
-- [Scrum](./docs/Scrum.md)
+## Arquitectura del Proyecto
+El sistema de Biblioteca Digital, desarrollado en Java (NetBeans) con conexión a MySQL, adopta una arquitectura Cliente–Servidor en 3 capas combinada con el patrón de diseño Modelo–Vista–Controlador (MVC).
 
-# Instalación
+**Arquitectura en 3 capas**
 
-# Diagramas y estructuras
-## Diagrama UML de clases
+1. Capa de Presentación (Cliente / Interfaz de Usuario)
+    - Implementada en Java (Swing/JavaFX).
+    - Permite al usuario interactuar con el sistema mediante botones y formularios que permiten:
+        - Autores.
+        - Usuarios.
+        - Préstamos.
+        - Materiales.
+    - Internamente esta capa se estructura bajo el patrón MVC:
+        - Vista: formularios, ventanas y paneles gráficos.
+        - Controlador: clases que reciben la acción del usuario (clic en botón) y la traducen en una solicitud hacia la lógica.
+        - Modelo: clases que representan entidades (Usuario, Autor, Libro, Préstamo) y que se relacionan con la base de datos.
+2. Capa de Lógica de Negocio (Servidor / Aplicación)
+    - Gestiona las reglas del negocio: validación de disponibilidad de libros, restricción de préstamos, control de fechas y gestión de usuarios.
+    - Está implementada en Java (POO) y se comunica con el controlador para ejecutar operaciones.
+3. Capa de Datos (Base de Datos)
+    - Implementada en MySQL.
+    - Almacena y gestiona información de usuarios, autores, libros y préstamos.
+    - La interacción con la lógica de negocio se realiza mediante JDBC, utilizando consultas SQL.
 
-## Diagrama E-R
+**Flujo de Interacción**
 
+1. El usuario interactúa con la Vista (interfaz gráfica).
+2. La acción es recibida por el Controlador, que valida la entrada y solicita a la capa de lógica la operación correspondiente.
+3. El Modelo representa las entidades y coordina con la capa de datos para realizar consultas o actualizaciones.
+4. Los resultados retornan al Controlador, que actualiza la Vista para mostrarlos al usuario.
+---
+
+### Diagrama UML de clases
+
+```mermaid
+classDiagram
+    direction TB
+    class MaterialBiblioteca {
+        <<abstract>>
+        -id: int
+        -titulo: String
+        -anio: int
+        -disponible: boolean
+        -rutaArchivo: String
+        +autores: List<Autor>
+        +mostrarInformacion() String
+        +generarCitaAPA() String
+    }
+    class Libro {
+        -isbn: String
+        -editorial: String
+        -numPaginas: int
+        +generarCitaAPA() String
+    }
+    class Revista {
+        -numero: int
+        -editorial: String
+        +generarCitaAPA() String
+    }
+    class Video {
+        -duracion: float
+        -formato: String
+        +generarCitaAPA() String
+    }
+    class Audio {
+        -duracion: float
+        -formato: String
+        +generarCitaAPA() String
+    }
+    class Autor {
+        -id: int
+        -nombre: String
+        -nacionalidad: String
+    }
+    class Usuario {
+        -id: int
+        -nombre: String
+        -email: String
+        -contraseña: String
+        -activo: boolean
+    }
+    class Prestamo {
+        -id: int
+        -fechaPrestamo: Date
+        -fechaDevolucion: Date
+        -estado: String
+        +material: MaterialBiblioteca
+        +usuario: Usuario
+    }
+    class Biblioteca {
+        -materiales: List<MaterialBiblioteca>
+        -usuarios: List<Usuario>
+        -prestamos: List<Prestamo>
+        +agregarMaterial(MaterialBiblioteca) void
+        +buscarPorTitulo(String) List<MaterialBiblioteca>
+        +buscarPorAutor(String) List<MaterialBiblioteca>
+        +realizarPrestamo(Usuario, MaterialBiblioteca) Prestamo
+        +registrarDevolucion(Prestamo) void
+    }
+    MaterialBiblioteca "1" --* "1.." Autor
+    MaterialBiblioteca <|-- Libro
+    MaterialBiblioteca <|-- Revista
+    MaterialBiblioteca <|-- Video
+    MaterialBiblioteca <|-- Audio
+    Biblioteca "1" o-- "" MaterialBiblioteca
+    Biblioteca "1" o-- "" Usuario
+    Biblioteca "1" o-- "" Prestamo
+    Prestamo "1" -- "1" MaterialBiblioteca
+    Prestamo "1" -- "1" Usuario
+```
+---
+
+### Diagrama E-R
+![alt text](images/diagramaER.png)
+---
+
+## Tecnologías y Especificaciones
+Antes de ejecutar el proyecto asegúrate de contar con el siguiente entorno:
+
+* Editor: Apache NetBeans IDE 19
+* Lenguaje: Java (JDK 23)
+* Base de datos: MySQL Workbench
+* Sistema Operativo: Windows 11
+
+  También es necesario tener instalado **Git** para clonar el repositorio.
+---
+
+## Ejecucion del Proyecto
+
+1. Clonar el repositorio
+  Primero descarga el código fuente del proyecto desde GitHub, ejecuta en terminal o línea de comandos Git:
+    ```
+    git clone https://github.com/jangelmm/BibliotecaDigital.git
+    ```
+    Esto creará una carpeta llamada *BibliotecaDigital* en tu computadora.
+
+2. Importar el proyecto en NetBeans
+
+3. Configurar la base de datos
+    - Iniciar tu servidor MySQL
+    - Crear la base de datos:
+      ```
+      CREATE DATABASE biblioteca_db;
+      ```
+      **Nota:** No es necesario importar un script adicional para las tablas, ya que estas se crean automáticamente al ejecutar el proyecto gracias a la configuración de JPA/Hibernate.
+    - Abrir el archivo *persistence.xml* del proyecto y editar los datos de conexión:
+      ```
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblioteca_db"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.password" value="password"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      ```
+      Sustituye ```password``` por la contraseña de tu usuario MySQL (por defecto suele ser root).
+
+4. Ejecutar la aplicación
+    - En NetBeans, selecciona el proyecto BibliotecaDigital.
+    - Haz clic en **Run Project** (o presiona Shift + F6).
+    - La aplicación iniciará y se conectará automáticamente a la base de datos configurada.
+
+      ¡Listo ya puedes usar ***Biblioteca Digital***!
+
+      ![alt text](images/inicioBibliotecaDigital.png)
+---
 
 # Conclusiones
 El proceso de desarrollo permitió aplicar de manera efectiva la evaluación de las historias de usuario, lo que facilitó una adaptación adecuada a las condiciones y requerimientos del proyecto. Como resultado, se logró un avance significativo en la creación de un sistema integral capaz de gestionar diversos tipos de archivos en una biblioteca digital. Este sistema, que inicialmente se centraba en documentos PDFs, se ha expandido exitosamente para incluir también audios y videos, consolidándose como una solución versátil y de alto impacto.
